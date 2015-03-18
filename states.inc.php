@@ -61,16 +61,76 @@ $machinestates = array(
     ),
     
     // Note: ID=2 => your first state
+/*
+uniqe cases (simultaneous)
+Set pairs   (simultaneous)
+Ante        (turn order)
+Reveal      (simultaneous, automatic)
+clash       (simultaneous, then re-choose)
+start Beat  (Turn order)
+Activation  (turn order)
 
     2 => array(
-    		"name" => "playerTurn",
-    		"description" => clienttranslate('${actplayer} must play a card or pass'),
-    		"descriptionmyturn" => clienttranslate('${you} must play a card or pass'),
-    		"type" => "activeplayer",
-    		"possibleactions" => array( "playCard", "pass" ),
-    		"transitions" => array( "playCard" => 2, "pass" => 2 )
+    	"name" => "characterSpecial",
+    	"description" => clienttranslate('${actplayer} must make a choice before attack pair selection'),
+    	"descriptionmyturn" => clienttranslate('${you} must make a choice before selecting an attack pair'),
+    	"type" => "multipleactiveplayer",
+    	"possibleactions" => array( "playCard", "pass" ),
+    	"transitions" => array( "playCard" => 3, "pass" => 3 )
     ),
-    
+
+    3 => array(
+        "name" = "chooseBasepairs",
+        "description" => clienttranslate('${activeplayer} must select an attack pair'),
+    	"descriptionmyturn" => clienttranslate('${you} must select an attack pair'),
+    	"type" => "multipleactiveplayer",
+    	"possibleactions" => array( "playCard" ),
+    	"transitions" => array( "playCard" => 4 )
+    )
+
+    4 => array(
+        "name" = "ante",
+        "description" => clienttranslate('${actplayer} must select an ante or pass'),
+    	"descriptionmyturn" => clienttranslate('${you} must select an ante or pass'),
+    	"type" => "activeplayer",
+    	"possibleactions" => array( "chooseSelected", "pass" ),
+    	"transitions" => array( "chooseSelected"=> 5, "pass" => 5 )
+    )
+
+    5 => array(
+        "name" = "revealEffects",
+        "description" => clienttranslate(""),
+        "type" => "game",
+    	"possibleactions" => array( "" ),
+    	"transitions" => array( "" => 6 )
+    )
+
+    6 => array(
+        "name" = "clash",
+        "description" => clienttranslate("Check for clash"),
+    	"type" => "game",
+    	"possibleactions" => array( "" ),
+    	"transitions" => array( "True" => 7, "False" => 8 )
+    )
+
+    7 => array(
+        "name" = "chooseClashpairs",
+        "description" => clienttranslate('${activeplayer} must select an attack pair'),
+    	"descriptionmyturn" => clienttranslate('${you} must select an attack pair'),
+    	"type" => "multipleactiveplayer",
+    	"possibleactions" => array( "playCard" ),
+    	"transitions" => array( "playCard" => 5 )
+    )
+
+    8 => array(
+        "name" = "startBeat",
+        "description" => clienttranslate('${activeplayer} must complete start of beat effect(s)'),
+    	"descriptionmyturn" => clienttranslate('${you} must complete start of beat effect(s)'),
+    	"type" => "activeplayer",
+// this needs to force each effect preciesley once these are placeholders for right now
+    	"possibleactions" => array( "$startStyle", "$startBase", "done" ),
+    	"transitions" => array( "playCard" => 4 )
+    )
 /*
     Examples:
     
