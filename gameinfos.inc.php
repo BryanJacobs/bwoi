@@ -4,25 +4,25 @@ $gameinfos = array(
 
 
 // Game designer (or game designers, separated by commas)
-'designer' => 'John Doe',       
+'designer' => 'Brad Talton Jr.', 'Steven Christopherson', 'Jared Roswurm', 'Trang Nhan', 'Bryan Graham',      
 
 // Game artist (or game artists, separated by commas)
-'artist' => 'Jane Doe',         
+'artist' => 'Eunice Abigael Tiu', 'Fábio Fontes', 'Danny Hirajeta', 'Joshua Van Laningham',        
 
 // Year of FIRST publication of this game. Can be negative.
-'year' => 2000,                 
+'year' => 2010,                 
 
 // Game publisher
-'publisher' => 'My Publishing Company',                     
+'publisher' => 'Level 99 Games',                     
 
 // Url of game publisher website
-'publisher_website' => 'http://www.mypublishingcompany.com/',   
+'publisher_website' => 'http://www.lvl99games.com/',   
 
 // Board Game Geek ID of the publisher
-'publisher_bgg_id' => 1234,
+'publisher_bgg_id' => 11752,
 
 // Board game geek if of the game
-'bgg_id' => 54321,
+'bgg_id' => 89409,
 
 
 // Players configuration that can be played (ex: 2 to 4 players)
