@@ -59,168 +59,147 @@ $machinestates = array(
         "action" => "stGameSetup",
         "transitions" => array( "" => 2 )
     ),
-    
+
     // Note: ID=2 => your first state
 /*
-uniqe cases		(simultaneous)
-Set pairs  		(simultaneous)
-Ante       		(turn order)
-Reveal     		(simultaneous, automatic)
-clash     		(simultaneous, then re-choose)
-start Beat		(Turn order)
-check for stun 		(Simultaneous, automatic)
-Activation  		(turn order)
-->before activating	(active player)
-->check range		(automatic)
-->on hit 		(active player)
-->hit			(automatic)
-->on damage		(active player)
-->damage		(automatic)
-->after activating	(active player)
+unique cases        (simultaneous)
+Set pairs          (simultaneous)
+Ante               (turn order)
+Reveal             (simultaneous, automatic)
+clash             (simultaneous, then re-choose)
+start Beat        (Turn order)
+check for stun         (Simultaneous, automatic)
+Activation          (turn order)
+->before activating    (active player)
+->check range        (automatic)
+->on hit         (active player)
+->hit            (automatic)
+->on damage        (active player)
+->damage        (automatic)
+->after activating    (active player)
 "" "" second player
-End of beat		(Turn order)
-recycle			(automatic)
+End of beat        (Turn order)
+recycle            (automatic)
 
  */
 
    2 => array(
-    	"name" => "characterSpecial",
-    	"description" => clienttranslate('${actplayer} must make a choice before attack pair selection'),
-    	"descriptionmyturn" => clienttranslate('${you} must make a choice before selecting an attack pair'),
-    	"type" => "multipleactiveplayer",
-    	"possibleactions" => array( "playCard", "pass" ),
-    	"transitions" => array( "playCard" => 3, "pass" => 3 )
+        "name" => "characterSpecial",
+        "description" => clienttranslate('${activeplayer} must make a choice before attack pair selection'),
+        "descriptionmyturn" => clienttranslate('${you} must make a choice before selecting an attack pair'),
+        "type" => "multipleactiveplayer",
+        "possibleactions" => array( "playCard", "pass" ),
+        "transitions" => array( "playCard" => 3, "pass" => 3 )
     ),
 
     3 => array(
-        "name" = "chooseBasepairs",
+        "name" = "chooseBasePairs",
         "description" => clienttranslate('${activeplayer} must select an attack pair'),
-    	"descriptionmyturn" => clienttranslate('${you} must select an attack pair'),
-    	"type" => "multipleactiveplayer",
-    	"possibleactions" => array( "playCard" ),
-    	"transitions" => array( "playCard" => 4 )
+        "descriptionmyturn" => clienttranslate('${you} must select an attack pair'),
+        "type" => "multipleactiveplayer",
+        "possibleactions" => array( "playCard" ),
+        "transitions" => array( "playCard" => 4 )
     )
 
     4 => array(
         "name" = "ante",
-        "description" => clienttranslate('${actplayer} must select an ante or pass'),
-    	"descriptionmyturn" => clienttranslate('${you} must select an ante or pass'),
-    	"type" => "activeplayer",
-    	"possibleactions" => array( "chooseSelected", "pass" ),
-    	"transitions" => array( "chooseSelected"=> 5, "pass" => 5 )
+        "description" => clienttranslate('${activeplayer} must select an ante or pass'),
+        "descriptionmyturn" => clienttranslate('${you} must select an ante or pass'),
+        "type" => "activeplayer",
+        "possibleactions" => array( "chooseSelected", "pass" ),
+        "transitions" => array( "chooseSelected"=> 5, "pass" => 5 )
     )
 
     5 => array(
         "name" = "revealEffects",
         "description" => clienttranslate(""),
         "type" => "game",
-    	"possibleactions" => array( "" ),
-    	"transitions" => array( "" => 6 )
+        "possibleactions" => array( "" ),
+        "transitions" => array( "" => 6 )
     )
-	//automatic check for a clash between players' atack pairs
+
+    //automatic check for a clash between players' atack pairs
     6 => array(
         "name" = "clash",
         "description" => clienttranslate("Check for clash"),
-    	"type" => "game",
-    	"possibleactions" => array( "" ),
-    	"transitions" => array( "True" => 7, "False" => 8 )
+        "type" => "game",
+        "possibleactions" => array( "" ),
+        "transitions" => array( "True" => 7, "False" => 8 )
     )
 
     7 => array(
-        "name" = "chooseClashpairs",
+        "name" = "chooseClashPairs",
         "description" => clienttranslate('${activeplayer} must select an attack pair'),
-    	"descriptionmyturn" => clienttranslate('${you} must select an attack pair'),
-    	"type" => "multipleactiveplayer",
-    	"possibleactions" => array( "playCard" ),
-    	"transitions" => array( "playCard" => 5 )
+        "descriptionmyturn" => clienttranslate('${you} must select an attack pair'),
+        "type" => "multipleactiveplayer",
+        "possibleactions" => array( "playCard" ),
+        "transitions" => array( "playCard" => 5 )
     )
 
     8 => array(
         "name" = "startBeat",
         "description" => clienttranslate('${activeplayer} must complete start of beat effect(s)'),
-    	"descriptionmyturn" => clienttranslate('${you} must complete start of beat effect(s)'),
-    	"type" => "activeplayer",
-	// each possible action puts you back in the action window here because you must complete all actions. only once all
+        "descriptionmyturn" => clienttranslate('${you} must complete start of beat effect(s)'),
+        "type" => "activeplayer",
+    // each possible action puts you back in the action window here because you must complete all actions. only once all
     // actions have been performed can players move into the next action window
-    	"possibleactions" => array( "startStyle", "startBase", "done" ),
-    	"transitions" => array( "startStyle" => 8, "startBase" => 8, "done" => 9 )
+        "possibleactions" => array( "startStyle", "startBase", "done" ),
+        "transitions" => array( "startStyle" => 8, "startBase" => 8, "done" => 9 )
     )
 
     9 => array(
         "name" = "beforeActivation",
         "description" => clienttranslate('${activeplayer} must complete their activation'),
-    	"descriptionmyturn" => clienttranslate('${you} must complete your activation'),
-    	"type" => "activeplayer",
-    	"possibleactions" => array( "preStyle", "preBase", "done" )
-    	"transitions" => array( "preStyle" => 9, "preBase" => 9, "done" => 10 )
+        "descriptionmyturn" => clienttranslate('${you} must complete your activation'),
+        "type" => "activeplayer",
+        "possibleactions" => array( "preStyle", "preBase", "done" )
+        "transitions" => array( "preStyle" => 9, "preBase" => 9, "done" => 10 )
     )
 
     10 => array(
         "name" = "onHit",
         "description" => clienttranslate('${activeplayer} must complete their activation'),
-    	"descriptionmyturn" => clienttranslate('${you} must complete your activation'),
-    	"type" => "activeplayer",
-    	"possibleactions" => array( "hitStyle", "hitBase", "done" )
-    	"transitions" => array( "hitStyle" => 10, "hitBase" => 10, "done" => 11 )
+        "descriptionmyturn" => clienttranslate('${you} must complete your activation'),
+        "type" => "activeplayer",
+        "possibleactions" => array( "hitStyle", "hitBase", "done" )
+        "transitions" => array( "hitStyle" => 10, "hitBase" => 10, "done" => 11 )
     )
 
     11 => array(
         "name" = "onDamage",
         "description" => clienttranslate('${activeplayer} must complete their activation'),
-    	"descriptionmyturn" => clienttranslate('${you} must complete your activation'),
-    	"type" => "activeplayer",
-    	"possibleactions" => array( "damageStyle", "damageBase", "done" )
-    	"transitions" => array( "damageStyle" => 11, "damageBase" => 11, "done" => 12 )
+        "descriptionmyturn" => clienttranslate('${you} must complete your activation'),
+        "type" => "activeplayer",
+        "possibleactions" => array( "damageStyle", "damageBase", "done" )
+        "transitions" => array( "damageStyle" => 11, "damageBase" => 11, "done" => 12 )
     )
 
     12 => array(
         "name" = "afterActivation",
         "description" => clienttranslate('${activeplayer} must complete their activation'),
-    	"descriptionmyturn" => clienttranslate('${you} must complete your activation'),
-    	"type" => "activeplayer",
-    	"possibleactions" => array( "postStyle", "postBase", "done" )
-    	"transitions" => array( "postStyle" => 12 "postBase" => 12, "done" => 13 )
+        "descriptionmyturn" => clienttranslate('${you} must complete your activation'),
+        "type" => "activeplayer",
+        "possibleactions" => array( "postStyle", "postBase", "done" )
+        "transitions" => array( "postStyle" => 12 "postBase" => 12, "done" => 13 )
     )
 
     13 => array(
         "name" = "endBeat",
         "description" => clienttranslate('${activeplayer} must complete end of beat effect(s)'),
-    	"descriptionmyturn" => clienttranslate('${you} must complete end of beat effect(s)'),
-    	"type" => "activeplayer",
-    	"possibleactions" => array( "endStyle", "endBase", "done" )
-    	"transitions" => array( "endStyle" => 13, "endBase" => 13, "done" => 14 )
+        "descriptionmyturn" => clienttranslate('${you} must complete end of beat effect(s)'),
+        "type" => "activeplayer",
+        "possibleactions" => array( "endStyle", "endBase", "done" )
+        "transitions" => array( "endStyle" => 13, "endBase" => 13, "done" => 14 )
     )
 
     14 => array(
         "name" = "recycle",
         "description" => clienttranslate('complete beat and check for game end'),
-    	"type" => "game",
-    	"possibleactions" => array( "" )
-    	"transitions" => array( "winner" => 99, "" => 2 )
-
-/*
-    Examples:
-    
-    2 => array(
-        "name" => "nextPlayer",
-        "description" => '',
         "type" => "game",
-        "action" => "stNextPlayer",
-        "updateGameProgression" => true,   
-        "transitions" => array( "endGame" => 99, "nextPlayer" => 10 )
-    ),
-    
-    10 => array(
-        "name" => "playerTurn",
-        "description" => clienttranslate('${actplayer} must play a card or pass'),
-        "descriptionmyturn" => clienttranslate('${you} must play a card or pass'),
-        "type" => "activeplayer",
-        "possibleactions" => array( "playCard", "pass" ),
-        "transitions" => array( "playCard" => 2, "pass" => 2 )
-    ), 
+        "possibleactions" => array( "" )
+        "updateGameProgression" => true,
+        "transitions" => array( "winner" => 99, "" => 2 )
 
-*/    
-   
     // Final state.
     // Please do not modify.
     99 => array(
