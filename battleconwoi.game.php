@@ -33,6 +33,15 @@ class BattleConWoI extends Table
         //  the corresponding ID in gameoptions.inc.php.
         // Note: afterwards, you can get/set the global variables with getGameStateValue/setGameStateInitialValue/setGameStateValue
         parent::__construct();self::initGameStateLabels( array( 
+        	"beatCount" => 10,
+		"playerOneLife" => 11,
+		"playerOneLoc" => 12,
+		"playerOneDisA" => 13,
+		"playerOneDisB" => 14,
+		"playerTwoLife" => 21,
+		"playerTwoLoc" => 22,
+		"playerTwoDisA" => 23,
+		"playerTwoDisB" => 24,
             //    "my_first_global_variable" => 10,
             //    "my_second_global_variable" => 11,
             //      ...
@@ -63,8 +72,7 @@ class BattleConWoI extends Table
         // Set the colors of the players with HTML color code
         // The default below is red/green/blue/orange/brown
         // The number of colors defined here must correspond to the maximum number of players allowed for the gams
-        $default_colors = array( "ff0000", "008000", "0000ff", "ffa500", "773300" );
-
+        $default_colors = array( "0000ff", "ffa500" );
  
         // Create players
         // Note: if you added some extra field on "player" table in the database (dbmodel.sql), you can initialize it there.
