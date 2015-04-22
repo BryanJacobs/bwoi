@@ -33,27 +33,95 @@ $this->card_types = array(
 */
 
 // it is unclear to me if this belongs in this file or in the battlecon.game.php file
-class Pair {
-	public function Pair($name, $dist, $prox, $power, $priority, $rev, $ong $sob, $bfa, $onh, $ond, $afa, $eob, $stun, $soak, $nature){
+class BaseCard {
+	public function BaseCard($name, $proxRange = 0, $distRange = 0, $power = 0, $priority = 0, $stun = 0, $soak = 0, $isBase = False) {
 		$this->name = $name;
-		$this->range = array($dist, $prox) ;
+		$this->range = array($proxRange, $distRange);
 		$this->power = $power;
 		$this->priority = $priority;
-		$this->effects = array($rev, $ong $sob, $bfa, $onh, $ond, $afa, $eob);
 		$this->stun = $stun;
 		$this->soak = $soak;
-		$this->nature = $nature;
+		$this->isBase = $isBase;
+	}
+
+	public function revealEffects() {
+	}
+
+	public function ongoingEffects() {
+	}
+
+	public function startOfBeatEffects() {
+	}
+
+	public function beforeActivatingEffects() {
+	}
+
+	public function onHitEffects() {
+	}
+
+	public function onDamageEffects() {
+	}
+
+	public function afterActivatingEffects() {
+	}
+
+	public function endOfBeatEffects() {
 	}
 }
 
-// building cards. was not sure if I could build a new card like I did the
-// dash here. 
-$dash = new Pair($name = "Dash", $priority = 9, $afa = "move funtion 1/2/3" . "dash ability", $nature =  "base" );
-$grasp = new Pair("Grasp", 1, 1, 2, 5, "", "", "", "", "moveO function 1", "", "", "", "", "", "base");
-$drive = new Pair("Drive", 1, 1, 3, 4, "", "", "", "advance function 1/2", "", "", "", "", "", "", "base");
-$strike = new Pair("Strike", 1, 1, 4, 3, "", "", "", "", "", "", "", "", "5", "", "base");
-$shot = new Pair("Shot", 4, 1, 3, 2, "", "", "", "", "", "", "", "", "2", "", "base");
-$burst = new Pair("Burst", 3, 2, 3, 1, "", "", "", "", "retreat function 1/2", "", "", "", "", "", "base");
+// Generic Bases
+$dash = new BaseCard($name="Dash", $priority=9, $isBase=True);
+$grasp = new BaseCard($name="Grasp", $proxRange=1, $distRange=1, $power=2, $priority=5, $isBase=True);
+$drive = new BaseCard($name="Drive", $proxRange=1, $distRange=1, $power=3, $priority=4, $isBase=True);
+$strike = new BaseCard($name="Strike", $proxRange=1, $distRange=1, $power=4, $priority=3, $stun=5, $isBase=True);
+$shot = new BaseCard($name="Shot", $proxRange=1, $distRange=4, $power=3, $priority=2, $stun=2, $isBase=True);
+$burst = new BaseCard($name="Burst", $proxRange=2, $distRange=3, $power=3, $priority=1, $isBase=True);
 
+//Cadenza's Kit (use this for first character work)
+$hydraulic = new BaseCard($name="Hydraulic", $power=2, $priority=-1, $soak=1);
+$battery = new BaseCard($name="Battery", $power=1, $priority=-1);
+$clockwork = new BaseCard($name="Clockwork", $power=3, $priority=-3, $soak=3);
+$grapnel = new BaseCard($name="Grapenel", $proxRange=2, $distRange=4);
+$mechanical = new BaseCard($name="Mechanical", $power=2, $priority=-2);
+$press = new BaseCard($name="Press", $proxRange=1, $distRange=2, $power=1, $stun=6, $isBase=True);
 
+//Vanaah Kalmor's Kit
+$reaping = new BaseCard($name="Reaping", $proxRange=0, $distRange=1, $priority=1);
+$glorious = new BaseCard($name="Glorious", $power=2);
+$judgement = new BaseCard($name="Judgment", $proxRange=1, $distRange =1, $power=1, $priority=-1);
+$vengance = new BaseCard($name="Vengance", $power=2, $stun=4);
+$paladin = new BaseCard($name="Paladin", $proxRange=0, $distRange=1, $power=1, $priority=-2, $stun=3);
+$scyth = new BaseCard($name="Scyth", $proxRange=1, $distRange=2, $power=3, $priority=3, $stun=3, $isBase=True);
+
+//Luc Von Gott's Kit
+$chrono = new BaseCard($name="Chrono", $priority=1);
+$eternal = new BaseCard($name="Eternal", $priority=-4, $soak=1);
+$memento = new BaseCard($name="Memento", $priority=-1);
+$fusion = new BaseCard($name="Fusion", $priority=1);
+$feinting = new BaseCard($name="Feinting", $proxRange=1, $distRange=1, $priority=-2);
+$flash = new BaseCard($name="Flash", $proxRage=1, $distRange=1, $power=1, $priority=6, $isBase=True);
+
+//Cherri Seneca's Kit
+$dreamscape = new  BaseCard($name="Dreamscape", $power=-1, $priority=1);
+$crimson = new BaseCard($name="Crimson", $distRange=1, $power= -1);
+$catatonic = new BaseCard($name="Catatonic", $priority=-2, $stun=3, $soak=1);
+$mirage = new BaseCard($name="Mirage", $power=-1);
+$blind = new BaseCard($name="Blind", $distRange=1, $priority=-1);
+$stare = new BaseCard($name="Stare", $proxRange=1, $distRange=3, $power=2, $isBase=True);
+
+//Demitras Desnigrande's Kit
+$darkside = new BaseCard($name= "Darkside", $power=-2, $priority=1);
+$jousting = new BaseCard($name="Jousting", $power=-2, $priority=1);
+$bloodletting = new BaseCard($name="Bloodletting", $power=-2 $priority=3);
+$illusory = new BaseCard($name="Illusory", $power=-1, $priority=1);
+$vapid = new BaseCard($name="Vapid", $distRange=1, $power=-1);
+$deathblow = new BaseCard($name="Deathblow", $proxRange=1, $distRange=1, $priority=8, $isBase=True);
+
+//Hepzibah Culotre's Kit
+$pactbond = new BaseCard($name="Pactbond", $power=-1, $priority=-1);
+$darkheart = new BaseCard($name="Darkheart", $priority=-1);
+$anathema = new BaseCard($name="Anathema", $power=-1, $priority=-1);
+$accursed = new BaseCard($name="Accursed", $distRange=1, $power=-1);
+$necrotizing = new BaseCard($name="Necrotizing", $distRange=2, $power=-1);
+$bloodlight = new BaseCard($name="Bloodlight", $proxRange=1, $distRange=3, $power=2, $priority=3);
 
