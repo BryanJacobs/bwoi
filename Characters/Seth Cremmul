@@ -1,0 +1,37 @@
+Beyond Eyes 	Original 	During the ante step of each beat, Seth may name a single base (including the opponent's unique base). As long as the nearest opponent's attack includes the named base, then Seth gains +2 Power and +2 Priority during that beat and wins priority ties.
+
+If the opponent's base changes due to a clash or other effect, Seth loses these bonuses (priority order cannot change once it is established, however). 
+
+
+
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+
+Yellow 	Compelling 	+0 	+0 	+0 	
+Before Activating: Move the nearest opponent 1 space.
+After Activating: Move the nearest opponent 1 space.
+
+Red 	Fool's 	+0 	-1 	-4 	
+Start of Beat: The nearest opponent has -1 Maximum and Minimum range.
+
+Green 	Mimic's 	+0 	+1 	+0 	
+Whenever the nearest opponent moves this turn, you move in the same direction, maintaining your range if possible. (So for each space the opponent advances, Seth retreats, and vice-versa. Ignore direct moves.)
+
+Blue 	Wyrding 	+0 	+0 	+0 	
+Start of Beat: If you correctly guessed an opponent's base this beat with Seth's Beyond Eyes ability, you may choose a new base from your hand and replace the one in this attack pair (Active Player does not change). Both the new and original base go to your discard. 
+
+Orange 	Vanishing 	+1 	+0 	+0 	
+Attacks at range 4 or greater do not hit you this beat.
+Start of Beat: Retreat up to 1 space.
+
+Grey 	Omen 	1 	3 	1 	
+Start of Beat: If you correctly guessed your nearest opponent's base with Seth's Beyond Eyes ability this beat, that opponent is stunned.
+
+FINISHER 	Reading Fate 	1-3 	0 	6 	
+On Hit: The opponent is stunned. Until the end of the duel, the opponent must play his style face up before Seth chooses his attack pair.
+
+FINISHER 	Fortune Buster 	1-6 	N/A 	13 	
+On Hit: If the opponent revealed a Finisher this beat, he is eliminated from the game. 

@@ -1,0 +1,39 @@
+Shapeshifting 	Original 	
+
+The style in Kehrolyn's first discard pile is called her Current Form.
+
+Whenever Kehrolyn plays an attack, her Current Form is applied to the attack in addition to the style played with it. This means that Kehrolyn will apply two styles every beat. 
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+
+Yellow 	Mutating 	+0 	+0 	+0 	
+Reveal: This style gains all the stats and effects of Kehrolyn's Current Form. If it is her Current Form, it gains all the stats and effects of the style she revealed this beat.
+End of Beat: Lose 1 life.
+
+Red 	Whip 	+0-1 	+0 	+0
+On Hit: If the opponent is at range 1, the opponent is stunned. Otherwise pull the opponent 1 space.
+
+Green 	Bladed 	+0 	+2 	+0 	
+Stun Guard 2
+
+Blue 	Exoskeletal 	+0 	+0 	+0 	
+Soak 2
+You may choose to ignore movement effects applied to you by opponents.
+
+Orange 	Quicksilver 	+0 	+0 	+2 	
+End of Beat: Move up to 1 space.
+
+Grey 	Overload 	1 	3 	3 	
+This attack loses priority ties.
+Start of Beat: Reveal an additional one of Kehrolyn's styles from your hand. That style is applied to the attack in addition to other styles. If it has Reveal effects, activate those effects now. Return it to your hand after the beat.
+
+FINISHER 	Hydra Fork 	1-3 	6 	0 	
+Stun Immunity
+After Activating: Recover 5 life.
+
+FINISHER 	The August Strain 	1-2 	4 	5 	
+Soak 2, Stun Guard 2
+On Hit: Choose any of Kehrolyn's styles and set it aside out of the game. That style is applied as an additional style to all of her attacks for the rest of the duel. 

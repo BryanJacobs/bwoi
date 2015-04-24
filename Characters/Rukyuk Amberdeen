@@ -1,0 +1,45 @@
+Custom Ammunition 	Original 	
+
+Rukyuk begins each duel with six custom Ammo Tokens. Each token has a specific effect printed on it that can be added to an attack by anteing the token. 
+
+If Rukyuk does not ante an Ammo Token during the ante phase, his attacks cannot hit an opponent during that beat. He may ante only one Token each beat.
+
+Rukyuk can recover Tokens with his Reload base. 
+
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+
+Yellow 	Gunner 	+2-4 	+0 	+0 	
+Before Activating: You may spend an Ammo token to give this style +1-5 range instead of its normal printed range.
+After Activating: Move 1 or 2 spaces.
+
+Red 	Sniper 	+3-5 	+1 	+2 	
+After Activating: Move 1, 2 or 3 spaces.
+
+Green 	Point Blank 	+0-1 	+0 	+0 	
+Stun Guard 2
+On Damage: Push an opponent up to 2 spaces.
+
+Blue 	Trick 	+1-2 	+0 	-3 	
+Stun Immunity
+
+Orange 	Crossfire 	+2-3 	+0 	-2 	
+Soak 2
+On Hit: You may discard another Ammo Token from your token pool. Its ante effects do not apply. If you do, this attack has +2 Power.
+
+Grey 	Reload 	N/A 	N/A 	4 	
+This attack does not hit oppponents.
+After Activating: Move directly to any space.
+End of Beat: Rukyuk recovers all Ammo Tokens.
+
+FINISHER 	Fully Automatic 	3-6 	2 	6 	
+Rukyuk does not apply the effects of Ammo Tokens to this attack.
+On Hit: You may discard an Ammo Token to execute this attack again.
+
+FINISHER 	Force Grenade 	1-2 	4 	4 	
+Do not apply Ammo Tokens to this attack. This attack hits even if an Ammo Token was not anted.
+On Hit: Push the opponent any number of spaces.
+After Activating: Retreat any number of spaces. 

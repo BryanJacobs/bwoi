@@ -79,27 +79,17 @@ $burst = new BaseCard($name="Burst", $proxRange=2, $distRange=3, $power=3, $prio
 
 //Cadenza's Kit (use this for first character work)
 $hydraulic = new BaseCard($name="Hydraulic", $power=2, $priority=-1, $soak=1);
+//Before activating: advance 1
 $battery = new BaseCard($name="Battery", $power=1, $priority=-1);
+//End of Beat: +4 priority next beat
 $clockwork = new BaseCard($name="Clockwork", $power=3, $priority=-3, $soak=3);
+//
 $grapnel = new BaseCard($name="Grapenel", $proxRange=2, $distRange=4);
+//On Hit: pull up to 3
 $mechanical = new BaseCard($name="Mechanical", $power=2, $priority=-2);
+//End of Beat: Advance up to 3
 $press = new BaseCard($name="Press", $proxRange=1, $distRange=2, $power=1, $stun=6, $isBase=True);
-
-//Vanaah Kalmor's Kit
-$reaping = new BaseCard($name="Reaping", $proxRange=0, $distRange=1, $priority=1);
-$glorious = new BaseCard($name="Glorious", $power=2);
-$judgement = new BaseCard($name="Judgment", $proxRange=1, $distRange =1, $power=1, $priority=-1);
-$vengance = new BaseCard($name="Vengance", $power=2, $stun=4);
-$paladin = new BaseCard($name="Paladin", $proxRange=0, $distRange=1, $power=1, $priority=-2, $stun=3);
-$scyth = new BaseCard($name="Scyth", $proxRange=1, $distRange=2, $power=3, $priority=3, $stun=3, $isBase=True);
-
-//Luc Von Gott's Kit
-$chrono = new BaseCard($name="Chrono", $priority=1);
-$eternal = new BaseCard($name="Eternal", $priority=-4, $soak=1);
-$memento = new BaseCard($name="Memento", $priority=-1);
-$fusion = new BaseCard($name="Fusion", $priority=1);
-$feinting = new BaseCard($name="Feinting", $proxRange=1, $distRange=1, $priority=-2);
-$flash = new BaseCard($name="Flash", $proxRage=1, $distRange=1, $power=1, $priority=6, $isBase=True);
+//+1 power for each point of damage taken
 
 //Cherri Seneca's Kit
 $dreamscape = new  BaseCard($name="Dreamscape", $power=-1, $priority=1);
@@ -123,5 +113,119 @@ $darkheart = new BaseCard($name="Darkheart", $priority=-1);
 $anathema = new BaseCard($name="Anathema", $power=-1, $priority=-1);
 $accursed = new BaseCard($name="Accursed", $distRange=1, $power=-1);
 $necrotizing = new BaseCard($name="Necrotizing", $distRange=2, $power=-1);
-$bloodlight = new BaseCard($name="Bloodlight", $proxRange=1, $distRange=3, $power=2, $priority=3);
+$bloodlight = new BaseCard($name="Bloodlight", $proxRange=1, $distRange=3, $power=2, $priority=3, $isBase=True);
+
+//Hikaru Sorayama's Kit
+$trance = new BaseCard($name="Trance", $distRange=1);
+$geomantic = new BaseCard($name="Geomantic", $power=1);
+$focused = new BaseCard($name="Focused", $priority=1, $stun=2);
+$advancing = new BaseCard($name="Advancing", $power=1, $priority=1);
+$sweeping = new BaseCard($name="Sweeping", $power=-1, $priority=3);
+$$palmStrike = new BaseCard($name="Palm Strike", $proxRange=1, $distRange=1, $power=2, $priority=5, $isBase=True);
+
+//Kallistar Flarechild's Kit
+$flare = new BaseCard($name="Flare", $power=3);
+$ignition = new BaseCard($name="Ignition", $power=1, $priority=-1);
+$caustic = new BaseCard($name="Caustic", $power=1, $priority=-1, $soak=2);
+$blazing = new BaseCard($name="Blazing", $priority=1);
+$volcanic = new BaseCard($name="Volcanic", $proxRange=2, $distRange=4);
+$spellbolt = new BaseCard($name="Spellbolt", $proxRange=2, $distRange=6, $power=2, $priority=3, $isBase=True);
+
+//Kehrolyn Ross's Kit
+$mutating = new BaseCard($name="Mutating");0
+$whip = new BaseCard($name="Whip", $distRange=1);
+$bladed = new BaseCard($name="Bladed", $power=2, $stun=2);
+$exoskeletal = new BaseCard($name="Exoskelital", $soak=2);
+$quicksilver = new BaseCard($name="Quicksilver", $priority=2);
+$overload = new BaseCard($name="Overload", $proxRange=1, $distRange=1, $power=3, $priority=3 $isBase=True);
+
+//Khadath Ahemusei's Kit
+$evacuation = new BaseCard($name="Evacuation", $distRange=1);
+$hunters = new BaseCard($name="Hunter's");
+$teleport = new BaseCard($name="Teleport", $power=1, $priority=-3);
+$lure = new BaseCard($name="Lure", $distRange=5, $power=-1, $priority=-1);
+$blight = new BaseCard($name="Blight", $distRange=2);
+$snare = new BaseCard($name="Snare", $power=3, $priority=1, $isBase=True);
+
+//Lixis Ran Kanda's Kit
+$pruning = new BaseCard($name="Pruning", $distRange=1, $power=-1, $priority=-2);
+$venomous = new BaseCard($name="Venomous", $power=1, $stun=2);
+$rooted = new BaseCard($name="Rooted", $proxRange=-1, $power=1, $priority=-2, $soak=2);
+$naturalizing = new BaseCard($name="Naturalizing", $distRange=1, $power=-1, $priority=1);
+$vine = new BaseCard($name="Vine", $distRane=2, $priority=-2, $stun=3);
+$lance = new BaseCard($name="Lance", $proxRange=2, $distRange=2, $power=3, $priority=5, $isBase=True);
+
+//Luc Von Gott's Kit
+$chrono = new BaseCard($name="Chrono", $priority=1);
+$eternal = new BaseCard($name="Eternal", $priority=-4, $soak=1);
+$memento = new BaseCard($name="Memento", $priority=-1);
+$fusion = new BaseCard($name="Fusion", $priority=1);
+$feinting = new BaseCard($name="Feinting", $proxRange=1, $distRange=1, $priority=-2);
+$flash = new BaseCard($name="Flash", $proxRage=1, $distRange=1, $power=1, $priority=6, $isBase=True);
+
+
+//Magdelina Larington's Kit
+$spiritual = new BaseCard($name="Spiritual", $power=1, $priority=1);
+$sanctimonious = new BaseCard($name="Sanctimonious", $power=-1, $priority=-2);
+$priestess = new BaseCard($name="Priestess", $power=-2, $priority=-1);
+$saftey = new BaseCard($name="Saftey", $power=-2, $priority=-1);
+$excelsius = new BaseCard($name="Excelsius", $distRange=1, $power=-2, $priority=-1);
+$blessing = new BaseCard($name="Blessing", $proxRange=1, $distRange=2, $priority=3, $stun=3);
+
+//Regicide Heketch's Kit
+$merciless = new BaseCard($name="Merciless", $distRange=1, $power=-1);
+$critical = new BaseCard($name="Critical", $power=-1, $priority=1);
+$rasping = new BaseCard($name="Rasping", $distRange=1, $power=-1, $priority=1);
+$assassin = new BaseCard($name="Assassin");
+$psycho = new BaseCard($name="Psycho", $priority=1);
+$knives = new BaseCard($name="Knives", $proxRange=1, $distRange=2, $power=4, $priority=5, $isBase=True);
+
+//Rukyuk Amberdeen's Kit
+$gunner = new BaseCard($name="Gunner", $proxRange=2, $distRange=4);
+$sniper = new BaseCard($name="Sniper", $proxRange=3, $distRange=5, $power=1, $priority=2);
+$pointBlank = new BaseCard($name="Point Blank", $distRange=1, $stun=2);
+$trick = new BaseCard($name="Trick", $proxRange=1 $distRange=2 $priority=-3);
+$crossfire = new BaseCard($name="Crossfire", $proxRange=2, $distrange=3, $priority=-2, $soak=2);
+$reload = new BaseCard($name="Reload", $priority=4, $isBase=True);
+
+//Sagas Seities's Kit
+$negation = new BaseCard($name="Negation");
+$echo = new BaseCard($name="Echo");
+$repelling = new BaseCard($name="Repelling", $proxRange=1, $distRange=2, $power=-1, $priority=1);
+$shadow = new BaseCard($name="Shadow", $distRange=1, $power=1);
+$shattering = new BaseCard($name="Shattering", $proxRange=1, $distRange=2, $power=1, $priority=-1, $stun=2);
+$staff = new BaseCard($name="Staff", $proxRange=1, $distRange=2, $power=3, $priority=4, $stun=4, $isBase=True);
+
+//Seth Cremmul's Kit
+$compelling = new BaseCard($name="Compelling");
+$fools = new BaseCard($name="Fool's", $power=-1, $priority=-2);
+$mimics = new BaseCard($name="Mimic's", $power=1);
+$wyrding = new BaseCard($name="Wyrding");
+$vanishing = new BaseCard($name="Vanishing", $proxRange=1, $distRange=1);
+$omen = new BaseCard($name="Omen", $proxRange=1, $distRange=1, $power=3, $priority=1, $isBase=True);
+
+//Tatsumi Nuac's Kit
+$empathic = new BaseCard($name="Empathic", $priority=-1);
+$siren = new BaseCard($name="Siren", $power=-1, $priority=1);
+$fearless = new BaseCard($name="Fearless", $proxRange=-1, $priority=1);
+$wave = new BaseCard($name="Wave", $proxRange=2, $distRange=4, $power=-1);
+$riptide = new BaseCard($name="Riptide", $distRange=2, $priority=-1);
+$whirlpool = new BaseCadr($name="Whirlpool", $proRange=1, $distRange=2, $power=3, $priority=3, $isBase=True);
+
+//Vanaah Kalmor's Kit
+$reaping = new BaseCard($name="Reaping", $proxRange=0, $distRange=1, $priority=1);
+$glorious = new BaseCard($name="Glorious", $power=2);
+$judgement = new BaseCard($name="Judgment", $proxRange=1, $distRange =1, $power=1, $priority=-1);
+$vengance = new BaseCard($name="Vengance", $power=2, $stun=4);
+$paladin = new BaseCard($name="Paladin", $proxRange=0, $distRange=1, $power=1, $priority=-2, $stun=3);
+$scyth = new BaseCard($name="Scyth", $proxRange=1, $distRange=2, $power=3, $priority=3, $stun=3, $isBase=True);
+
+//Zaamassel Kett's Kit
+$urgent = new BaseCard($name="Urgent", $distRange=1, $power=1, $priority=2);
+$malicious = new BaseCard($name="Malicious", $power=1, $priority=-1, $stun=2);
+$sinuous = new BaseCard($name="Sinuous", $priority=1);
+$warped = new BaseCard($name="Warped", $distRange=2);
+$sturdy = new BaseCard($name="Sturdy");
+$paradigmShift = new BaseCard($name="Paradigm Shift", $proxRange=2, $distRange=3, $power=3, $priority=3, $isBase=True);
+
 

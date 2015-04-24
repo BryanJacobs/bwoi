@@ -1,0 +1,40 @@
+Divine Conduit
+
+Magdelina has 5 Trance Counters and 3 double-sided Level Cards (0-5). She begins a duel at Level 0.
+
+At the end of each beat, she gains a Trance Counter. At this time, if she has more Trance Counters than Levels, she must discard all of her Trance Counters to gain a Level. She can't gain a level on the first beat that her Trance Counters exceed her Level.
+
+During ante, Magdelina gains +1 Power, +1 Priority and Stun Guard 1 for each Level she possesses. 
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+Yellow 	Spiritual 	+0 	+1 	+1 	
+If you didn't hit an opponent this beat, you do not gain Trance or Level counters at the end of the beat
+
+Red 	Sanctimonious 	+0~X 	-1 	-2 	
+X is Magdelina's current Trance Counters.
+
+Green 	Priestess 	+0 	-2 	-1 	
+On Hit: The opponent has -2 power this beat.
+After Activating: Recover 1 life point.
+
+Blue 	Safety 	+0 	-2 	-1 	
+You cannot take more damage than your level +3 from each attack this beat. 
+End of Beat: If you were hit during this beat, move up to 3 spaces.
+
+Orange 	Excelsius 	+0~1 	-2 	-1 	
+Before Activating: Move 1 space.
+On Hit, Level 2+: Push up to 2 spaces.
+
+Grey 	Blessing 	1~2 	N/A 	3 	
+Stun Guard 3
+On Hit: Both you and the opponent regain 3 life. Magdelina gains a Trance Counter.
+
+FINISHER 	Apotheosis 	1 	1 	4 	
+On Hit: The opponent is stunned and Magdelina gains a level.
+
+FINISHER 	Solar Soul 	1~2 	2 	4 	
+Soak 2
+On Hit: Discard any number of Trance Counters for +1 Power each. 

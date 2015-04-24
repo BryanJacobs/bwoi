@@ -1,0 +1,56 @@
+Geomantic Assault
+
+Hikaru begins a duel with four Elemental Tokens: Fire, Water, Wind, and Earth. Hikaru cannot have more than one of each type of token.
+
+Hikaru may ante up to one token each beat to gain the effect of that token applied to his attack.
+
+Fire: Power +3
+
+Water: Range -1~+1
+
+Wind: Priority +2
+
+Earth: Soak 3
+
+Hikaru's styles and unique base allow him to recover Elemental Tokens. He cannot recover a token the same turn he antes it. 
+
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect 	Def. Discard / Side
+Yellow 	Trance 	+0~1 	+0 	+0 	
+Reveal: Return all Elemental Tokens anted this beat to your token pool. You do not gain their ante effects during this beat.
+End of Beat: Regain an Elemental Token of your choice.
+	
+
+Red-diamond 	Geomantic 	+0 	+1 	+0 
+Start of Beat: You may spend an Elemental Token to this attack. 	
+
+
+Green-tri 	Focused 	+0 	+0 	+1 	
+Stun Guard 2
+On Hit: Regain an Elemental Token of your choice.
+
+
+Blue-circle 	Advancing 	+0 	+1 	+1 
+Start of Beat: Advance 1 space. If you switched sides with an opponent, this attack has +1 power. 	
+
+
+Orange-pent 	Sweeping 	+0 	-1 	+3
+If you are hit this beat, take 2 extra damage from that attack. 	
+
+
+Grey 	Palm Strike 	1 	2 	5 	
+Start of Beat: Advance 1 space.
+On Damage: Regain an Elemental Token of your choice.
+
+	
+FINISHER 	Wrath of Elements 	1 	7 	6 	Reveal: Hikaru immediately spends all Elemental Tokens in his token pool and applies them to this attack. 	α
+FINISHER 	Four Winds 	1 	2 	5 	
+
+Reveal: Return any tokens anted this beat by Hikaru to your token pool and ignore their effects.
+
+Before Activating: Advance up to 1 space.
+
+On Hit: Regain an Elemental Token. If you do, repeat this attack. 

@@ -1,0 +1,38 @@
+Withering Touch 	Original 
+Whenever Lixis hits with an attack, the opponent must choose and discard a base from their hand. This base is sent to the opponent's discard pile together with the attack played this beat and recycles as normal with the rest of the discarded cards. 
+
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+
+Yellow 	Pruning 	+0~1 	-1 	-2 	
+Reveal: This attack has +1 Power and +1 Priority for each base in the nearest opponent's discard piles.
+On Hit: The opponent discards an extra base of their choice with this attack pair.
+
+Red 	Venomous 	+0 	+1 	+0 	
+Stun Guard 2
+Before Activating: Advance up to 1 space.
+On Hit: The opponent has -2 Priority during the next beat.
+
+Green 	Rooted 	-1~0 	+1 	-2 	
+Soak 2
+You may ignore movement effects that would be applied to you this beat, including your own.
+
+Blue 	Naturalizing 	+0~1 	-1 	+1 	
+Reveal: Negate the effects of all counters, tokens and cards anted by the nearest opponent. Players cannot spend tokens or counters during this beat. The opponent's power, priority, and range cannot exceed printed values this beat.
+
+Orange 	Vine 	+0~2 	+0 	-2 	
+Stun Guard 3
+On Hit: Pull the opponent up to 2 spaces.
+
+Grey 	Lance 	2 	3 	5 	
+Opponents cannot move into or through the spaces adjacent to you this beat. They may still move out of these spaces.
+
+FINISHER 	Virulent Miasma 	1~3 	4 	5 	
+On Hit: The opponent loses 2 life during each ante step. Opponents at 1 life at the start of the ante phase have -3 Priority instead.
+
+FINISHER 	Life Virus 	3~6 	4 	3 	
+Soak 3, Stun Guard 2
+On Hit: Name a style and a base. For the rest of the duel, each time the opponent reveals one of the named cards, they lose 3 life (or 6 life if both are revealed). 

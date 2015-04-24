@@ -1,0 +1,51 @@
+Tidal Bond 	Original 	
+
+Juto has 4 life points and begins a duel in the same space as Tatsumi. If Juto's life is reduce to zero or less, he is removed from the board. Juto's position grants bonuses:
+
+Zone 0 (Behind Tatsumi): +0-2 range, +1 power.
+
+Zone 1 (Same space as Tatsumi): Soak 3; Juto loses life equal to the amount soaked.
+
+Zone 2 (Between Tatsumi and opponent): Soak 1, Stun Guard 2; Juto loses life equal to the amount soaked.
+
+Zone 3 (With or behind opponent): +1 priority 
+
+
+
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+
+Yellow 	Empathic 	+0 	+0 	-1 	
+Start of Beat: If Juto is in an unoccupied space, Tatsumi and Juto may swap places.
+End of Beat: The nearest opponent loses life equal to the damage Juto took this beat.
+
+Red 	Siren 	+0 	-1 	+1 	
+On Hit: The opponent is stunned.
+End of Beat: Move Juto up to 2 spaces.
+
+Green 	Fearless 	-1-0 	+0 	+1 	
+This attack calculates its range from Juto's position. If Juto is disabled, then this attack does not hit or deal damage.
+End of Beat: If Juto is disabled, he returns to full life in the same space as Tatsumi.
+
+Blue 	Wave 	+2-4 	-1 	+0 	
+On Hit: Push the opponent up to 2 spaces.
+After Activating: Advance Juto any number of spaces.
+
+Orange 	Riptide 	+0-2 	+0 	-1 	
+Start of Beat, Zone 2: Attacks at range 3 or greater do not hit you this beat.
+End of Beat: Move Juto any number of spaces towards Tatsumi.
+
+Grey 	Whirlpool 	1-2 	3 	3 	
+Start of Beat: Move the nearest opponent 1 space towards Juto.
+After Activating: Move up to 2 spaces, then move Juto up to 2 spaces.
+
+FINISHER 	Tsumanis Collide 	2-4 	0 	0 	
+This attack does not hit adjacent to Juto.
+Reveal, Zone 3: +3 power and +2 priority for every space between Tatsumi and Juto (maximum 5 spaces).
+
+FINISHER 	Guardian Xandjinn 	X 	6 	5 	
+The range of this attack is the space occupied by Juto and adjacent spaces.
+On Hit: The opponent is stunned, and move Juto any number of spaces. 

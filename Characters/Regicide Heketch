@@ -1,0 +1,42 @@
+DARK FORCE
+
+Heketch has one Dark Force Token at the start of a duel.
+
+He may ante this token to immediately move adjacent to an opponent and gain +3 priority. (This movement takes place during the ante step.)
+
+At the end of a beat, if there are 2 or more spaces between Heketch and the nearest opponent, and if he does not have a Dark Force token, he regains his Dark Force token. 
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+
+Yellow 	Merciless 	+0-1 	-1 	+0 	
+If an opponent moves past you, that player loses 2 life and may not move again this beat.
+After Activating: If you have a Dark Force Token, attacks do not hit you or deal damage for the rest of this beat.
+
+Red 	Critical 	+0 	-1 	+1 	
+This attack ignores Stun Guard.
+On Hit, Range 1: You may spend a Dark Force Token for +3 power.
+
+Green 	Rasping 	+0-1 	-1 	+1 	
+On Hit, Range 1: You may spend a Dark Force token for +3 power.
+On Damage: Recover life equal to half the damage dealt by this attack (round up).
+
+Blue 	Assassin 	+0 	+0 	+0 	
+On Hit: Retreat any number of spaces.
+On Damage, Range 1: You may spend a Dark Force Token. If you do, the opponent cannot move during the next beat.
+
+Orange 	Psycho 	+0 	+0 	+1 	
+Start of Beat: Advance until you are adjacent to an opponent.
+End of Beat, Range 1: You may spend a Dark Force token to execute this attack (just as though you were activating it normally).
+
+Grey 	Knives 	1-2 	4 	5 	
+This attack does not stun an opponent at Range 1.
+If a clash would occur due to a priority tie, you become the active player without clashing.
+
+FINISHER 	Million Knives 	1-4 	3 	7 	
+On Hit: Advance 1 space. If you moved and are not adjacent to the opponent, execute this attack again.
+
+FINISHER 	Living Nightmare 	1 	3 	2 	
+On Hit: The opponent is stunned. For the rest of the duel, Heketch regains his Dark Force Token at the end of each beat, if he does not have it already.

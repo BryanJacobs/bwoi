@@ -1,0 +1,55 @@
+Crescendo
+
+Demitras begins a duel with 2 Crescendo Tokens. 
+
+He has +1 priority for each of these tokens in his token pool. He may ante these tokens for +2 power each and may ante any number of these tokens in a turn.
+
+Whenever he is hit by an attack, Demitras loses 1 Crescendo Token.
+
+Whenever he hits an opponent, he gains 1 token, up to a maximum of 5. 
+
+
+
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 
+Yellow 	Darkside 	+0 	-2 	+1
+Opponents at range 4 or greater do not hit you this beat.
+On Hit: Retreat any number of spaces.
+
+
+Red 	Jousting 	+0 	-2 	+1 	
+Start of Beat: Advance until you are adjacent to the nearest opponent.
+On Hit: Advance as far as possible.
+
+
+Green 	Bloodletting 	+0 	-2 	+3 	
+This attack ignores Soak.
+On Hit: Gain life equal to the number of Crescendo Tokens you anted this beat.
+
+
+Blue 	Illusory 	+0 	-1 	+1 	
+Reveal: Return all Crescendo Tokens anted this beat to your token pool. You do not gain their ante effect this beat. 
+If you have 2 or fewer Crescendo Tokens, opponents with higher priority do not hit you.
+
+
+Orange 	Vapid 	+0-1 	-1 	+0 	
+On Hit: If the opponent has a priority of 3 or less, he is stunned.
+
+
+Grey 	Deathblow 	1 	0 	8 	
+On Hit: You may spend any number of Crescendo Tokens. For each token you spend, this attack has +2 power.
+After Activating: You gain an additional Crescendo Token if you hit with this attack.
+
+
+FINISHER 	Symphony of Demise 	1 	0 	9 	
+Before Activating: Advance up to 4 spaces.
+On Hit: Gain Crescendo Tokens until you have 5.
+
+
+FINISHER 	Accelerando 	1-2 	2 	4 	
+This attack ignores Stun Guard.
+Before Activating: Advance as far as possible.
+On Hit: Discard any number of Crescendo Tokens for +2 power each. 

@@ -1,0 +1,37 @@
+Divine Rush
+
+Vanaah has one Divine Rush Token at the beginning of each duel.
+
+She can ante this token to gain +2 Power and +2 Priority on an attack. The token is discarded together with an attack that it is used with and cycles back to her token pool when its discard pile returns to her hand. 
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+Yellow 	Reaping 	+0-1 	+0 	+1 
+On Hit: If the opponent has any tokens, he must choose and discard one of those tokens. If he cannot, return your Divine Rush token to your token pool. 
+
+Red 	Glorious 	+0 	+2 	+0 	
+This attack does not hit an opponent with higher priority than you. 
+Before Activating: Advance up to 1 space.
+
+Green 	Judgment 	+1 	+1 	-1 	
+Reveal: The nearest opponent cannot move past you or retreat during this beat.
+
+Blue 	Vengeance 	+0 	+2 	+0 	
+Stun Guard 4
+This attack does not hit an opponent with lower priority than you.
+
+Orange 	Paladin 	+0-1 	+1 	-2 	
+Stun Guard 3
+End of Beat: Move directly to any space adjacent to an opponent.
+
+Grey 	Scythe 	1-2 	3 	3 	
+Stun Guard 3
+Before Activating: Advance 1 space.
+On Hit: Pull an opponent up to 1 space.
+
+FINISHER 	Hand of Divinity 	5 	7 	3 	
+Stun Immunity, Soak 3
+After Activating: Advance any number of spaces.
+
+FINISHER 	Death Walks 	1-2 	5 	6 	On Hit: The opponent is stunned and has -4 priority next beat. 

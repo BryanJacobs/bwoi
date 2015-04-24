@@ -1,0 +1,42 @@
+Gate Trap 	Original 	
+
+Khadath's attacks allow him to place a Gate Trap Marker on the field. This marker does not take up space, so players may freely move over and onto it. An opponent who moves onto the marker cannot move off it as part of the same movement (though he may do so as part of a later movement). 
+
+During Reveal, an opponent standing on top of the marker has -3 priority for the beat, and an opponent standing adjacent to the marker has -1 priority for that beat. 
+
+
+
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+
+Yellow 	Evacuation 	+0-1 	+0 	+0 	
+An opponent standing directly on top of Khadath's Gate Trap Marker cannot hit him this turn.
+Start of Beat: Place Khadath's Gate Trap Marker in your current space, then retreat one space.
+
+Red 	Hunter's 	+0 	+0 	+0 	
+Reveal: This attack has +2 power and +2 priority if your opponent is standing on or adjacent to Khadath's Gate Trap Marker.
+
+Green 	Teleport 	+0 	+1 	-3 	
+Attacks do not hit you if your trap is between Khadath and the attacker (this does not work if either of you occupies the Trap's space).
+End of Beat: Move directly to any space. Move your Trap Marker to any space.
+
+Blue 	Lure 	+0-5 	-1 	-1 	
+On Hit: Pull the opponent any number of spaces. You may not move them past yourself. ('You may ignore the Gate Trap's stop effect when you pull an opponent past it by this effect).
+
+Orange 	Blight 	+0-2 	+0 	+0 	
+Start of Beat: Place Khadath's Gate Trap Marker in any square that falls into this attack's range and is not occupied by an opponent. (If your attack range is X, do not move the marker).
+
+Grey 	Snare 	X 	3 	1 	
+Stun Immunity
+Khadath's Gate Trap marker cannot be moved or added to the board this turn.
+The range of this attack is the space occupied by and adjacent to Khadath's Gate Trap Marker.
+
+FINISHER 	Dimensional Exile 	X       25 	0 	
+Stun Immunity
+The range of this attack is the space occupied by Khadath's Gate Trap Marker.
+
+FINISHER 	Planar Crossing 	1-2 	4 	5 	
+On Hit: Rearrange the board however you wish, moving all characters and markers to any legal positions. 

@@ -1,0 +1,44 @@
+Shadow Mirror 	Original 	
+
+Sagas has one Mirror Token at the start of a duel. Anteing this token causes Sagas and the opponent to both gain all bonuses and penalties to range, priority and power that beat granted to by status effects, unique abilities and tokens. 
+
+At the end of a beat, if Sagas' attack included a base with the same name as a base in his opponent's discard pile, he gains a Mirror Token. He can never have more than one token.
+
+Sagas may treat a Mirror Token as any other kind of Token to fulfill card effects. He may only gain Mirror tokens.
+
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+
+Yellow 	Negation 	+0 	+0 	+0 	
+Reveal: The nearest opponent does not apply styles to this beat, except for End of Beat effects on styles. 
+If you have a Mirror Token, you win priority ties without clashing.
+
+Red 	Echo 	+0 	+0 	+0 	
+Reveal: Apply a style in your nearest opponent's discard 1 to this attack.
+Ignore any effects that involve that character's name.
+
+Green 	Repelling 	+1-2 	-1 	+1 	
+Start of Beat: You may spend a Mirror Token. If you do, opponents may not enter the spaces adjacent to Sagas this beat, and push all adjacent opponents 1 space backwards.
+On Hit: Push the opponent up to 2 spaces.
+
+Blue 	Shadow 	+0-1 	-1 	+0 	
+Sagas considers edges of the board adjacent when moving himself or opponents.
+Before Activating: Move 1 space.
+End of Beat, Range 3: You may spent a Mirror Token to execute this attack (just as if you were activating it normally during the beat).
+
+Orange 	Shattering 	+1-2 	+1 	-1 	
+Stun Guard 2, this attack ignores Stun Guard.
+Sagas cannot gain a Mirror Token this beat.
+On Hit: You may spend a Mirror Token. If you do, your next attack has "On Hit: The opponent is stunned".
+
+Grey 	Staff 	1-2 	3 	4 	
+Stun Guard 4, does not stun an opponent at range 1.
+Reveal: If you anted a Mirror Token, this base copies the nearest opponent's unique base and loses its other effects. Ignore effects with that opponent's name.
+On Hit: Push the opponent 1 space. He cannot advance for the rest of the beat.
+
+FINISHER 	Soul Mirror 	1 	N/A 	7 	On Hit: Sagas and his opponent switch places and life totals.
+
+FINISHER 	Assimilate 	3-4 	3 	6 	On Hit: Add the opponent's attack pair to your hand (he does not recycle this beat, and does not activate further effects this beat). You can use these cards as your own (ignore any effects that contain another character's name).

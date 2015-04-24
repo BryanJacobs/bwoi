@@ -1,0 +1,47 @@
+DARK PACT
+
+Hepzibah begins the game with 5 Dark Pact cards. She can ante these at a cost of 1 life point per Pact, and they all return to her at the end of each beat.
+
+Hepzibah may ante as many Pacts each turn as she can pay for, but may not spend her final life point in this way. 
+
+
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+Yellow 	Pactbond 	+0 	-1 	-1 	
+Reveal: For each Dark Pact you anted this beat, regain 1 life (to a maximum of 2).
+End of Beat: Choose a Dark Pact. That Pact can be anted without paying life during the next beat.
+
+
+
+Red 	Darkheart 	+0 	+0 	-1 	
+On Hit: Recover 2 life points.
+On Hit: The opponent must discard a token if he or she has any.
+
+
+Green 	Anathema 	+0 	-1 	-1 	
+Reveal: This attack has +1 power and +1 priority for each Dark Pact you ante'd this turn (up to a maximum of 3)
+
+
+Blue 	Accursed 	+0-1 	-1 	+0 	
+Stun Immunity if you anted 3 or more Dark Pacts this turn.
+
+
+Orange 	Necrotizing 	+0-2 	-1 	+0 
+On Hit: Spend up to 3 life points. This attack has +1 power for each life point spent. (Characters cannot spend themselves below 1 life point)
+
+
+Grey 	Bloodlight 	1-3 	2 	3 	
+On Damage: Gain life equal to the damage dealt, up to the number of Dark Pacts anted this beat.
+
+
+FINISHER 	Seal the Pact 	N/A 	N/A 	0 	
+Soak 2
+After Activating: For the rest of the duel, Hepzibah may spend her nearest opponent's life to pay for her first Dark Pact each turn.
+
+
+FINISHER 	Altazzair 	1 	6 	2 	
+Dark pact effects are doubled this beat. (This only applies to priority, power, soak and range bonuses).
+Start of Beat: Hepzibah's life is reduced to 1. 

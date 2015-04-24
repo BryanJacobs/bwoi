@@ -1,0 +1,31 @@
+Iron Body
+Cadenza begins a duel with 3 Iron Body Tokens. He may spend one of these tokens whenever he takes damage to gain infinite Stun Guard. He may ante one of these tokens to gain Stun Immunity. 
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+Yellow 	Hydraulic 	0 	+2 	-1 	Soak 1. Before Activating: Advance 1 space. 
+
+
+Red 	Battery 	0 	+1 	-1 	End of Beat: You have +4 priority next beat.
+
+
+Green 	Clockwork 	0 	+3 	-3 	Soak 3.
+
+
+Blue 	Grapnel 	+2~4 	+0 	+0 	On Hit: Pull the opponent up to 3 spaces.
+
+
+Orange 	Mechanical 	0 	+2 	-2 	End of Beat: Advance up to 3 spaces. 
+
+
+Grey 	Press 	1-2 	1 	0
+Stun Guard 6.
+This attack has +1 power for each point of damange you have taken during this beat. 
+
+
+FINISHER 	Rocket Press 	1 	8 	0 	
+
+Soak 3, Stun Immunity. Before Activating: Advance 2 or more spaces. 
+FINISHER 	Feedback Field 	1-2 	1 	0 	Soak 5. On Hit: This attack has +2 power for each point of damage Cadenza soaked during this beat.  
+
+

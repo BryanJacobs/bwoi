@@ -1,0 +1,42 @@
+Temporal Battery 	Original 	
+
+Luc begins a duel with 2 Time Tokens and gains an additional 1 at the end of each beat, up to a limit of 5. He may ante tokens one time each beat, and gains a different effect based upon how many he antes at once. These ante effects are not cumulative.
+
+1 Token: +1 Priority
+
+3 Tokens, Start of Beat: Advance up to 2 spaces.
+
+5 Tokens, Start of Beat: You become the Active Player this beat. 
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+Yellow 	Chrono 	+0 	+0 	+1 	
+Start of Beat: Spend any number of Time Tokens to advance that many spaces. You cannot move past an opponent with this movement.
+
+Red 	Eternal 	+0 	+0 	-4 
+Soak 1 	When you are hit this beat, you can discard any number of Time Tokens for Soak 1 per token.
+
+Green 	Memento 	+0 	+0 	-1 
+After Activating: Luc may spend 2 Time Tokens to execute this attack again (just as if you were activating it normally during the beat). This effect may not be used more than once per beat.
+
+Blue 	Fusion 	+0 	+0 	+1 	
+On Damage: Push the opponent 1 space per point of damage dealt. If an opponent would be pushed beyond the edge of the arena by this effect, he is pushed as far as possible and loses 2 life instead.
+
+Orange 	Feinting 	+1 	+0 	-2
+Start of Beat: Retreat 1 space. End of Beat: Advance 1 or 2 spaces.
+
+Grey 	Flash 	1 	1 	6 	
+This attack ignores Stun Guard.   Start of Beat: Advance 1 space.
+
+FINISHER 	Temporal Recursion 	1 	3 	5 	
+
+Before Activating: Advance up to 1 space.
+
+After Activating: You may spend a Time Token to activate this attack again.
+FINISHER 	Stasis Charge 	1 	4 	3 	
+
+Stun Guard 4
+
+During this beat, each time the nearest opponent would activate a triggered effect, negate that effect and gain a Time Token instead. 

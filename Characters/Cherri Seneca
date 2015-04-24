@@ -1,0 +1,34 @@
+Nightmarish Visions 	Original 	
+
+Cherri begins a duel with one Insight Token. She cannot have more than one of these tokens at a time. When she takes 3 or more damage at once, she regains her Insight Token. If Cherri antes her Insight Token, a clash occurs as a Reveal effect, regardless of priority (a Finisher can't be clashed).
+
+If a player reveals a Special Action, then the token has no effect. Whenever Cherri clashes with an opponent or extends a clash, that opponent loses 1 life. 
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+Yellow 	Dreamscape 	+0 	-1 	+1 	Before Activating: You may move directly to any space behind the nearest opponent.
+Red 	Crimson 	+0-1 	-1 	+0 	Reveal: If the nearest opponent's printed priority value before any bonuses are added is lower than yours, trigger a clash with that opponent. [Updated re official FAQ]
+Green 	Catatonic 	+0 	+0 	-2 	
+
+Stun Guard 3, Soak 1
+
+End of Beat: If you were hit this beat and do not have an Insight Token, gain an Insight Token.
+Blue 	Mirage 	+0 	-1 	+0 	
+
+Reveal: The nearest opponent's style has +0 priority this beat instead of its printed value.
+
+After Activating: Move directly to any space that is range 3 from an opponent.
+Orange 	Blind 	+0-1 	+0 	-1 	After Activating: Opponents with priority 3 or less do not hit you this beat.
+Grey 	Stare 	1-3 	2 	X 	
+
+This base's priority is equal to the priority of the base revealed by the nearest opponent.
+
+On Hit: You gain an Insight Token if you do not have one.
+FINISHER 	Soul Gaze 	3 	6 	9 	On Hit: The opponent is stunned and Cherri gains an Insight Token.
+FINISHER 	The Watchers 	2-4 	3 	5 	
+
+On Hit: Move directly to any space, and move the opponent directly to any space.
+
+After Activating: For the rest of the duel, Cherri regains her Insight Token after each beat. 

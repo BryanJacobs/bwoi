@@ -1,0 +1,49 @@
+Form of Disaster
+
+Kallistar begins a duel in Human Form.
+
+Her Ignition style allows her to change into Elemental Form, and her Flare style allows her to change into Human Form. Many effects of her styles differ based on her Form.
+
+If Kallistar is in Elemental Form during the ante phase, she gains +2 Power and +2 Priority during the beat and loses 1 life.
+
+If she is in Human Form during the ante phase, she has Soak 1 during the beat. 
+
+
+
+
+Color 	Name 	Range 	Power 	Priority 	Effect
+
+Yellow 	Flare 	+0 	+3 	+0 	
+Reveal, Human Form: Kallistar loses 3 life and this attack has +3 Priority.
+End of Beat, Elemental Form: Kallistar returns to Human Form.
+
+Red-diamond 	Ignition 	+0 	+1 	-1 	
+Reveal, Elemental Form: This attack has +3 power, and Kallistar loses 3 life points.
+End of Beat, Human Form: Kallistar enters Elemental Form.
+
+Green-tri 	Caustic 	+0 	+1 	-1 	
+Human Form: Soak 2
+On Hit, Elemental Form: The opponent is stunned.
+
+Blue-circle 	Blazing 	+0 	+0 	+1 	
+Elemental Form: This attack has +0~1 range.
+After Activating, Human Form: Move 1 or 2 spaces.
+
+Orange-pent 	Volcanic 	+2~4 	+0 	+0 	
+On Hit, Elemental Form: The opponent has -2 priority next beat.
+End of Beat, Human Form: Move directly to any unoccupied space.
+
+Grey 	Spellbolt 	2~6 	2 	3 	
+On Hit, Human Form: The opponent has -2 Power.
+On Hit, Elemental Form: Pull the opponent up to 2 spaces.
+
+FINISHER 	Supernova 	1~2 	8 	5 	
+This attack may only be used in Elemental Form (it becomes a Cancel otherwise).
+End of Beat: Kallistar is defeated.
+
+FINISHER 	Chain of Destruction 	4~6 	4 	5 	
+This attack may only be used in Human Form (it becomes a Cancel otherwise). 
+On Hit: Kallistar may spend 3 life to repeat this attack. (You cannot spend life if it would reduce you below 1 life.)
+
+
+
