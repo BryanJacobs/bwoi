@@ -110,7 +110,8 @@ function setNextBeatRelativePriority($priorityModifier) {
 function getPuller($distanceLow, $distanceHigh) {
     $ret = function($eventDetails, $extraData) {
         // TODO: Pull someone by a distance
-    }
+    };
+    return $ret;
 }
 
 $cardRegistry = array();
