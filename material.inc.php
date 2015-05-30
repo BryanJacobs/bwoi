@@ -32,9 +32,23 @@ $this->card_types = array(
 
 */
 
+function registerEvent($eventType, $eventAction, $extraEventData=NULL) {
+}
+
+abstract class Events {
+    const REVEAL = 0;
+    const STARTOFBEAT = 1;
+    const BEFOREACTIVATING = 2;
+    const ONHITE = 3;
+    const ONDAMAGE = 4;
+    const AFTERACTIVATING = 5;
+    const ENDOFBEAT = 6;
+    const ANTE = 7;
+}
+
 // it is unclear to me if this belongs in this file or in the battlecon.game.php file
 class BaseCard {
-    public function BaseCard($name, $proxRange = 0, $distRange = 0, $power = 0, $priority = 0, $stun = 0, $soak = 0, $isBase = False, $character=NULL) {
+    public function BaseCard($name, $proxRange = 0, $distRange = 0, $power = 0, $priority = 0, $stun = 0, $soak = 0, $isBase = False, $events=array()) {
         $this->name = $name;
         $this->range = array($proxRange, $distRange);
         $this->power = $power;
@@ -42,65 +56,16 @@ class BaseCard {
         $this->stun = $stun;
         $this->soak = $soak;
         $this->isBase = $isBase;
+
+        foreach ($events as $eventType => $eventAction) {
+            registerEvent($eventType, $eventAction);
+        }
     }
 
-    public function revealEffects() {
-    }
-
-    public function ongoingEffects() {
-    }
-
-    public function startOfBeatEffects() {
-    }
-
-    public function beforeActivatingEffects() {
-    }
-
-    public function onHitEffects() {
-    }
-
-    public function onDamageEffects() {
-    }
-
-    public function afterActivatingEffects() {
-    }
-
-    public function endOfBeatEffects() {
-    }
 }
 
 class Character {
     public function Character() {
-    }
-
-    public function gameStart() {
-    }
-
-    public function revealEffects() {
-    }
-
-    public function ongoingEffects() {
-    }
-
-    public function ante() {
-    }
-
-    public function startOfBeatEffects() {
-    }
-
-    public function beforeActivatingEffects() {
-    }
-
-    public function onHitEffects() {
-    }
-
-    public function onDamageEffects() {
-    }
-
-    public function afterActivatingEffects() {
-    }
-
-    public function endOfBeatEffects() {
     }
 }
 
@@ -115,6 +80,9 @@ $burst = new BaseCard($name="Burst", $proxRange=2, $distRange=3, $power=3, $prio
 class Cadenza extends Character {
     public function gameStart() {
         // Set tokens to 3
+
+        registerEvent(Events::ANTE, $self->ante);
+        registerEvent(Events::ONDAMAGE, $self->onDamageEffects);
     }
 
     public function ante() {
@@ -129,8 +97,17 @@ class Cadenza extends Character {
 $cardRegistry = array();
 
 //Cadenza's Kit (use this for first character work)
-$hydraulic = new BaseCard($name="Hydraulic", $power=2, $priority=-1, $soak=1);
-//Before activating: advance 1
+
+function getAdvancer($distance) {
+    $ret = function($eventDetails) {
+        // Iff this is for me, advance by $distance
+    };
+    return $ret;
+}
+
+$hydraulic = new BaseCard($name="Hydraulic", $power=2, $priority=-1, $soak=1,
+                          $events=array(Events::BEFOREACTIVATING => getAdvancer(1)));
+
 class BatteryCard extends Basecard {
     public function BatteryCard() {
         parent::BaseCard($name="Battery", $power=1, $priority=-1);
