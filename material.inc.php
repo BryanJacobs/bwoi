@@ -126,11 +126,21 @@ $battery = new BaseCard($name="Battery", $power=1, $priority=-1,
 
 $clockwork = new BaseCard($name="Clockwork", $power=3, $priority=-3, $soak=3);
 $grapnel = new BaseCard($name="Grapenel", $proxRange=2, $distRange=4,
-                        $events=array(Evenets::ONHIT => getPuller(0, 3)));
+                        $events=array(Events::ONHIT => getPuller(0, 3)));
 
 $mechanical = new BaseCard($name="Mechanical", $power=2, $priority=-2,
-//End of Beat: Advance up to 3
-$press = new BaseCard($name="Press", $proxRange=1, $distRange=2, $power=1, $stun=6, $isBase=True);
+                          $events=array(Events::ENDOFBEAT => getAdvancer(0, 3)));
+
+$increasePressDamage = function($eventDetails, $extraData) {
+    // TODO: increase power by the amount of damage taken, iff I just took damage
+};
+$resetPressDamage = function($eventDetails, $extraData) {
+    // TODO: reset press power to one
+};
+
+$press = new BaseCard($name="Press", $proxRange=1, $distRange=2, $power=1, $stun=6, $isBase=True,
+                      $events=array(Events::ONDAMAGE => $increasePressDamage,
+                                    Events::ENDOFBEAT => $resetPressDamage));
 //+1 power for each point of damage taken
 
 $cardRegistry["Cadenza"] = array($hydraulic, $battery, $clockwork, $grapnel, $mechanical, $press);
