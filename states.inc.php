@@ -84,12 +84,12 @@ recycle            (automatic)
  */
 
    2 => array(
-        "name" => "characterSpecial",
-        "description" => clienttranslate('${activeplayer} must make a choice before attack pair selection'),
-        "descriptionmyturn" => clienttranslate('${you} must make a choice before selecting an attack pair'),
+        "name" => "characterSelect",
+        "description" => clienttranslate('${activeplayer} must make a character choice'),
+        "descriptionmyturn" => clienttranslate('${you} must make a character choice'),
         "type" => "multipleactiveplayer",
-        "possibleactions" => array( "playCard", "pass" ),
-        "transitions" => array( "playCard" => 3, "pass" => 3 )
+        "possibleactions" => array( "selectChar" ),
+        "transitions" => array(  => 3, => 3 )
     ),
 
     3 => array(
@@ -97,8 +97,8 @@ recycle            (automatic)
         "description" => clienttranslate('${activeplayer} must select an attack pair'),
         "descriptionmyturn" => clienttranslate('${you} must select an attack pair'),
         "type" => "multipleactiveplayer",
-        "possibleactions" => array( "playCard" ),
-        "transitions" => array( "playCard" => 4 )
+        "possibleactions" => array( "playPair" ),
+        "transitions" => array( "playPair" => 4 )
     )
 
     4 => array(

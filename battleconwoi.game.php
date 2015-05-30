@@ -33,15 +33,18 @@ class BattleConWoI extends Table
         //  the corresponding ID in gameoptions.inc.php.
         // Note: afterwards, you can get/set the global variables with getGameStateValue/setGameStateInitialValue/setGameStateValue
         parent::__construct();self::initGameStateLabels( array( 
-        	"beatCount" => 10,
+        "beatCount" => 10,
 		"playerOneLife" => 11,
 		"playerOneLoc" => 12,
 		"playerOneDisA" => 13,
 		"playerOneDisB" => 14,
+		"playerOneChar" => 15,
 		"playerTwoLife" => 21,
 		"playerTwoLoc" => 22,
 		"playerTwoDisA" => 23,
 		"playerTwoDisB" => 24,
+		"playerTwoChar" => 25,
+		"characterArray" => 30,
             //    "my_first_global_variable" => 10,
             //    "my_second_global_variable" => 11,
             //      ...
@@ -91,7 +94,18 @@ class BattleConWoI extends Table
 
         // Init global values with their initial values
         //self::setGameStateInitialValue( 'my_first_global_variable', 0 );
-        
+        self::setGameStateInitialValue("beatCount", 0);
+        self::setGameStateInitialalue("playerOneLife", 20);
+        self::setGameStateInitialalue("playerOneLoc",1);
+		self::setGameStateInitialalue("playerOneDisA", array());
+		self::setGameStateInitialalue("playerOneDisB", array());
+		self::setGameStateInitialalue("playerOneChar", "");
+        self::setGameStateInitialalue("playerTwoLife", 20);
+		self::setGameStateInitialalue("playerTwoLoc", 5);
+		self::setGameStateInitialalue("playerTwoDisA", array());
+		self::setGameStateInitialalue("playerTwoDisB", array());
+        self::setGameStateInitialalue("playerTwoChar", "");
+        self::setGameStateInitialalue("characterArray", array("cadenza"=> 0);
         // Init game statistics
         // (note: statistics used in this file must be defined in your stats.inc.php file)
         //self::initStat( 'table', 'table_teststat1', 0 );    // Init a table statistics
@@ -171,7 +185,19 @@ class BattleConWoI extends Table
     /*
     
     Example:
-
+    */
+    function selectChar($CharKey)
+    {
+        self::checkAction('selectChar');
+        $player_id = self::getActivePlayerID();
+        
+        //get user input for character choice
+        switch(initGameStatelabels["characterArray"[$charKey]])
+        {
+            case 0:
+                $playerOneCharacter = new Cadenza();
+                
+    /*
     function playCard( $card_id )
     {
         // Check that this is the player's turn and that it is a "possible action" at this game state (see states.inc.php)

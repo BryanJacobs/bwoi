@@ -65,6 +65,7 @@ class BaseCard {
 
 class Character {
     public function Character() {
+        
     }
 }
 
