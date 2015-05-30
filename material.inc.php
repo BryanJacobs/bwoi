@@ -61,7 +61,6 @@ class BaseCard {
             registerEvent($eventType, $eventAction);
         }
     }
-
 }
 
 class Character {
@@ -94,9 +93,9 @@ class Cadenza extends Character {
     }
 }
 
-function getAdvancer($distance) {
+function getAdvancer($distanceLow, $distanceHigh) {
     $ret = function($eventDetails, $extraData) {
-        // TODO: Iff this is for me, advance by $distance
+        // TODO: Iff this is for me, advance by some distance
     };
     return $ret;
 }
@@ -108,21 +107,27 @@ function setNextBeatRelativePriority($priorityModifier) {
     return $ret;
 }
 
+function getPuller($distanceLow, $distanceHigh) {
+    $ret = function($eventDetails, $extraData) {
+        // TODO: Pull someone by a distance
+    }
+}
+
 $cardRegistry = array();
 
 //Cadenza's Kit (use this for first character work)
 
 $hydraulic = new BaseCard($name="Hydraulic", $power=2, $priority=-1, $soak=1,
-                          $events=array(Events::BEFOREACTIVATING => getAdvancer(1)));
+                          $events=array(Events::BEFOREACTIVATING => getAdvancer(1, 1)));
 
 $battery = new BaseCard($name="Battery", $power=1, $priority=-1,
                     $events=array(Events::ENDOFBEAT => setNextBeatRelativePriority(4)));
 
 $clockwork = new BaseCard($name="Clockwork", $power=3, $priority=-3, $soak=3);
-//
-$grapnel = new BaseCard($name="Grapenel", $proxRange=2, $distRange=4);
-//On Hit: pull up to 3
-$mechanical = new BaseCard($name="Mechanical", $power=2, $priority=-2);
+$grapnel = new BaseCard($name="Grapenel", $proxRange=2, $distRange=4,
+                        $events=array(Evenets::ONHIT => getPuller(0, 3)));
+
+$mechanical = new BaseCard($name="Mechanical", $power=2, $priority=-2,
 //End of Beat: Advance up to 3
 $press = new BaseCard($name="Press", $proxRange=1, $distRange=2, $power=1, $stun=6, $isBase=True);
 //+1 power for each point of damage taken
