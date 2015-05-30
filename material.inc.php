@@ -141,10 +141,9 @@ $resetPressDamage = function($eventDetails, $extraData) {
 $press = new BaseCard($name="Press", $proxRange=1, $distRange=2, $power=1, $stun=6, $isBase=True,
                       $events=array(Events::ONDAMAGE => $increasePressDamage,
                                     Events::ENDOFBEAT => $resetPressDamage));
-//+1 power for each point of damage taken
 
 $cardRegistry["Cadenza"] = array($hydraulic, $battery, $clockwork, $grapnel, $mechanical, $press);
-
+/*
 //Cherri Seneca's Kit
 $dreamscape = new  BaseCard($name="Dreamscape", $power=-1, $priority=1);
 $crimson = new BaseCard($name="Crimson", $distRange=1, $power= -1);
@@ -282,4 +281,4 @@ $warped = new BaseCard($name="Warped", $distRange=2);
 $sturdy = new BaseCard($name="Sturdy");
 $paradigmShift = new BaseCard($name="Paradigm Shift", $proxRange=2, $distRange=3, $power=3, $priority=3, $isBase=True);
 
-
+*/
