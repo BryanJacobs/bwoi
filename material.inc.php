@@ -78,24 +78,42 @@ $burst = new BaseCard($name="Burst", $proxRange=2, $distRange=3, $power=3, $prio
 
 class Cadenza extends Character {
     public function gameStart() {
-        // TODO: Set tokens to 3
+        $self->ironBodyTokens = 3;
 
         registerEvent(Events::ANTE, $self->ante);
         registerEvent(Events::ONDAMAGE, $self->onDamageEffects);
     }
 
-    public function ante() {
-        // TODO: Present option to ante a token
+    public function ante($eventDetails, $extraData) {
+        if ($self->ironBodyTokens > 0) {
+            // TODO: present choice of ante to user
+            // Iff user antes, then:
+            // $self->ironBodyTokens -= 1;
+            $self->stunImmune = true;
+            registerEvent(Events::ENDOFBEAT, $self->removeStunImmunity);
+        }
     }
 
-    public function onDamageEffects() {
-        // TODO: Present option for using a token
+    public function removeStunImmunity($eventDetails, $extraData) {
+        $self->stunImmune = false;
+        return false;
+    }
+
+    public function removeInfiniteStunGuard($eventDetails, $extraData) {
+        $self->stunGuard = 0;
+        return false;
+    }
+
+    public function onDamageEffects($eventDetails, $extraData) {
+        $self->stunGuard = 99999;
+        registerEvent(Events::ENDOFBEAT, $self->removeInfiniteStunGuard);
     }
 }
 
 function getAdvancer($distanceLow, $distanceHigh) {
     $ret = function($eventDetails, $extraData) {
         // TODO: Iff this is for me, advance by some distance
+        return true;
     };
     return $ret;
 }
@@ -103,6 +121,7 @@ function getAdvancer($distanceLow, $distanceHigh) {
 function setNextBeatRelativePriority($priorityModifier) {
     $ret = function($eventDetails, $extraData) {
         // TODO: register a next-beat one-time priority boost or penalty
+        return true;
     };
     return $ret;
 }
@@ -110,6 +129,7 @@ function setNextBeatRelativePriority($priorityModifier) {
 function getPuller($distanceLow, $distanceHigh) {
     $ret = function($eventDetails, $extraData) {
         // TODO: Pull someone by a distance
+        return true;
     };
     return $ret;
 }
