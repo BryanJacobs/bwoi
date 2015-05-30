@@ -82,7 +82,7 @@ class Cadenza extends Character {
         registerEvent(Events::GAMESTART, $self->gameStart);
     }
 
-    public function gameStart() {
+    public function gameStart($eventDetails, $extraData) {
         $self->ironBodyTokens = 3;
 
         registerEvent(Events::ANTE, $self->ante);
