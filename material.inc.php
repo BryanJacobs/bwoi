@@ -92,6 +92,8 @@ class Cadenza extends Character {
             $self->stunImmune = true;
             registerEvent(Events::ENDOFBEAT, $self->removeStunImmunity);
         }
+
+        return $self->ironBodyTokens > 0;
     }
 
     public function removeStunImmunity($eventDetails, $extraData) {
@@ -112,6 +114,7 @@ class Cadenza extends Character {
             // $self->stunGuard = 99999;
             // registerEvent(Events::ENDOFBEAT, $self->removeInfiniteStunGuard);
         }
+        return $self->ironBodyTokens > 0;
     }
 }
 
