@@ -105,8 +105,13 @@ class Cadenza extends Character {
     }
 
     public function onDamageEffects($eventDetails, $extraData) {
-        $self->stunGuard = 99999;
-        registerEvent(Events::ENDOFBEAT, $self->removeInfiniteStunGuard);
+        if ($self->ironBodyTokens > 0) {
+            // TODO: present choice to use token
+            // Iff token used, then:
+            // $self->ironBodyTokens -= 1
+            // $self->stunGuard = 99999;
+            // registerEvent(Events::ENDOFBEAT, $self->removeInfiniteStunGuard);
+        }
     }
 }
 
