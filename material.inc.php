@@ -34,39 +34,74 @@ $this->card_types = array(
 
 // it is unclear to me if this belongs in this file or in the battlecon.game.php file
 class BaseCard {
-	public function BaseCard($name, $proxRange = 0, $distRange = 0, $power = 0, $priority = 0, $stun = 0, $soak = 0, $isBase = False) {
-		$this->name = $name;
-		$this->range = array($proxRange, $distRange);
-		$this->power = $power;
-		$this->priority = $priority;
-		$this->stun = $stun;
-		$this->soak = $soak;
-		$this->isBase = $isBase;
-	}
+    public function BaseCard($name, $proxRange = 0, $distRange = 0, $power = 0, $priority = 0, $stun = 0, $soak = 0, $isBase = False, $character=NULL) {
+        $this->name = $name;
+        $this->range = array($proxRange, $distRange);
+        $this->power = $power;
+        $this->priority = $priority;
+        $this->stun = $stun;
+        $this->soak = $soak;
+        $this->isBase = $isBase;
+    }
 
-	public function revealEffects() {
-	}
+    public function revealEffects() {
+    }
 
-	public function ongoingEffects() {
-	}
+    public function ongoingEffects() {
+    }
 
-	public function startOfBeatEffects() {
-	}
+    public function startOfBeatEffects() {
+    }
 
-	public function beforeActivatingEffects() {
-	}
+    public function beforeActivatingEffects() {
+    }
 
-	public function onHitEffects() {
-	}
+    public function onHitEffects() {
+    }
 
-	public function onDamageEffects() {
-	}
+    public function onDamageEffects() {
+    }
 
-	public function afterActivatingEffects() {
-	}
+    public function afterActivatingEffects() {
+    }
 
-	public function endOfBeatEffects() {
-	}
+    public function endOfBeatEffects() {
+    }
+}
+
+class Character {
+    public function Character() {
+    }
+
+    public function gameStart() {
+    }
+
+    public function revealEffects() {
+    }
+
+    public function ongoingEffects() {
+    }
+
+    public function ante() {
+    }
+
+    public function startOfBeatEffects() {
+    }
+
+    public function beforeActivatingEffects() {
+    }
+
+    public function onHitEffects() {
+    }
+
+    public function onDamageEffects() {
+    }
+
+    public function afterActivatingEffects() {
+    }
+
+    public function endOfBeatEffects() {
+    }
 }
 
 // Generic Bases
@@ -77,10 +112,33 @@ $strike = new BaseCard($name="Strike", $proxRange=1, $distRange=1, $power=4, $pr
 $shot = new BaseCard($name="Shot", $proxRange=1, $distRange=4, $power=3, $priority=2, $stun=2, $isBase=True);
 $burst = new BaseCard($name="Burst", $proxRange=2, $distRange=3, $power=3, $priority=1, $isBase=True);
 
+class Cadenza extends Character {
+    public function gameStart() {
+        // Set tokens to 3
+    }
+
+    public function ante() {
+        // Present option to ante a token
+    }
+
+    public function onDamageEffects() {
+        // Present option for using a token
+    }
+}
+
+$cardRegistry = array();
+
 //Cadenza's Kit (use this for first character work)
 $hydraulic = new BaseCard($name="Hydraulic", $power=2, $priority=-1, $soak=1);
 //Before activating: advance 1
-$battery = new BaseCard($name="Battery", $power=1, $priority=-1);
+class BatteryCard extends Basecard {
+    public function BatteryCard() {
+        parent::BaseCard($name="Battery", $power=1, $priority=-1);
+    }
+}
+
+$battery = new BatteryCard();
+
 //End of Beat: +4 priority next beat
 $clockwork = new BaseCard($name="Clockwork", $power=3, $priority=-3, $soak=3);
 //
@@ -90,6 +148,8 @@ $mechanical = new BaseCard($name="Mechanical", $power=2, $priority=-2);
 //End of Beat: Advance up to 3
 $press = new BaseCard($name="Press", $proxRange=1, $distRange=2, $power=1, $stun=6, $isBase=True);
 //+1 power for each point of damage taken
+
+$cardRegistry["Cadenza"] = array($hydraulic, $battery, $clockwork, $grapnel, $mechanical, $press);
 
 //Cherri Seneca's Kit
 $dreamscape = new  BaseCard($name="Dreamscape", $power=-1, $priority=1);
@@ -102,7 +162,7 @@ $stare = new BaseCard($name="Stare", $proxRange=1, $distRange=3, $power=2, $isBa
 //Demitras Desnigrande's Kit
 $darkside = new BaseCard($name= "Darkside", $power=-2, $priority=1);
 $jousting = new BaseCard($name="Jousting", $power=-2, $priority=1);
-$bloodletting = new BaseCard($name="Bloodletting", $power=-2 $priority=3);
+$bloodletting = new BaseCard($name="Bloodletting", $power=-2, $priority=3);
 $illusory = new BaseCard($name="Illusory", $power=-1, $priority=1);
 $vapid = new BaseCard($name="Vapid", $distRange=1, $power=-1);
 $deathblow = new BaseCard($name="Deathblow", $proxRange=1, $distRange=1, $priority=8, $isBase=True);
@@ -121,7 +181,7 @@ $geomantic = new BaseCard($name="Geomantic", $power=1);
 $focused = new BaseCard($name="Focused", $priority=1, $stun=2);
 $advancing = new BaseCard($name="Advancing", $power=1, $priority=1);
 $sweeping = new BaseCard($name="Sweeping", $power=-1, $priority=3);
-$$palmStrike = new BaseCard($name="Palm Strike", $proxRange=1, $distRange=1, $power=2, $priority=5, $isBase=True);
+$palmStrike = new BaseCard($name="Palm Strike", $proxRange=1, $distRange=1, $power=2, $priority=5, $isBase=True);
 
 //Kallistar Flarechild's Kit
 $flare = new BaseCard($name="Flare", $power=3);
@@ -132,12 +192,12 @@ $volcanic = new BaseCard($name="Volcanic", $proxRange=2, $distRange=4);
 $spellbolt = new BaseCard($name="Spellbolt", $proxRange=2, $distRange=6, $power=2, $priority=3, $isBase=True);
 
 //Kehrolyn Ross's Kit
-$mutating = new BaseCard($name="Mutating");0
+$mutating = new BaseCard($name="Mutating");
 $whip = new BaseCard($name="Whip", $distRange=1);
 $bladed = new BaseCard($name="Bladed", $power=2, $stun=2);
 $exoskeletal = new BaseCard($name="Exoskelital", $soak=2);
 $quicksilver = new BaseCard($name="Quicksilver", $priority=2);
-$overload = new BaseCard($name="Overload", $proxRange=1, $distRange=1, $power=3, $priority=3 $isBase=True);
+$overload = new BaseCard($name="Overload", $proxRange=1, $distRange=1, $power=3, $priority=3, $isBase=True);
 
 //Khadath Ahemusei's Kit
 $evacuation = new BaseCard($name="Evacuation", $distRange=1);
@@ -184,7 +244,7 @@ $knives = new BaseCard($name="Knives", $proxRange=1, $distRange=2, $power=4, $pr
 $gunner = new BaseCard($name="Gunner", $proxRange=2, $distRange=4);
 $sniper = new BaseCard($name="Sniper", $proxRange=3, $distRange=5, $power=1, $priority=2);
 $pointBlank = new BaseCard($name="Point Blank", $distRange=1, $stun=2);
-$trick = new BaseCard($name="Trick", $proxRange=1 $distRange=2 $priority=-3);
+$trick = new BaseCard($name="Trick", $proxRange=1, $distRange=2, $priority=-3);
 $crossfire = new BaseCard($name="Crossfire", $proxRange=2, $distrange=3, $priority=-2, $soak=2);
 $reload = new BaseCard($name="Reload", $priority=4, $isBase=True);
 
@@ -210,7 +270,7 @@ $siren = new BaseCard($name="Siren", $power=-1, $priority=1);
 $fearless = new BaseCard($name="Fearless", $proxRange=-1, $priority=1);
 $wave = new BaseCard($name="Wave", $proxRange=2, $distRange=4, $power=-1);
 $riptide = new BaseCard($name="Riptide", $distRange=2, $priority=-1);
-$whirlpool = new BaseCadr($name="Whirlpool", $proRange=1, $distRange=2, $power=3, $priority=3, $isBase=True);
+$whirlpool = new BaseCard($name="Whirlpool", $proRange=1, $distRange=2, $power=3, $priority=3, $isBase=True);
 
 //Vanaah Kalmor's Kit
 $reaping = new BaseCard($name="Reaping", $proxRange=0, $distRange=1, $priority=1);
