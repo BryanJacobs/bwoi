@@ -39,7 +39,7 @@ abstract class Events {
     const REVEAL = 0;
     const STARTOFBEAT = 1;
     const BEFOREACTIVATING = 2;
-    const ONHITE = 3;
+    const ONHIT = 3;
     const ONDAMAGE = 4;
     const AFTERACTIVATING = 5;
     const ENDOFBEAT = 6;
@@ -94,29 +94,30 @@ class Cadenza extends Character {
     }
 }
 
-$cardRegistry = array();
-
-//Cadenza's Kit (use this for first character work)
-
 function getAdvancer($distance) {
-    $ret = function($eventDetails) {
+    $ret = function($eventDetails, $extraData) {
         // Iff this is for me, advance by $distance
     };
     return $ret;
 }
 
+function setNextBeatRelativePriority($priorityModifier) {
+    $ret = function($eventDetails, $extraData) {
+        // register a next-beat one-time priority boost or penalty
+    };
+    return $ret;
+}
+
+$cardRegistry = array();
+
+//Cadenza's Kit (use this for first character work)
+
 $hydraulic = new BaseCard($name="Hydraulic", $power=2, $priority=-1, $soak=1,
                           $events=array(Events::BEFOREACTIVATING => getAdvancer(1)));
 
-class BatteryCard extends Basecard {
-    public function BatteryCard() {
-        parent::BaseCard($name="Battery", $power=1, $priority=-1);
-    }
-}
+$battery = BaseCard($name="Battery", $power=1, $priority=-1,
+                    $events=array(Events::ENDOFBEAT => setNextBeatRelativePriority(4)));
 
-$battery = new BatteryCard();
-
-//End of Beat: +4 priority next beat
 $clockwork = new BaseCard($name="Clockwork", $power=3, $priority=-3, $soak=3);
 //
 $grapnel = new BaseCard($name="Grapenel", $proxRange=2, $distRange=4);
