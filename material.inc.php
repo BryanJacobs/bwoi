@@ -79,31 +79,31 @@ $burst = new BaseCard($name="Burst", $proxRange=2, $distRange=3, $power=3, $prio
 
 class Cadenza extends Character {
     public function gameStart() {
-        // Set tokens to 3
+        // TODO: Set tokens to 3
 
         registerEvent(Events::ANTE, $self->ante);
         registerEvent(Events::ONDAMAGE, $self->onDamageEffects);
     }
 
     public function ante() {
-        // Present option to ante a token
+        // TODO: Present option to ante a token
     }
 
     public function onDamageEffects() {
-        // Present option for using a token
+        // TODO: Present option for using a token
     }
 }
 
 function getAdvancer($distance) {
     $ret = function($eventDetails, $extraData) {
-        // Iff this is for me, advance by $distance
+        // TODO: Iff this is for me, advance by $distance
     };
     return $ret;
 }
 
 function setNextBeatRelativePriority($priorityModifier) {
     $ret = function($eventDetails, $extraData) {
-        // register a next-beat one-time priority boost or penalty
+        // TODO: register a next-beat one-time priority boost or penalty
     };
     return $ret;
 }
@@ -115,7 +115,7 @@ $cardRegistry = array();
 $hydraulic = new BaseCard($name="Hydraulic", $power=2, $priority=-1, $soak=1,
                           $events=array(Events::BEFOREACTIVATING => getAdvancer(1)));
 
-$battery = BaseCard($name="Battery", $power=1, $priority=-1,
+$battery = new BaseCard($name="Battery", $power=1, $priority=-1,
                     $events=array(Events::ENDOFBEAT => setNextBeatRelativePriority(4)));
 
 $clockwork = new BaseCard($name="Clockwork", $power=3, $priority=-3, $soak=3);
