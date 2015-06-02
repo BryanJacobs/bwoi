@@ -135,7 +135,7 @@ function getDasher($distanceLow, $distanceHigh){
     $ret = function($eventDetails, $extraData){
             // TODO: Iff this is for me, advance by some distance with each advance check:
         if $active_player_location == $extradata{
-            regesterEvent(Events::ONHIT, $extradata-> hitFail);
+            regesterEvent(Events::ONHIT, => hitFail);
         }
     }
 }
@@ -197,95 +197,248 @@ $press = new BaseCard($name="Press", $proxRange=1, $distRange=2, $power=1, $stun
 $cardRegistry["Cadenza"] = array($hydraulic, $battery, $clockwork, $grapnel, $mechanical, $press);
 /*
 //Cherri Seneca's Kit
-$dreamscape = new  BaseCard($name="Dreamscape", $power=-1, $priority=1);
-$crimson = new BaseCard($name="Crimson", $distRange=1, $power= -1);
-$catatonic = new BaseCard($name="Catatonic", $priority=-2, $stun=3, $soak=1);
-$mirage = new BaseCard($name="Mirage", $power=-1);
-$blind = new BaseCard($name="Blind", $distRange=1, $priority=-1);
-$stare = new BaseCard($name="Stare", $proxRange=1, $distRange=3, $power=2, $isBase=True);
+//My activation
+$dreamscape = new  BaseCard($name="Dreamscape", $power=-1, $priority=1, 
+                    $events=array(Events::BEFOREACTIVATING=>getSwitchSides));
+//Character specific function
+$crimson = new BaseCard($name="Crimson", $distRange=1, $power= -1,
+                    $events=array(Events::REVEAL=>getForceClash));
+//Character specific function
+$catatonic = new BaseCard($name="Catatonic", $priority=-2, $stun=3, $soak=1,
+                    $events=array(Events::ENDOFBEAT=>getInsightToken));
+//Character specific function (function 2), My activation                                                 
+$mirage = new BaseCard($name="Mirage", $power=-1, 
+                    $events=array(Events::REVEAL=>getSetFoeStyle($priority, 0),
+                                  Events::AFTERACTIVATINg=>getMirage));
+//Character Specificfunction My activation
+$blind = new BaseCard($name="Blind", $distRange=1, $priority=-1, 
+                    $events=array(Events::AFTERACTIVATING=>getBlind));
+$stare = new BaseCard($name="Stare", $proxRange=1, $distRange=3, $power=2, $isBase=True, 
+                    $events=array(Events::REVEAL=>getStare));
+                    
 
 //Demitras Desnigrande's Kit
-$darkside = new BaseCard($name= "Darkside", $power=-2, $priority=1);
-$jousting = new BaseCard($name="Jousting", $power=-2, $priority=1);
-$bloodletting = new BaseCard($name="Bloodletting", $power=-2, $priority=3);
-$illusory = new BaseCard($name="Illusory", $power=-1, $priority=1);
-$vapid = new BaseCard($name="Vapid", $distRange=1, $power=-1);
-$deathblow = new BaseCard($name="Deathblow", $proxRange=1, $distRange=1, $priority=8, $isBase=True);
+//I need to know how much I anteed eachturn
+// when I get hit for 1; when I hit for 2
+$darkside = new BaseCard($name= "Darkside", $power=-2, $priority=1,
+                    $events=array(Events::ONHIT=>getForceShort(4),
+                                  Events::ONHIT=>getadvancer(-9,0)));
+//when I hit
+$jousting = new BaseCard($name="Jousting", $power=-2, $priority=1, 
+                    $events=array(Events::STAROFBEAT=>getMakeAdjacent,
+                                  Events::ONHIT=>getJousting));
+//When I hit both on hits; need to store number of anteed crescendo tokens
+$bloodletting = new BaseCard($name="Bloodletting", $power=-2, $priority=3,
+                    $events=array(Events::ONHIT=>getSetFoePair($soak, 0),
+                                  Events::ONHIT=>GetBloodletting));
+$illusory = new BaseCard($name="Illusory", $power=-1, $priority=1,
+                    $events=array(Events::REVEAL=>getIllusory));
+//when I hit
+$vapid = new BaseCard($name="Vapid", $distRange=1, $power=-1, 
+                    $events=array(Events::ONHIT=>getVapid));
+//my Activation: both events
+$deathblow = new BaseCard($name="Deathblow", $proxRange=1, $distRange=1, $priority=8, $isBase=True,
+                    $events=array(Events::ONHIT=>getDeathblowSpend,
+                                  Events::AFTERACTIVATING=>getDeathblowGain));
 
 //Hepzibah Culotre's Kit
-$pactbond = new BaseCard($name="Pactbond", $power=-1, $priority=-1);
-$darkheart = new BaseCard($name="Darkheart", $priority=-1);
-$anathema = new BaseCard($name="Anathema", $power=-1, $priority=-1);
-$accursed = new BaseCard($name="Accursed", $distRange=1, $power=-1);
-$necrotizing = new BaseCard($name="Necrotizing", $distRange=2, $power=-1);
-$bloodlight = new BaseCard($name="Bloodlight", $proxRange=1, $distRange=3, $power=2, $priority=3, $isBase=True);
+//I needto know how much I anteed each turn
+$pactbond = new BaseCard($name="Pactbond", $power=-1, $priority=-1, 
+                    $events=array(Events::REVEAL=>getPactboundLife,
+                                  Events::ENDOFBEAT=>getPactboundfree));
+//when I hit both events
+$darkheart = new BaseCard($name="Darkheart", $priority=-1, 
+                    $events=array(Event::ONHIT=>getLifeGain(2),
+                                  Event::ONHIT=>getDarkheartDiscard));
+$anathema = new BaseCard($name="Anathema", $power=-1, $priority=-1
+                    $events=array(Event::REVEAL=>getAnathema));
+//when I am hit
+$accursed = new BaseCard($name="Accursed", $distRange=1, $power=-1,
+                    $events=array(Event::ONDAMAGE=>getAccursed));
+//when I hit
+$necrotizing = new BaseCard($name="Necrotizing", $distRange=2, $power=-1,
+                    $events=array(Event::ONHIT=>getNecrotizing));
+//When I damage
+$bloodlight = new BaseCard($name="Bloodlight", $proxRange=1, $distRange=3, $power=2, $priority=3, $isBase=True,
+                    $events=array(Event::ONDAMAGE=>getBloodlight));
 
 //Hikaru Sorayama's Kit
-$trance = new BaseCard($name="Trance", $distRange=1);
-$geomantic = new BaseCard($name="Geomantic", $power=1);
-$focused = new BaseCard($name="Focused", $priority=1, $stun=2);
-$advancing = new BaseCard($name="Advancing", $power=1, $priority=1);
-$sweeping = new BaseCard($name="Sweeping", $power=-1, $priority=3);
-$palmStrike = new BaseCard($name="Palm Strike", $proxRange=1, $distRange=1, $power=2, $priority=5, $isBase=True);
+//I can't regain a token I successfully anteed on a given beat
+$trance = new BaseCard($name="Trance", $distRange=1,
+                    $events=array(Event::REVEAL=>getCancelMyAnte,
+                                  Event::ENDOFBEAT=>getGainHikaruToken));
+$geomantic = new BaseCard($name="Geomantic", $power=1,
+                    $events=array(Event::STARTOFBEAT=>getGeomantic));
+//When I hit
+$focused = new BaseCard($name="Focused", $priority=1, $stun=2,
+                    $events=array(Event::ONHIT=>getGainHikaruToken));
+$advancing = new BaseCard($name="Advancing", $power=1, $priority=1,
+                    $event=array(Event::STARTOFBEAT=>getAdvancing));
+//When I get hit; add damage to their attack
+$sweeping = new BaseCard($name="Sweeping", $power=-1, $priority=3,
+                    $event=array(Event::ONDAMAGE=>getAdjustFoePair($power, 2));
+//When I hit
+$palmStrike = new BaseCard($name="Palm Strike", $proxRange=1, $distRange=1, $power=2, $priority=5, $isBase=True,
+                    $event=array(Event::STARTOFBEAT=>getAdvancer(1,1),
+                                 Event::ONDAMAGE=>getGainHikaruToken));
 
 //Kallistar Flarechild's Kit
-$flare = new BaseCard($name="Flare", $power=3);
-$ignition = new BaseCard($name="Ignition", $power=1, $priority=-1);
+//I have to know know either if my elemental Form is on or off
+$flare = new BaseCard($name="Flare", $power=3,
+                    $event=array(Event::REVEAL=>getCheckForm("flare")
+                                 Event::ENDOFBEAT=>getCheckForm("flare")));
+//above is one option for Kallistar below is a second with each base handledby itself.
+$ignition = new BaseCard($name="Ignition", $power=1, $priority=-1,
+                    $event=array(Event::REVEAL=>getIgnition));
+//a third option s to move her event tree from here onto her character. will wait for discussion
 $caustic = new BaseCard($name="Caustic", $power=1, $priority=-1, $soak=2);
 $blazing = new BaseCard($name="Blazing", $priority=1);
 $volcanic = new BaseCard($name="Volcanic", $proxRange=2, $distRange=4);
 $spellbolt = new BaseCard($name="Spellbolt", $proxRange=2, $distRange=6, $power=2, $priority=3, $isBase=True);
 
 //Kehrolyn Ross's Kit
-$mutating = new BaseCard($name="Mutating");
-$whip = new BaseCard($name="Whip", $distRange=1);
+//I need to trigger my Styles from discard 1
+$mutating = new BaseCard($name="Mutating", 
+                    $events=array(Event::REVEAL=>getMutating));
+//when I hit
+$whip = new BaseCard($name="Whip", $distRange=1, 
+                    $events=array(Event::ONHIT=>getWhip));
 $bladed = new BaseCard($name="Bladed", $power=2, $stun=2);
-$exoskeletal = new BaseCard($name="Exoskelital", $soak=2);
-$quicksilver = new BaseCard($name="Quicksilver", $priority=2);
-$overload = new BaseCard($name="Overload", $proxRange=1, $distRange=1, $power=3, $priority=3, $isBase=True);
+//THis should have record triggers at any time a move effect could occur. is generic
+$exoskeletal = new BaseCard($name="Exoskeletal", $soak=2,
+                    $events=array(Event:REVEAL=>getIgnoreMove));
+$quicksilver = new BaseCard($name="Quicksilver", $priority=2, 
+                    $events=array(Evnet::ENDOFBEAT=>getAdvancer(-1,1)));
+//need to activate the new styles Reveal effects during STARTOFBEAT
+$overload = new BaseCard($name="Overload", $proxRange=1, $distRange=1, $power=3, $priority=3, $isBase=True,
+                    $events=array(Event::REVEAL=>getOverloadTie,
+                    $events=array(Event::STARTOFBEAT=>getOverloadStyle));
 
 //Khadath Ahemusei's Kit
-$evacuation = new BaseCard($name="Evacuation", $distRange=1);
-$hunters = new BaseCard($name="Hunter's");
-$teleport = new BaseCard($name="Teleport", $power=1, $priority=-3);
-$lure = new BaseCard($name="Lure", $distRange=5, $power=-1, $priority=-1);
-$blight = new BaseCard($name="Blight", $distRange=2);
-$snare = new BaseCard($name="Snare", $power=3, $priority=1, $isBase=True);
+//I play tokens onto the field that stop my opponent's movement
+//note on evacuation: When I am hit
+$evacuation = new BaseCard($name="Evacuation", $distRange=1,
+                    $events=array(Event::STARTOFBEAT=>getKhadathTrap(0),
+                                  Event::STARTOFBEAT=>getAdvancer(-1,-1),
+                                  Event::ONHIT=>getEvacuationDodge));
+//When I hit
+$hunters = new BaseCard($name="Hunter's", 
+                    $events=array(Event::REVEAL=>getHuntersPriority,
+                                  Event::ONHIT=>getHuntersPower));
+//when I am hit
+$teleport = new BaseCard($name="Teleport", $power=1, $priority=-3,
+                    $events=array(Event::ONHIT=>getTeleportDodge,
+                                  Event::ENDOFBEAT=>getDirectMove,
+                                  Event::ENDOFBEAT=>getTeleportTrap));
+//when I hit; can ignore trap
+$lure = new BaseCard($name="Lure", $distRange=5, $power=-1, $priority=-1,
+                    $events=array(Event::ONHIT=>getLure));
+$blight = new BaseCard($name="Blight", $distRange=2,
+                    $events=array(Event::STARTOFBET=>getBlightTrap));
+//when I hit for event 2; When I am hit for event 3
+$snare = new BaseCard($name="Snare", $power=3, $priority=1, $isBase=True,
+                    $events=array(Event::REVEAL=>getCancelTrapEffects));
+                                  Event::ONHIT=>getSetRangeOnTrap
+                                  Event::ONHIT=>getStunImmune
 
 //Lixis Ran Kanda's Kit
-$pruning = new BaseCard($name="Pruning", $distRange=1, $power=-1, $priority=-2);
-$venomous = new BaseCard($name="Venomous", $power=1, $stun=2);
-$rooted = new BaseCard($name="Rooted", $proxRange=-1, $power=1, $priority=-2, $soak=2);
-$naturalizing = new BaseCard($name="Naturalizing", $distRange=1, $power=-1, $priority=1);
-$vine = new BaseCard($name="Vine", $distRane=2, $priority=-2, $stun=3);
-$lance = new BaseCard($name="Lance", $proxRange=2, $distRange=2, $power=3, $priority=5, $isBase=True);
+//Character UA when I hit: Event::ONHIT=>getFoeDiscardsBase
+//when I hit
+$pruning = new BaseCard($name="Pruning", $distRange=1, $power=-1, $priority=-2,
+                    $events=array(Event::REVEAl=>getPruningBonus,
+                                  Event::ONHIT=>getFoeDiscardsBase));
+//My activation: both events
+$venomous = new BaseCard($name="Venomous", $power=1, $stun=2,
+                    $events=array(Event::BEFOREACTIVATING=>getAdvancer(1,1),
+                                  Event::ONHIT=>getFoeNextBeatPairAdjust($priority, -2)));
+//can ignore her own movements as well!
+$rooted = new BaseCard($name="Rooted", $proxRange=-1, $power=1, $priority=-2, $soak=2,
+                    $events=array(Event::REVEAL=>getIgnoreMove,
+                                  Event::REVEAL=>getRooted);
+//Negate all nearest Foe's ante effects. players cannot spend tokens/counters; pow/pri/range<=printed pair
+$naturalizing = new BaseCard($name="Naturalizing", $distRange=1, $power=-1, $priority=1,
+                    $events=array(Event::REVEAL=>getNaturalizing));
+//when I hit
+$vine = new BaseCard($name="Vine", $distRane=2, $priority=-2, $stun=3,
+                    $events=array(Event:ONHIT=>getPuller(0,2)));
+//opponents canot create adjacency
+$lance = new BaseCard($name="Lance", $proxRange=2, $distRange=2, $power=3, $priority=5, $isBase=True,
+                    $events=array(Event::REVEAL=>getLance));
 
 //Luc Von Gott's Kit
-$chrono = new BaseCard($name="Chrono", $priority=1);
-$eternal = new BaseCard($name="Eternal", $priority=-4, $soak=1);
-$memento = new BaseCard($name="Memento", $priority=-1);
-$fusion = new BaseCard($name="Fusion", $priority=1);
-$feinting = new BaseCard($name="Feinting", $proxRange=1, $distRange=1, $priority=-2);
-$flash = new BaseCard($name="Flash", $proxRage=1, $distRange=1, $power=1, $priority=6, $isBase=True);
+//My ante effects are not cumulative
+//advance 1 per token spet not passed opponent
+$chrono = new BaseCard($name="Chrono", $priority=1,
+                    $events=array(Event::STARTOFBEAT=>getChrono));
+//when I am hit gain soak=tokens spent
+$eternal = new BaseCard($name="Eternal", $priority=-4, $soak=1,
+                    $events=array(Event::ONHIT=>getEternal));
+//one time: 2 tokens to perform attack again
+$memento = new BaseCard($name="Memento", $priority=-1,
+                    $events=array(Event::AFTERACTIVATING=>getMemento));
+//when I deal damage
+$fusion = new BaseCard($name="Fusion", $priority=1,
+                    $events=array(Event::ONDAMAGE=>getFusion));
+$feinting = new BaseCard($name="Feinting", $proxRange=1, $distRange=1, $priority=-2,
+                    $events=array(Event::STARTOFBEAT=>getAdvancer(-1,-1),
+                                  Event::ENDOFBEAT=>getAdvancer(1,2)));
+//when I hit
+$flash = new BaseCard($name="Flash", $proxRage=1, $distRange=1, $power=1, $priority=6, $isBase=True,
+                    $events=array(Event::STARTOFBEAT=>getAdvancer(1,1),
+                                  Event::ONHIT=>getAdjustFoePair($stun,0)));
 
 
 //Magdelina Larington's Kit
-$spiritual = new BaseCard($name="Spiritual", $power=1, $priority=1);
-$sanctimonious = new BaseCard($name="Sanctimonious", $power=-1, $priority=-2);
-$priestess = new BaseCard($name="Priestess", $power=-2, $priority=-1);
-$saftey = new BaseCard($name="Saftey", $power=-2, $priority=-1);
-$excelsius = new BaseCard($name="Excelsius", $distRange=1, $power=-2, $priority=-1);
-$blessing = new BaseCard($name="Blessing", $proxRange=1, $distRange=2, $priority=3, $stun=3);
+//UA:check if level advance, then if no advance, gain token
+$spiritual = new BaseCard($name="Spiritual", $power=1, $priority=1,
+                    $events=array(Event::ENDOFBEAT=>getCancelMyUA));
+//when I hit
+$sanctimonious = new BaseCard($name="Sanctimonious", $power=-1, $priority=-2,
+                    $events=array(Event::ONHIT=>getSanctimoniousRange));
+//when I activate: both events
+$priestess = new BaseCard($name="Priestess", $power=-2, $priority=-1,
+                    $events=array(Event::ONHIT=>getAdjustFoePair($power, -2),
+                                  Event::AFTERACTIVATING=>getLifeGain(1)));
+//when I am damaged
+$saftey = new BaseCard($name="Saftey", $power=-2, $priority=-1,
+                    $events=array(Event::ONDAMAGE=>getSafetyDamageAdjust,
+                                  Event::ENDOFBEAT=>getSafetyMove));
+//my activation: both events
+$excelsius = new BaseCard($name="Excelsius", $distRange=1, $power=-2, $priority=-1,
+                    $events=array(Event::BEFOREACTIVATING=>getAdvancer(1,1),
+                                  Event::ONHIT=>getExcelsius));
+//when I hit
+$blessing = new BaseCard($name="Blessing", $proxRange=1, $distRange=2, $priority=3, $stun=3,
+                    $events=array(Event::ONHIT=>getBlessing));
 
 //Regicide Heketch's Kit
-$merciless = new BaseCard($name="Merciless", $distRange=1, $power=-1);
-$critical = new BaseCard($name="Critical", $power=-1, $priority=1);
-$rasping = new BaseCard($name="Rasping", $distRange=1, $power=-1, $priority=1);
-$assassin = new BaseCard($name="Assassin");
-$psycho = new BaseCard($name="Psycho", $priority=1);
-$knives = new BaseCard($name="Knives", $proxRange=1, $distRange=2, $power=4, $priority=5, $isBase=True);
+//I gain my token at the end of beat if my oppponent is far away
+//event 2: my activation
+$merciless = new BaseCard($name="Merciless", $distRange=1, $power=-1,
+                    $events=array(Event::REVEAL=>getMercilessMoveStop,
+                                  Event::AFTERACTIVATING=>getMercilessDodge));
+//my activtion: both events
+$critical = new BaseCard($name="Critical", $power=-1, $priority=1,
+                    $events=array(Event::ONHIT=>getHeketchDamage,
+                                  Event::ONDAMAGE=>getAdjustFoePair($stun,0)));
+//my acivation: both events
+$rasping = new BaseCard($name="Rasping", $distRange=1, $power=-1, $priority=1,
+                    $events=array(Event::ONHHIT=>getHeketchDamage,
+                                  Event::ONDAMAGE=>getRaspingHeal));
+//my activation
+$assassin = new BaseCard($name="Assassin",
+                    $events=array(Event::ONHIT=>getAdvancer(-9,0),
+                                 Event::ONDAMAGE=>getAssassin));
+$psycho = new BaseCard($name="Psycho", $priority=1,
+                    $events=array(Event::STARTOFBEAT=>getMakeAdjacent,
+                                 Event::ENDOFBEAT=>getPsycho));
+//my activation
+$knives = new BaseCard($name="Knives", $proxRange=1, $distRange=2, $power=4, $priority=5, $isBase=True
+                    $events=array(Event::REVEAL=>getKnivesClash,
+                                  Event::ONHIT=>getKnivesStun));
 
 //Rukyuk Amberdeen's Kit
+//I have 6 unique tokens and can ante only 1 per beat
 $gunner = new BaseCard($name="Gunner", $proxRange=2, $distRange=4);
 $sniper = new BaseCard($name="Sniper", $proxRange=3, $distRange=5, $power=1, $priority=2);
 $pointBlank = new BaseCard($name="Point Blank", $distRange=1, $stun=2);
