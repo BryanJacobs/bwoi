@@ -46,6 +46,7 @@ abstract class Events {
     const ENDOFBEAT = 6;
     const ANTE = 7;
     const RECYCLE = 8;
+    const GAMESTART = 9;
 }
 
 // it is unclear to me if this belongs in this file or in the battlecon.game.php file
@@ -86,7 +87,11 @@ $burst = new BaseCard($name="Burst", $proxRange=2, $distRange=3, $power=3, $prio
                                   $events=array(Events::STARTOFBEAT => getAdvancer(-2,-1)));
 
 class Cadenza extends Character {
-    public function gameStart() {
+    public function Cadenza() {
+        registerEvent(Events::GAMESTART, $self->gameStart);
+    }
+
+    public function gameStart($eventDetails, $extraData) {
         $self->ironBodyTokens = 3;
 
         registerEvent(Events::ANTE, $self->ante);
