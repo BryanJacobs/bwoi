@@ -33,6 +33,7 @@ $this->card_types = array(
 */
 
 function registerEvent($eventType, $eventAction, $extraEventData=NULL) {
+$eventAction = true
 }
 
 abstract class Events {
@@ -44,6 +45,7 @@ abstract class Events {
     const AFTERACTIVATING = 5;
     const ENDOFBEAT = 6;
     const ANTE = 7;
+    const RECYCLE = 8;
 }
 
 // it is unclear to me if this belongs in this file or in the battlecon.game.php file
@@ -65,17 +67,23 @@ class BaseCard {
 
 class Character {
     public function Character() {
+        $this->setPair = array()
         
     }
 }
 
 // Generic Bases
-$dash = new BaseCard($name="Dash", $priority=9, $isBase=True);
-$grasp = new BaseCard($name="Grasp", $proxRange=1, $distRange=1, $power=2, $priority=5, $isBase=True);
-$drive = new BaseCard($name="Drive", $proxRange=1, $distRange=1, $power=3, $priority=4, $isBase=True);
+$dash = new BaseCard($name="Dash", $priority=9, $isBase=True, 
+                                $events=array(Events::AFTERACTIVATING => getDasher(-3,3),
+                                              Events::ONHIT => hitFail()));
+$grasp = new BaseCard($name="Grasp", $proxRange=1, $distRange=1, $power=2, $priority=5, $isBase=True,
+                                 $events=array(Events::ONHIT => getPuller(-1,1)));
+$drive = new BaseCard($name="Drive", $proxRange=1, $distRange=1, $power=3, $priority=4, $isBase=True,
+                                 $events=array(Events::BEFOREACTIVATING => getAdvancer(1,2)));
 $strike = new BaseCard($name="Strike", $proxRange=1, $distRange=1, $power=4, $priority=3, $stun=5, $isBase=True);
 $shot = new BaseCard($name="Shot", $proxRange=1, $distRange=4, $power=3, $priority=2, $stun=2, $isBase=True);
-$burst = new BaseCard($name="Burst", $proxRange=2, $distRange=3, $power=3, $priority=1, $isBase=True);
+$burst = new BaseCard($name="Burst", $proxRange=2, $distRange=3, $power=3, $priority=1, $isBase=True,
+                                  $events=array(Events::STARTOFBEAT => getAdvancer(-2,-1)));
 
 class Cadenza extends Character {
     public function gameStart() {
@@ -91,7 +99,7 @@ class Cadenza extends Character {
             // Iff user antes, then:
             // $self->ironBodyTokens -= 1;
             $self->stunImmune = true;
-            registerEvent(Events::ENDOFBEAT, $self->removeStunImmunity);
+            registerEvent(Events::RECYCLE, $self->removeStunImmunity);
         }
 
         return $self->ironBodyTokens > 0;
@@ -118,7 +126,17 @@ class Cadenza extends Character {
         return $self->ironBodyTokens > 0;
     }
 }
-
+function getDasher($distanceLow, $distanceHigh){
+    $ret = function($eventDetails, $extraData){
+            // TODO: Iff this is for me, advance by some distance with each advance check:
+        if $active_player_location == $extradata{
+            regesterEvent(Events::ONHIT, $extradata-> hitFail);
+        }
+    }
+}
+function hitFail(){
+    return $hitConfirm = false;
+}
 function getAdvancer($distanceLow, $distanceHigh) {
     $ret = function($eventDetails, $extraData) {
         // TODO: Iff this is for me, advance by some distance
@@ -169,7 +187,7 @@ $resetPressDamage = function($eventDetails, $extraData) {
 
 $press = new BaseCard($name="Press", $proxRange=1, $distRange=2, $power=1, $stun=6, $isBase=True,
                       $events=array(Events::ONDAMAGE => $increasePressDamage,
-                                    Events::ENDOFBEAT => $resetPressDamage));
+                                    Events::RECYCLE => $resetPressDamage));
 
 $cardRegistry["Cadenza"] = array($hydraulic, $battery, $clockwork, $grapnel, $mechanical, $press);
 /*

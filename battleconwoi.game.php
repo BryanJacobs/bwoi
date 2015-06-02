@@ -45,6 +45,7 @@ class BattleConWoI extends Table
 		"playerTwoDisB" => 24,
 		"playerTwoChar" => 25,
 		"characterArray" => 30,
+		"eventClock" => 31,
             //    "my_first_global_variable" => 10,
             //    "my_second_global_variable" => 11,
             //      ...
@@ -95,17 +96,18 @@ class BattleConWoI extends Table
         // Init global values with their initial values
         //self::setGameStateInitialValue( 'my_first_global_variable', 0 );
         self::setGameStateInitialValue("beatCount", 0);
-        self::setGameStateInitialalue("playerOneLife", 20);
-        self::setGameStateInitialalue("playerOneLoc",1);
-		self::setGameStateInitialalue("playerOneDisA", array());
-		self::setGameStateInitialalue("playerOneDisB", array());
-		self::setGameStateInitialalue("playerOneChar", "");
-        self::setGameStateInitialalue("playerTwoLife", 20);
-		self::setGameStateInitialalue("playerTwoLoc", 5);
-		self::setGameStateInitialalue("playerTwoDisA", array());
-		self::setGameStateInitialalue("playerTwoDisB", array());
-        self::setGameStateInitialalue("playerTwoChar", "");
-        self::setGameStateInitialalue("characterArray", array("cadenza"=> 0);
+        self::setGameStateInitialValue("playerOneLife", 20);
+        self::setGameStateInitialValue("playerOneLoc",1);
+		self::setGameStateInitialValue("playerOneDisA", array());
+		self::setGameStateInitialValue("playerOneDisB", array());
+		self::setGameStateInitialValue("playerOneChar", "");
+        self::setGameStateInitialValue("playerTwoLife", 20);
+		self::setGameStateInitialValue("playerTwoLoc", 5);
+		self::setGameStateInitialValue("playerTwoDisA", array());
+		self::setGameStateInitialValue("playerTwoDisB", array());
+        self::setGameStateInitialValue("playerTwoChar", "");
+        self::setGameStateInitialValue("characterArray", array(0=>"Cadenza", 1=>"Cherri_Seneca"));
+        self::setGameStateInitialValue("eventClock", ANTE);
         // Init game statistics
         // (note: statistics used in this file must be defined in your stats.inc.php file)
         //self::initStat( 'table', 'table_teststat1', 0 );    // Init a table statistics
@@ -186,17 +188,61 @@ class BattleConWoI extends Table
     
     Example:
     */
-    function selectChar($CharKey)
+    function selectChar(characterArray($charKey))
     {
         self::checkAction('selectChar');
         $player_id = self::getActivePlayerID();
         
+        //TODO
         //get user input for character choice
-        switch(initGameStatelabels["characterArray"[$charKey]])
+        foreach ($players as $player_id => $playercharacter)
         {
-            case 0:
-                $playerOneCharacter = new Cadenza();
-                
+            $playerCharacter = new characterArray($charKey());
+            characterArray($charKey()).gameStart();
+            
+        }
+    }
+
+    function playPair($beatBase, $beatStyle)
+    {
+        self::checkAction('playPair');
+        $player_id = self::getActivePlayerID();
+
+        //TODO
+        //get user input for BaseCard where $isBase == False
+        //get user input for BaseCard where $isBase == True
+        for($i=0, $i=$players, $i++  )
+        {
+            $playercharacter.setPair = ($beatStyle, $beatBase);
+    }   
+    function anteSelected($playerCharacter, $anteInput)
+    {
+        self::checkAction('anteSelected');
+        $player_id = self::getActivePlayerID();
+        if $playerCharacter.ante != false or $playerCharacter.setPair.ante != false
+        {
+            //TODO get player input for what to ante and how many
+            //and a pass break
+            $anteInput.ante();
+        }
+        $eventClock = REVEAL;
+    }
+    function clashPair ($beatBase, $playerCharacter.setPair())
+    {
+         $playercharacter.setPair = ($playercharacter.setPair(0));
+        //TODO get new base choice only
+         $playercharacter.setPair = ($playercharacter.setPair(0), $beatBase);
+    }
+    
+    function actions($playerCharacter,$eventClock)
+    {
+        self::checkAction('anteSelected');
+        $player_id = self::getActivePlayerID();
+        if $playerCharacter.$eventClock != false or $playerCharacter.setPair.$eventClock != false
+        {
+            
+        }
+        
     /*
     function playCard( $card_id )
     {

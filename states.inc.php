@@ -89,116 +89,116 @@ recycle            (automatic)
         "descriptionmyturn" => clienttranslate('${you} must make a character choice'),
         "type" => "multipleactiveplayer",
         "possibleactions" => array( "selectChar" ),
-        "transitions" => array(  => 3, => 3 )
+        "transitions" => array()
     ),
 
     3 => array(
-        "name" = "chooseBasePairs",
+        "name" => "chooseBasePairs",
         "description" => clienttranslate('${activeplayer} must select an attack pair'),
         "descriptionmyturn" => clienttranslate('${you} must select an attack pair'),
         "type" => "multipleactiveplayer",
         "possibleactions" => array( "playPair" ),
         "transitions" => array( "playPair" => 4 )
-    )
+    ),
 
     4 => array(
-        "name" = "ante",
+        "name" => "ante",
         "description" => clienttranslate('${activeplayer} must select an ante or pass'),
         "descriptionmyturn" => clienttranslate('${you} must select an ante or pass'),
         "type" => "activeplayer",
-        "possibleactions" => array( "chooseSelected", "pass" ),
-        "transitions" => array( "chooseSelected"=> 5, "pass" => 5 )
-    )
+        "possibleactions" => array( "anteSelected", "pass" ),
+        "transitions" => array( "anteSelected"=> 5, "pass" => 5 )
+    ),
 
     5 => array(
-        "name" = "revealEffects",
+        "name" => "revealEffects",
         "description" => clienttranslate(""),
         "type" => "game",
         "possibleactions" => array( "" ),
         "transitions" => array( "" => 6 )
-    )
+    ),
 
     //automatic check for a clash between players' atack pairs
     6 => array(
-        "name" = "clash",
+        "name" => "clash",
         "description" => clienttranslate("Check for clash"),
         "type" => "game",
         "possibleactions" => array( "" ),
         "transitions" => array( "True" => 7, "False" => 8 )
-    )
+    ),
 
     7 => array(
-        "name" = "chooseClashPairs",
+        "name" => "chooseClashPairs",
         "description" => clienttranslate('${activeplayer} must select an attack pair'),
         "descriptionmyturn" => clienttranslate('${you} must select an attack pair'),
         "type" => "multipleactiveplayer",
-        "possibleactions" => array( "playCard" ),
-        "transitions" => array( "playCard" => 5 )
-    )
+        "possibleactions" => array( "clashPair" ),
+        "transitions" => array( "clashPair" => 5 )
+    ),
 
     8 => array(
-        "name" = "startBeat",
+        "name" => "startBeat",
         "description" => clienttranslate('${activeplayer} must complete start of beat effect(s)'),
         "descriptionmyturn" => clienttranslate('${you} must complete start of beat effect(s)'),
         "type" => "activeplayer",
     // each possible action puts you back in the action window here because you must complete all actions. only once all
     // actions have been performed can players move into the next action window
-        "possibleactions" => array( "startStyle", "startBase", "done" ),
+        "possibleactions" => array( "actions", "done" ),
         "transitions" => array( "startStyle" => 8, "startBase" => 8, "done" => 9 )
-    )
+    ),
 
     9 => array(
-        "name" = "beforeActivation",
+        "name" => "beforeActivation",
         "description" => clienttranslate('${activeplayer} must complete their activation'),
         "descriptionmyturn" => clienttranslate('${you} must complete your activation'),
         "type" => "activeplayer",
-        "possibleactions" => array( "preStyle", "preBase", "done" )
+        "possibleactions" => array( "preStyle", "preBase", "done" ),
         "transitions" => array( "preStyle" => 9, "preBase" => 9, "done" => 10 )
-    )
+    ),
 
     10 => array(
-        "name" = "onHit",
+        "name" => "onHit",
         "description" => clienttranslate('${activeplayer} must complete their activation'),
         "descriptionmyturn" => clienttranslate('${you} must complete your activation'),
         "type" => "activeplayer",
-        "possibleactions" => array( "hitStyle", "hitBase", "done" )
+        "possibleactions" => array( "hitStyle", "hitBase", "done" ),
         "transitions" => array( "hitStyle" => 10, "hitBase" => 10, "done" => 11 )
-    )
+    ),
 
     11 => array(
-        "name" = "onDamage",
+        "name" => "onDamage",
         "description" => clienttranslate('${activeplayer} must complete their activation'),
         "descriptionmyturn" => clienttranslate('${you} must complete your activation'),
         "type" => "activeplayer",
-        "possibleactions" => array( "damageStyle", "damageBase", "done" )
+        "possibleactions" => array( "damageStyle", "damageBase", "done" ),
         "transitions" => array( "damageStyle" => 11, "damageBase" => 11, "done" => 12 )
-    )
+    ),
 
     12 => array(
-        "name" = "afterActivation",
+        "name" => "afterActivation",
         "description" => clienttranslate('${activeplayer} must complete their activation'),
         "descriptionmyturn" => clienttranslate('${you} must complete your activation'),
         "type" => "activeplayer",
-        "possibleactions" => array( "postStyle", "postBase", "done" )
-        "transitions" => array( "postStyle" => 12 "postBase" => 12, "done" => 13 )
-    )
+        "possibleactions" => array( "postStyle", "postBase", "done" ),
+        "transitions" => array( "postStyle" => 12, "postBase" => 12, "done" => 13 )
+    ),
 
     13 => array(
-        "name" = "endBeat",
+        "name" => "endBeat",
         "description" => clienttranslate('${activeplayer} must complete end of beat effect(s)'),
         "descriptionmyturn" => clienttranslate('${you} must complete end of beat effect(s)'),
         "type" => "activeplayer",
-        "possibleactions" => array( "endStyle", "endBase", "done" )
+        "possibleactions" => array( "endStyle", "endBase", "done" ),
         "transitions" => array( "endStyle" => 13, "endBase" => 13, "done" => 14 )
-    )
+    ),
 
     14 => array(
-        "name" = "recycle",
+        "name" => "recycle",
         "description" => clienttranslate('complete beat and check for game end'),
         "type" => "game",
-        "possibleactions" => array( "" )
+        "possibleactions" => array( "" ),
         "updateGameProgression" => true,
-        "transitions" => array( "winner" => 99, "" => 2 )
+        "transitions" => array( "winner" => 99, "" => 2 ),
 
     // Final state.
     // Please do not modify.
@@ -210,6 +210,6 @@ recycle            (automatic)
         "args" => "argGameEnd"
     )
 
-);
+)
 
 
