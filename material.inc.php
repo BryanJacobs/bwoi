@@ -33,6 +33,7 @@ $this->card_types = array(
 */
 
 function registerEvent($eventType, $eventAction, $extraEventData=NULL) {
+//TODO generate an actual dictionary item here
 $eventAction = true
 }
 
@@ -304,7 +305,7 @@ $mutating = new BaseCard($name="Mutating",
 $whip = new BaseCard($name="Whip", $distRange=1, 
                     $events=array(Event::ONHIT=>getWhip));
 $bladed = new BaseCard($name="Bladed", $power=2, $stun=2);
-//THis should have record triggers at any time a move effect could occur. is generic
+//This should have record triggers at any time a move effect could occur. is generic
 $exoskeletal = new BaseCard($name="Exoskeletal", $soak=2,
                     $events=array(Event:REVEAL=>getIgnoreMove));
 $quicksilver = new BaseCard($name="Quicksilver", $priority=2, 
@@ -438,52 +439,146 @@ $knives = new BaseCard($name="Knives", $proxRange=1, $distRange=2, $power=4, $pr
                                   Event::ONHIT=>getKnivesStun));
 
 //Rukyuk Amberdeen's Kit
-//I have 6 unique tokens and can ante only 1 per beat
-$gunner = new BaseCard($name="Gunner", $proxRange=2, $distRange=4);
-$sniper = new BaseCard($name="Sniper", $proxRange=3, $distRange=5, $power=1, $priority=2);
-$pointBlank = new BaseCard($name="Point Blank", $distRange=1, $stun=2);
-$trick = new BaseCard($name="Trick", $proxRange=1, $distRange=2, $priority=-3);
-$crossfire = new BaseCard($name="Crossfire", $proxRange=2, $distrange=3, $priority=-2, $soak=2);
-$reload = new BaseCard($name="Reload", $priority=4, $isBase=True);
+//not move 0
+$gunner = new BaseCard($name="Gunner", $proxRange=2, $distRange=4,
+                    $events=array((Event::BEFOREACTIVATING=>getGunnerRange,
+                                   Event::AFTERACTIVATING=>getAdvancer(-2,2)))
+//not move 0
+$sniper = new BaseCard($name="Sniper", $proxRange=3, $distRange=5, $power=1, $priority=2,
+                    $events=array(Event::AFTERACTIVATING=>getAdvancer(-3,3)));
+//my activation
+$pointBlank = new BaseCard($name="Point Blank", $distRange=1, $stun=2,
+                    $events=array(Event::ONDAMAGE=>getPuller(-2,0)));
+//When I am damaged
+$trick = new BaseCard($name="Trick", $proxRange=1, $distRange=2, $priority=-3,
+                    $events=array(Event::ONDAMAGE=>getStunImmune));
+//when I hit
+$crossfire = new BaseCard($name="Crossfire", $proxRange=2, $distrange=3, $priority=-2, $soak=2,
+                    $events=array(Event::ONHIT=>getCrossfire));
+//when I activate
+$reload = new BaseCard($name="Reload", $priority=4, $isBase=True,
+                    $events=array(Event::ONHIT=>getHitFail,
+                                  Event::AFTERACTIVATING=>getDierectMove,
+                                  Event::ENDOFBEAT=>getReload));
 
 //Sagas Seities's Kit
-$negation = new BaseCard($name="Negation");
-$echo = new BaseCard($name="Echo");
-$repelling = new BaseCard($name="Repelling", $proxRange=1, $distRange=2, $power=-1, $priority=1);
-$shadow = new BaseCard($name="Shadow", $distRange=1, $power=1);
-$shattering = new BaseCard($name="Shattering", $proxRange=1, $distRange=2, $power=1, $priority=-1, $stun=2);
-$staff = new BaseCard($name="Staff", $proxRange=1, $distRange=2, $power=3, $priority=4, $stun=4, $isBase=True);
+//I need to know hat my opponent has played and is playing
+//only ENDOFBEAT from opp styles, and if you have mirror win priority
+$negation = new BaseCard($name="Negation", 
+                    $events=array(Event::REVEAL=>getNegtion));
+//gain a style in Foe's discard. ignore effects with their name
+$echo = new BaseCard($name="Echo",
+                    $events=array(event::REVEAL=>getEcho));
+$repelling = new BaseCard($name="Repelling", $proxRange=1, $distRange=2, $power=-1, $priority=1,
+                    $events=array(Event::STARTOFBEAT=>getRepelling));
+$shadow = new BaseCard($name="Shadow", $distRange=1, $power=1,
+                    $events=array(Event::REVEAL=>getShadowWrap,
+                                  Event::BEFOREACTIVATING=>getAdvancer(1,1),
+                                  Event::ENDOFBEAT=>getShadowAttack));
+//my activation
+$shattering = new BaseCard($name="Shattering", $proxRange=1, $distRange=2, $power=1, $priority=-1, $stun=2,
+                    $events=array(Event::ONHIT=>getShatteringStun,
+                                  Event::ONDAMAGE=>getSetFoePair($stun, 0),
+                                  Event::ENDOFBEAT=>getShatteringCancel));
+//my activation
+$staff = new BaseCard($name="Staff", $proxRange=1, $distRange=2, $power=3, $priority=4, $stun=4, $isBase=True,
+                    $events=array(Event::REVEAL=>getStaffCopy,
+                                  Event::ONHIT=>getStaffRoot
+                                  Event::ONHIT=>getPuller(-1,-1),
+                                  Event::ONDAMAGE=>getStaffNoStun));
 
 //Seth Cremmul's Kit
-$compelling = new BaseCard($name="Compelling");
-$fools = new BaseCard($name="Fool's", $power=-1, $priority=-2);
-$mimics = new BaseCard($name="Mimic's", $power=1);
-$wyrding = new BaseCard($name="Wyrding");
-$vanishing = new BaseCard($name="Vanishing", $proxRange=1, $distRange=1);
-$omen = new BaseCard($name="Omen", $proxRange=1, $distRange=1, $power=3, $priority=1, $isBase=True);
+//I need to name a base in my opponents hand
+//my activation
+$compelling = new BaseCard($name="Compelling",
+                    $events=array(Event::BEFOREACTIVATING=>getPuller(-1,1),
+                                  Event::AFTERACTIVATING=>getPuller(-1,1)));
+$fools = new BaseCard($name="Fool's", $power=-1, $priority=-2,
+                    $events=array(Event::STARTOFBEAT=>getAdjustFoePair($proxrange, -1),
+                                  Event::STARTOFBEAT=>getAdjustFoePair($distrange, -1));
+//move exactly as opponent moves if able
+$mimics = new BaseCard($name="Mimic's", $power=1,
+                    $events=array(Event::REVEAL=>getMimic));
+//add an additional base to discard
+$wyrding = new BaseCard($name="Wyrding",
+                    $events=array(Event::STARTOFBEAT=>getWyrding));
+//when I am hit
+$vanishing = new BaseCard($name="Vanishing", $proxRange=1, $distRange=1,
+                    $events=array(Event::ONHIT=>getForceShort(4),
+                                  Event::STARTOFBEAT=>getAdvancer(-1,-1)));
+$omen = new BaseCard($name="Omen", $proxRange=1, $distRange=1, $power=3, $priority=1, $isBase=True,
+                    $events=array(Event::STARTOFBEAT=>getOmen));
 
 //Tatsumi Nuac's Kit
-$empathic = new BaseCard($name="Empathic", $priority=-1);
-$siren = new BaseCard($name="Siren", $power=-1, $priority=1);
-$fearless = new BaseCard($name="Fearless", $proxRange=-1, $priority=1);
-$wave = new BaseCard($name="Wave", $proxRange=2, $distRange=4, $power=-1);
-$riptide = new BaseCard($name="Riptide", $distRange=2, $priority=-1);
-$whirlpool = new BaseCard($name="Whirlpool", $proRange=1, $distRange=2, $power=3, $priority=3, $isBase=True);
+//I need to know the relative position of Juto
+$empathic = new BaseCard($name="Empathic", $priority=-1,
+                    $events=array(Event::STARTOFBEAT=>getEmpathicSwap,
+                                  Event::ENDOFBEAT=>getEmpathicDamage));
+//when I hit
+$siren = new BaseCard($name="Siren", $power=-1, $priority=1,
+                    $events=array(Event::ONHIT=>getStunner,
+                                  Event::ENDOFBEAT=>getJutoMove(-2,2)));
+//when I hit
+$fearless = new BaseCard($name="Fearless", $proxRange=-1, $priority=1,
+                    $events=array(Event::ONHIT=>getFearlessRangeCheck,
+                                  Event::ENDOFBEAT=>getSetJuto));
+//my activation
+$wave = new BaseCard($name="Wave", $proxRange=2, $distRange=4, $power=-1,
+                    $events=array(Event::ONHIT=>getPuller(-2,0),
+                                  Event::AFTERACTIVATING=>getJutoMove(0,9)));
+$riptide = new BaseCard($name="Riptide", $distRange=2, $priority=-1,
+                    $events=array(Event::STARTOFBEAT=>getRiptideDodge,
+                                  Event::ENDOFBEAT=>getRiptideJutoMove));
+//my activation
+$whirlpool = new BaseCard($name="Whirlpool", $proRange=1, $distRange=2, $power=3, $priority=3, $isBase=True,
+                    $events=array(Event::STARTOFBEAT=>getWhirlpoolPull,
+                                  Event::AFTERACTIVATING=>getAdvancer(-2,2),
+                                  Event::AFTERACTIVATING=>getJutoMove(-2,2)));
 
 //Vanaah Kalmor's Kit
-$reaping = new BaseCard($name="Reaping", $proxRange=0, $distRange=1, $priority=1);
-$glorious = new BaseCard($name="Glorious", $power=2);
-$judgement = new BaseCard($name="Judgment", $proxRange=1, $distRange =1, $power=1, $priority=-1);
-$vengance = new BaseCard($name="Vengance", $power=2, $stun=4);
-$paladin = new BaseCard($name="Paladin", $proxRange=0, $distRange=1, $power=1, $priority=-2, $stun=3);
-$scyth = new BaseCard($name="Scyth", $proxRange=1, $distRange=2, $power=3, $priority=3, $stun=3, $isBase=True);
+//my token cycles with its attack pair, but can return early
+//when i hit
+$reaping = new BaseCard($name="Reaping", $proxRange=0, $distRange=1, $priority=1,
+                    $events=array(Event::ONHIT=>getReaping));
+//my activtion
+$glorious = new BaseCard($name="Glorious", $power=2,
+                    $events=array(Event::ONHIT=>getGloriousMiss,
+                                  Event::BEFOREACTIVATING=>getAdvancer(1,1)));
+//affects all movements of foe
+$judgement = new BaseCard($name="Judgment", $proxRange=1, $distRange =1, $power=1, $priority=-1,
+                    $events=array(Event::REVEAL=>getJudgment));
+//my activation
+$vengance = new BaseCard($name="Vengance", $power=2, $stun=4,
+                    $events=array(Event::ONHIT=>getVenganceMiss));
+$paladin = new BaseCard($name="Paladin", $proxRange=0, $distRange=1, $power=1, $priority=-2, $stun=3,
+                    $events=array(Event::ENDOFBEAT=>getPaladinTeleport));
+//my activation
+$scyth = new BaseCard($name="Scyth", $proxRange=1, $distRange=2, $power=3, $priority=3, $stun=3, $isBase=True,
+                    $events=array(Event::BEFOREACTIVATING=>getAdvancer(1,1),
+                                  Event::ONHIT=>getPuller(0,1)));
 
 //Zaamassel Kett's Kit
-$urgent = new BaseCard($name="Urgent", $distRange=1, $power=1, $priority=2);
-$malicious = new BaseCard($name="Malicious", $power=1, $priority=-1, $stun=2);
-$sinuous = new BaseCard($name="Sinuous", $priority=1);
-$warped = new BaseCard($name="Warped", $distRange=2);
-$sturdy = new BaseCard($name="Sturdy");
-$paradigmShift = new BaseCard($name="Paradigm Shift", $proxRange=2, $distRange=3, $power=3, $priority=3, $isBase=True);
-
-*/
+//one paradigm active at a time, and lose paradigme when stunned
+//my activation
+$urgent = new BaseCard($name="Urgent", $distRange=1, $power=1, $priority=2,
+                    $events=array(Event::BEFOREACTIVATING=>getAdvancer(0,1),
+                                  Event::AFTERACTIVATING=>getParadigm("haste"));
+//my activation
+$malicious = new BaseCard($name="Malicious", $power=1, $priority=-1, $stun=2,
+                    $events=array(Event::AFTERACTIVATING=>getParadigm("pain"));
+//my activation
+$sinuous = new BaseCard($name="Sinuous", $priority=1,
+                    $events=array(Event::AFTERACTIVATING=>getParadigm("fluidity"),
+                                  Event::ENDOFBEAT=>getDirectMove));
+//my activation
+$warped = new BaseCard($name="Warped", $distRange=2,
+                    $events=array(Event::STARTOFBEAT=>getadvance(-1,-1),
+                                  Event::AFTERACTIVATING=>getParadigm("distortion")));
+//when I am damaged for first event, ,y activation for third event
+$sturdy = new BaseCard($name="Sturdy",
+                    $events=array(Event::ONDAMAGE=>getStunImmune,
+                                  Event::REVEAL=>getIgnoreMove,
+                                  Event::AFTERACTIVATING=>getParadigm("resiliance")));
+//my activation
+$paradigmShift = new BaseCard($name="Paradigm Shift", $proxRange=2, $distRange=3, $power=3, $priority=3, $isBase=True, $events=array(Event::AFTERACTIVATING=>getParadigm("$paradigmChoice")));
+*/ 
