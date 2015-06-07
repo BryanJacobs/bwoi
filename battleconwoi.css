@@ -65,6 +65,8 @@
     }
 */
 
-
-
-
+.space {
+    border: 4px solid black;
+    width: 40px;
+    height: 40px;
+}

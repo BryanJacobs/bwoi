@@ -20,35 +20,45 @@
  * this.ajaxcall( "/battleconwoi/battleconwoi/myAction.html", ...)
  *
  */
-  
-  
-  class action_battleconwoi extends APP_GameAction
-  { 
+
+
+class action_battleconwoi extends APP_GameAction
+{
     // Constructor: please do not modify
-   	public function __default()
-  	{
-  	    if( self::isArg( 'notifwindow') )
-  	    {
+    public function __default()
+    {
+        if( self::isArg( 'notifwindow') )
+        {
             $this->view = "common_notifwindow";
-  	        $this->viewArgs['table'] = self::getArg( "table", AT_posint, true );
-  	    }
-  	    else
-  	    {
+            $this->viewArgs['table'] = self::getArg( "table", AT_posint, true );
+        }
+        else
+        {
             $this->view = "battleconwoi_battleconwoi";
             self::trace( "Complete reinitialization of board game" );
-      }
-  	} 
-  	
-  	// TODO: defines your action entry points there
+        }
+    }
 
+    // TODO: defines your action entry points there
+
+    public function moveToLocation()
+    {
+        self::setAjaxMode();
+
+        $location = self::getArg("location", AT_posint, true);
+
+        $this->game->moveToLocation($location);
+
+        self::ajaxResponse();
+    }
 
     /*
-    
+
     Example:
-  	
+
     public function myAction()
     {
-        self::setAjaxMode();     
+        self::setAjaxMode();
 
         // Retrieve arguments
         // Note: these arguments correspond to what has been sent through the javascript "ajaxcall" method
@@ -60,7 +70,7 @@
 
         self::ajaxResponse( );
     }
-    
+
     */
 
   }

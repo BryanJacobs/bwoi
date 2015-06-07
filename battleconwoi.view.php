@@ -23,25 +23,29 @@
  * Note: if the HTML of your game interface is always the same, you don't have to place anything here.
  *
  */
-  
-  require_once( APP_BASE_PATH."view/common/game.view.php" );
-  
+
+  require_once(APP_BASE_PATH . "view/common/game.view.php");
+
   class view_battleconwoi_battleconwoi extends game_view
   {
     function getGameName() {
         return "battleconwoi";
-    }    
-  	function build_page( $viewArgs )
-  	{		
-  	    // Get players & players number
+    }
+
+    function build_page($viewArgs) {
+        // Get players & players number
         $players = $this->game->loadPlayersBasicInfos();
-        $players_nbr = count( $players );
+        $players_nbr = count($players);
+        $board_width = 7;
 
         /*********** Place your code below:  ************/
 
+        for ($i = 0; $i < $board_width; $i++) {
+            $no = $i - (int)($board_width / 2);
+            $this->page->insert_block("space", array("X" => $i * 50, "NO" => $no));
+        }
 
         /*
-        
         // Examples: set the value of some element defined in your tpl file like this: {MY_VARIABLE_ELEMENT}
 
         // Display a specific number / string
@@ -52,17 +56,17 @@
 
         // Display some HTML content of your own:
         $this->tpl['MY_VARIABLE_ELEMENT'] = self::raw( $some_html_code );
-        
+
         */
-        
+
         /*
-        
+
         // Example: display a specific HTML block for each player in this game.
         // (note: the block is defined in your .tpl file like this:
         //      <!-- BEGIN myblock --> 
         //          ... my HTML code ...
         //      <!-- END myblock --> 
-        
+
 
         $this->page->begin_block( "battleconwoi_battleconwoi", "myblock" );
         foreach( $players as $player )
@@ -73,7 +77,7 @@
                                                     ...
                                                      ) );
         }
-        
+
         */
 
 

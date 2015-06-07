@@ -70,12 +70,20 @@ class BattleConWoI extends Table
 
         // Create players
         // Note: if you added some extra field on "player" table in the database (dbmodel.sql), you can initialize it there.
-        $sql = "INSERT INTO player (player_id, player_color, player_canal, player_name, player_avatar) VALUES ";
+        $sql = "INSERT INTO player (player_id, player_color, player_canal, player_name, player_avatar, life) VALUES ";
         $values = array();
         foreach( $players as $player_id => $player )
         {
             $color = array_shift( $default_colors );
-            $values[] = "('".$player_id."','$color','".$player['player_canal']."','".addslashes( $player['player_name'] )."','".addslashes( $player['player_avatar'] )."')";
+
+            $curvalue = array(
+                "$player_id", "'${color}'", "'${player['player_canal']}'",
+                "'" . addslashes($player['player_name']) . "'",
+                "'" . addslashes($player['player_avatar']) . "'",
+                "20"
+            );
+
+            $values[] = implode($curvalue, ',');
         }
         $sql .= implode( $values, ',' );
         self::DbQuery( $sql );
@@ -86,16 +94,10 @@ class BattleConWoI extends Table
         // Init global values with their initial values
         //self::setGameStateInitialValue( 'my_first_global_variable', 0 );
         self::setGameStateInitialValue("beatCount", 0);
-        self::setGameStateInitialValue("playerOneLife", 20);
-        self::setGameStateInitialValue("playerOneLoc", 1);
         //self::setGameStateInitialValue("playerOneDisA", array());
         //self::setGameStateInitialValue("playerOneDisB", array());
-        self::setGameStateInitialValue("playerOneChar", "");
-        self::setGameStateInitialValue("playerTwoLife", 20);
-        self::setGameStateInitialValue("playerTwoLoc", 5);
         //self::setGameStateInitialValue("playerTwoDisA", array());
         //self::setGameStateInitialValue("playerTwoDisB", array());
-        self::setGameStateInitialValue("playerTwoChar", "");
         //self::setGameStateInitialValue("characterArray", array(0=>"Cadenza", 1=>"Cherri_Seneca"));
         self::setGameStateInitialValue("eventClock", ANTE);
         // Init game statistics
@@ -103,8 +105,8 @@ class BattleConWoI extends Table
         //self::initStat( 'table', 'table_teststat1', 0 );    // Init a table statistics
         //self::initStat( 'player', 'player_teststat1', 0 );  // Init a player statistics (for all players)
 
-        self::placePlayerAt(1, -3);
-        self::placePlayerAt(2, 3);
+        self::placePlayerAt(1, -2);
+        self::placePlayerAt(2, 2);
 
         // Activate first player (which is in general a good idea :) )
         $this->activeNextPlayer();
@@ -124,6 +126,25 @@ class BattleConWoI extends Table
         self::DbQuery("INSERT INTO `${table}` (`position`, `object_type`, `object_description`) VALUES(${values})");
     }
 
+    private function getPlayerLocation($playerNumber)
+    {
+        $table = "board_objects";
+        $playerObjectType = "PLAYER";
+        $playerObjectDescription = "NO${playerNumber}";
+
+        $where_clause = "`object_type`=\"${playerObjectType}\" AND `object_description`=\"${playerObjectDescription}\"";
+
+        return (int) self::getUniqueValueFromDB("SELECT location FROM `${table}` WHERE ${where_clause}");
+    }
+
+    protected function moveToLocation($targetLocation)
+    {
+        $requestingPlayer = self::getCurrentPlayerId();
+        $activePlayer = self::getActivePlayerId();
+
+        self::placePlayerAt($activePlayer, $targetLocation);
+    }
+
     /*
         getAllDatas: 
 
@@ -135,16 +156,12 @@ class BattleConWoI extends Table
     */
     protected function getAllDatas()
     {
-        $result = array( 'players' => array() );
+        $result = array();
 
-        $current_player_id = self::getCurrentPlayerId();    // !! We must only return information visible to this player !!
-
-        // Get information about players
-        // Note: you can retrieve some extra field you added for "player" table in "dbmodel.sql" if you need it.
         $sql = "SELECT player_id id, player_score score FROM player ";
         $result['players'] = self::getCollectionFromDb( $sql );
 
-        // TODO: Gather all information about current game situation (visible by player $current_player_id).
+        $boardState = self::getCollectionFromDb("SELECT `position`,`object_type`,`description` FROM `board_objects`");
 
         return $result;
     }
