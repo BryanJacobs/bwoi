@@ -34,7 +34,6 @@ $this->card_types = array(
 
 function registerEvent($eventType, $eventAction, $extraEventData=NULL) {
 //TODO generate an actual dictionary item here
-$eventAction = true
 }
 
 abstract class Events {
@@ -69,8 +68,6 @@ class BaseCard {
 
 class Character {
     public function Character() {
-        $this->setPair = array()
-        
     }
 }
 
@@ -133,13 +130,15 @@ class Cadenza extends Character {
     }
 }
 function getDasher($distanceLow, $distanceHigh){
-    $ret = function($eventDetails, $extraData){
+    $ret = function($eventDetails, $extraData) {
             // TODO: Iff this is for me, advance by some distance with each advance check:
-        if $active_player_location == $extradata{
-            regesterEvent(Events::ONHIT, => hitFail);
+        if ($active_player_location == $extradata) {
+            registerEvent(Events::ONHIT, hitFail);
         }
-    }
+    };
+    return $ret;
 }
+
 function hitFail(){
     return $hitConfirm = false;
 }
@@ -199,7 +198,7 @@ $cardRegistry["Cadenza"] = array($hydraulic, $battery, $clockwork, $grapnel, $me
 /*
 //Cherri Seneca's Kit
 //My activation
-$dreamscape = new  BaseCard($name="Dreamscape", $power=-1, $priority=1, 
+$dreamscape = new  BaseCard($name="Dreamscape", $power=-1, $priority=1,
                     $events=array(Events::BEFOREACTIVATING=>getSwitchSides));
 //Character specific function
 $crimson = new BaseCard($name="Crimson", $distRange=1, $power= -1,
@@ -207,8 +206,8 @@ $crimson = new BaseCard($name="Crimson", $distRange=1, $power= -1,
 //Character specific function
 $catatonic = new BaseCard($name="Catatonic", $priority=-2, $stun=3, $soak=1,
                     $events=array(Events::ENDOFBEAT=>getInsightToken));
-//Character specific function (function 2), My activation                                                 
-$mirage = new BaseCard($name="Mirage", $power=-1, 
+//Character specific function (function 2), My activation
+$mirage = new BaseCard($name="Mirage", $power=-1,
                     $events=array(Events::REVEAL=>getSetFoeStyle($priority, 0),
                                   Events::AFTERACTIVATINg=>getMirage));
 //Character Specificfunction My activation
@@ -216,7 +215,7 @@ $blind = new BaseCard($name="Blind", $distRange=1, $priority=-1,
                     $events=array(Events::AFTERACTIVATING=>getBlind));
 $stare = new BaseCard($name="Stare", $proxRange=1, $distRange=3, $power=2, $isBase=True, 
                     $events=array(Events::REVEAL=>getStare));
-                    
+
 
 //Demitras Desnigrande's Kit
 //I need to know how much I anteed eachturn
@@ -235,7 +234,7 @@ $bloodletting = new BaseCard($name="Bloodletting", $power=-2, $priority=3,
 $illusory = new BaseCard($name="Illusory", $power=-1, $priority=1,
                     $events=array(Events::REVEAL=>getIllusory));
 //when I hit
-$vapid = new BaseCard($name="Vapid", $distRange=1, $power=-1, 
+$vapid = new BaseCard($name="Vapid", $distRange=1, $power=-1,
                     $events=array(Events::ONHIT=>getVapid));
 //my Activation: both events
 $deathblow = new BaseCard($name="Deathblow", $proxRange=1, $distRange=1, $priority=8, $isBase=True,
@@ -244,7 +243,7 @@ $deathblow = new BaseCard($name="Deathblow", $proxRange=1, $distRange=1, $priori
 
 //Hepzibah Culotre's Kit
 //I needto know how much I anteed each turn
-$pactbond = new BaseCard($name="Pactbond", $power=-1, $priority=-1, 
+$pactbond = new BaseCard($name="Pactbond", $power=-1, $priority=-1,
                     $events=array(Events::REVEAL=>getPactboundLife,
                                   Events::ENDOFBEAT=>getPactboundfree));
 //when I hit both events
