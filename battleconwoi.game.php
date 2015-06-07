@@ -77,13 +77,13 @@ class BattleConWoI extends Table
             $color = array_shift( $default_colors );
 
             $curvalue = array(
-                "$player_id", "'${color}'", "'${player['player_canal']}'",
-                "'" . addslashes($player['player_name']) . "'",
-                "'" . addslashes($player['player_avatar']) . "'",
+                "$player_id", "\"${color}\"", "\"${player['player_canal']}\"",
+                '"' . addslashes($player['player_name']) . '"',
+                '"' . addslashes($player['player_avatar']) . '"',
                 "20"
             );
 
-            $values[] = implode($curvalue, ',');
+            $values[] = "(" . implode($curvalue, ',') . ")";
         }
         $sql .= implode( $values, ',' );
         self::DbQuery( $sql );
@@ -99,7 +99,7 @@ class BattleConWoI extends Table
         //self::setGameStateInitialValue("playerTwoDisA", array());
         //self::setGameStateInitialValue("playerTwoDisB", array());
         //self::setGameStateInitialValue("characterArray", array(0=>"Cadenza", 1=>"Cherri_Seneca"));
-        self::setGameStateInitialValue("eventClock", ANTE);
+        //self::setGameStateInitialValue("eventClock", ANTE);
         // Init game statistics
         // (note: statistics used in this file must be defined in your stats.inc.php file)
         //self::initStat( 'table', 'table_teststat1', 0 );    // Init a table statistics
