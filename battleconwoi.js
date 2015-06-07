@@ -44,21 +44,16 @@ function (dojo, declare) {
             "gamedatas" argument contains all datas retrieved by your "getAllDatas" PHP method.
         */
 
-        setup: function(gamedatas)
+        setup: function(gamedata)
         {
-            console.log( "Starting game setup" );
+            console.log("Starting game setup");
 
-            // Setting up player boards
-            for( var player_id in gamedatas.players )
-            {
-                var player = gamedatas.players[player_id];
+            console.log("Fetched game data %o", gamedata);
+            console.log("Board state %o", gamedata.boardState);
 
-            }
-
-            // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();
 
-            console.log( "Ending game setup" );
+            console.log("Ending game setup");
         },
 
         ///////////////////////////////////////////////////

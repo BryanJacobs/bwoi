@@ -162,6 +162,7 @@ class BattleConWoI extends Table
         $result['players'] = self::getCollectionFromDb( $sql );
 
         $boardState = self::getCollectionFromDb("SELECT `position`,`object_type`,`description` FROM `board_objects`");
+        $result['boardState'] = $boardState;
 
         return $result;
     }

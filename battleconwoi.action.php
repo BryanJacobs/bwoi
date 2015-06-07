@@ -45,7 +45,7 @@ class action_battleconwoi extends APP_GameAction
     {
         self::setAjaxMode();
 
-        $location = self::getArg("location", AT_posint, true);
+        $location = self::getArg("location", AT_int, true);
 
         $this->game->moveToLocation($location);
 
