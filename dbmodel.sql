@@ -35,7 +35,7 @@ ALTER TABLE `player` ADD `life` INT UNSIGNED NOT NULL;
 ALTER TABLE `player` ADD `character` VARCHAR(20);
 
 CREATE TABLE IF NOT EXISTS `board_objects` (
-    `position` int(2) NOT NULL;
-    `object_type` VARCHAR(16) NOT NULL;
-    `object_description` VARCHAR(16) NOT NULL;
+    `position` int(2) NOT NULL,
+    `object_type` VARCHAR(16) NOT NULL,
+    `object_description` VARCHAR(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
