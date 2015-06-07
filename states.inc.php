@@ -198,7 +198,8 @@ recycle            (automatic)
         "type" => "game",
         "possibleactions" => array( "" ),
         "updateGameProgression" => true,
-        "transitions" => array( "winner" => 99, "" => 2 ),
+        "transitions" => array( "winner" => 99, "" => 2 )
+    ),
 
     // Final state.
     // Please do not modify.
@@ -210,6 +211,4 @@ recycle            (automatic)
         "args" => "argGameEnd"
     )
 
-)
-
-
+);
