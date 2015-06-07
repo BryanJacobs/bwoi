@@ -163,42 +163,31 @@ function (dojo, declare) {
             _ make a call to the game server
         
         */
-        
-        /* Example:
-        
-        onMyMethodToCall1: function( evt )
+
+        locationClicked: function( evt )
         {
-            console.log( 'onMyMethodToCall1' );
-            
+            console.log('locationClicked');
+
             // Preventing default browser reaction
-            dojo.stopEvent( evt );
+            dojo.stopEvent(evt);
 
             // Check that this action is possible (see "possibleactions" in states.inc.php)
-            if( ! this.checkAction( 'myAction' ) )
-            {   return; }
+            /*if( ! this.checkAction( 'myAction' ) )
+            {   return; }*/
 
-            this.ajaxcall( "/battleconwoi/battleconwoi/myAction.html", { 
-                                                                    lock: true, 
-                                                                    myArgument1: arg1, 
-                                                                    myArgument2: arg2,
-                                                                    ...
-                                                                 }, 
-                         this, function( result ) {
-                            
+            this.ajaxcall( "/battleconwoi/battleconwoi/moveToLocation.html", {
+                                                                    lock: true,
+                                                                    location: 3,
+                                                                 },
+                         this, function(result) {
                             // What to do after the server call if it succeeded
                             // (most of the time: nothing)
-                            
-                         }, function( is_error) {
+                            console.log("moveToLocation success %o", result);
+                         }, function(is_error) {
+                            console.log("moveToLocation result %o", is_error);
+                     });
+        },
 
-                            // What to do after the server call in anyway (success or failure)
-                            // (most of the time: nothing)
-
-                         } );        
-        },        
-        
-        */
-
-        
         ///////////////////////////////////////////////////
         //// Reaction to cometD notifications
 
