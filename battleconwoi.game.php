@@ -23,7 +23,6 @@ class BattleConWoI extends Table
 {
     function BattleConWoI()
     {
-
         // Your global variables labels:
         //  Here, you can assign labels to global variables you are using for this game.
         //  You can use any number of global variables with IDs between 10 and 99.
@@ -48,7 +47,7 @@ class BattleConWoI extends Table
         ));
     }
 
-    protected function getGameName( )
+    protected function getGameName()
     {
         return "battleconwoi";
     }
@@ -88,7 +87,7 @@ class BattleConWoI extends Table
         //self::setGameStateInitialValue( 'my_first_global_variable', 0 );
         self::setGameStateInitialValue("beatCount", 0);
         self::setGameStateInitialValue("playerOneLife", 20);
-        self::setGameStateInitialValue("playerOneLoc",1);
+        self::setGameStateInitialValue("playerOneLoc", 1);
         //self::setGameStateInitialValue("playerOneDisA", array());
         //self::setGameStateInitialValue("playerOneDisB", array());
         self::setGameStateInitialValue("playerOneChar", "");
@@ -104,12 +103,25 @@ class BattleConWoI extends Table
         //self::initStat( 'table', 'table_teststat1', 0 );    // Init a table statistics
         //self::initStat( 'player', 'player_teststat1', 0 );  // Init a player statistics (for all players)
 
-        // TODO: set up the initial game situation here
+        self::placePlayerAt(1, -3);
+        self::placePlayerAt(2, 3);
 
         // Activate first player (which is in general a good idea :) )
         $this->activeNextPlayer();
 
         /************ End of the game initialization *****/
+    }
+
+    private function placePlayerAt($playerNumber, $location) {
+        $table = "board_objects";
+        $playerObjectType = "PLAYER";
+        $playerObjectDescription = "NO${playerNumber}";
+
+        $where_clause = "`object_type`=\"${playerObjectType}\" AND `object_description`=\"${playerObjectDescription}\"";
+        self::DbQuery("DELETE FROM `${table}` WHERE ${where_clause}");
+
+        $values = "${location}, \"${playerObjectType}\", \"${playerObjectDescription}\"";
+        self::DbQuery("INSERT INTO `${table}` (`position`, `object_type`, `object_description`) VALUES(${values})");
     }
 
     /*

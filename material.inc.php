@@ -49,7 +49,6 @@ abstract class Events {
     const GAMESTART = 9;
 }
 
-// it is unclear to me if this belongs in this file or in the battlecon.game.php file
 class BaseCard {
     public function BaseCard($name, $proxRange = 0, $distRange = 0, $power = 0, $priority = 0, $stun = 0, $soak = 0, $isBase = False, $events=array()) {
         $this->name = $name;
