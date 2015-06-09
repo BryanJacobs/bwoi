@@ -18,6 +18,7 @@
 
 
 require_once(APP_GAMEMODULE_PATH . 'module/table/table.game.php');
+require_once('basics.php');
 
 class BattleConWoI extends Table
 {
@@ -31,19 +32,7 @@ class BattleConWoI extends Table
         // Note: afterwards, you can get/set the global variables with getGameStateValue/setGameStateInitialValue/setGameStateValue
         parent::__construct();
         self::initGameStateLabels(array(
-            "beatCount" => 10,
-            "playerOneLife" => 11,
-            "playerOneLoc" => 12,
-            //"playerOneDisA" => 13,
-            //"playerOneDisB" => 14,
-            "playerOneChar" => 15,
-            "playerTwoLife" => 21,
-            "playerTwoLoc" => 22,
-            //"playerTwoDisA" => 23,
-            //"playerTwoDisB" => 24,
-            "playerTwoChar" => 25,
-            //"characterArray" => 30,
-            "eventClock" => 31,
+            "beatCount" => 11,
         ));
     }
 
@@ -94,19 +83,14 @@ class BattleConWoI extends Table
         // Init global values with their initial values
         //self::setGameStateInitialValue( 'my_first_global_variable', 0 );
         self::setGameStateInitialValue("beatCount", 0);
-        //self::setGameStateInitialValue("playerOneDisA", array());
-        //self::setGameStateInitialValue("playerOneDisB", array());
-        //self::setGameStateInitialValue("playerTwoDisA", array());
-        //self::setGameStateInitialValue("playerTwoDisB", array());
-        //self::setGameStateInitialValue("characterArray", array(0=>"Cadenza", 1=>"Cherri_Seneca"));
-        //self::setGameStateInitialValue("eventClock", ANTE);
+
         // Init game statistics
         // (note: statistics used in this file must be defined in your stats.inc.php file)
         //self::initStat( 'table', 'table_teststat1', 0 );    // Init a table statistics
         //self::initStat( 'player', 'player_teststat1', 0 );  // Init a player statistics (for all players)
 
-        self::placePlayerAt(1, -2);
-        self::placePlayerAt(2, 2);
+        /*self::placePlayerAt(1, -2);
+        self::placePlayerAt(2, 2);*/
 
         // Activate first player (which is in general a good idea :) )
         $this->activeNextPlayer();
@@ -161,7 +145,7 @@ class BattleConWoI extends Table
         $sql = "SELECT player_id id, player_score score FROM player ";
         $result['players'] = self::getCollectionFromDb( $sql );
 
-        $boardState = self::getCollectionFromDb("SELECT `position`,`object_type`,`description` FROM `board_objects`");
+        $boardState = self::getCollectionFromDb("SELECT `position`,`object_type`,`object_description` FROM `board_objects`");
         $result['boardState'] = $boardState;
 
         return $result;
@@ -315,6 +299,13 @@ class BattleConWoI extends Table
         );
     }    
     */
+
+    function argCharacterSelect()
+    {
+        return array(
+            "CHARACTER DATA HERE"
+        );
+    }
 
 //////////////////////////////////////////////////////////////////////////////
 //////////// Game state actions

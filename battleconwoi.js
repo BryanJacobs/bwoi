@@ -78,6 +78,9 @@ function (dojo, declare) {
 
                 break;
            */
+            case 'characterSelect':
+                console.log('CHARACTER SELECTION THINGY');
+                break;
 
 
             case 'dummmy':

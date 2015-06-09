@@ -52,6 +52,16 @@ class action_battleconwoi extends APP_GameAction
         self::ajaxResponse();
     }
 
+    public function selectChar()
+    {
+        self::setAjaxMode();
+
+        $characterSelection = self::getArg("character", AT_enum, true, NULL, array_keys($cardRegistry));
+        self::trace("Selected character: " . var_dump($characterSelection, true));
+
+        self::ajaxResponse();
+    }
+
     /*
 
     Example:

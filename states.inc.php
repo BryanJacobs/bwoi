@@ -85,16 +85,17 @@ recycle            (automatic)
 
    2 => array(
         "name" => "characterSelect",
-        "description" => clienttranslate('${activeplayer} must make a character choice'),
+        "description" => clienttranslate('${actplayer} must make a character choice'),
         "descriptionmyturn" => clienttranslate('${you} must make a character choice'),
-        "type" => "multipleactiveplayer",
+        "type" => "activeplayer",
+        "args" => "argCharacterSelect",
         "possibleactions" => array( "selectChar" ),
-        "transitions" => array()
+        "transitions" => array( "characterSelected" => 99 )
     ),
 
     3 => array(
         "name" => "chooseBasePairs",
-        "description" => clienttranslate('${activeplayer} must select an attack pair'),
+        "description" => clienttranslate('${actplayer} must select an attack pair'),
         "descriptionmyturn" => clienttranslate('${you} must select an attack pair'),
         "type" => "multipleactiveplayer",
         "possibleactions" => array( "playPair" ),
@@ -103,7 +104,7 @@ recycle            (automatic)
 
     4 => array(
         "name" => "ante",
-        "description" => clienttranslate('${activeplayer} must select an ante or pass'),
+        "description" => clienttranslate('${actplayer} must select an ante or pass'),
         "descriptionmyturn" => clienttranslate('${you} must select an ante or pass'),
         "type" => "activeplayer",
         "possibleactions" => array( "anteSelected", "pass" ),
@@ -112,7 +113,7 @@ recycle            (automatic)
 
     5 => array(
         "name" => "revealEffects",
-        "description" => clienttranslate(""),
+        "description" => clienttranslate("Processing reveal effects"),
         "type" => "game",
         "possibleactions" => array( "" ),
         "transitions" => array( "" => 6 )
@@ -124,12 +125,12 @@ recycle            (automatic)
         "description" => clienttranslate("Check for clash"),
         "type" => "game",
         "possibleactions" => array( "" ),
-        "transitions" => array( "True" => 7, "False" => 8 )
+        "transitions" => array( "clash" => 7, "noClash" => 8 )
     ),
 
     7 => array(
         "name" => "chooseClashPairs",
-        "description" => clienttranslate('${activeplayer} must select an attack pair'),
+        "description" => clienttranslate('${actplayer} must select an attack pair'),
         "descriptionmyturn" => clienttranslate('${you} must select an attack pair'),
         "type" => "multipleactiveplayer",
         "possibleactions" => array( "clashPair" ),
@@ -138,7 +139,7 @@ recycle            (automatic)
 
     8 => array(
         "name" => "startBeat",
-        "description" => clienttranslate('${activeplayer} must complete start of beat effect(s)'),
+        "description" => clienttranslate('${actplayer} must complete start of beat effect(s)'),
         "descriptionmyturn" => clienttranslate('${you} must complete start of beat effect(s)'),
         "type" => "activeplayer",
     // each possible action puts you back in the action window here because you must complete all actions. only once all
@@ -149,7 +150,7 @@ recycle            (automatic)
 
     9 => array(
         "name" => "beforeActivation",
-        "description" => clienttranslate('${activeplayer} must complete their activation'),
+        "description" => clienttranslate('${actplayer} must complete their activation'),
         "descriptionmyturn" => clienttranslate('${you} must complete your activation'),
         "type" => "activeplayer",
         "possibleactions" => array( "preStyle", "preBase", "done" ),
@@ -158,7 +159,7 @@ recycle            (automatic)
 
     10 => array(
         "name" => "onHit",
-        "description" => clienttranslate('${activeplayer} must complete their activation'),
+        "description" => clienttranslate('${actplayer} must complete their activation'),
         "descriptionmyturn" => clienttranslate('${you} must complete your activation'),
         "type" => "activeplayer",
         "possibleactions" => array( "hitStyle", "hitBase", "done" ),
@@ -167,7 +168,7 @@ recycle            (automatic)
 
     11 => array(
         "name" => "onDamage",
-        "description" => clienttranslate('${activeplayer} must complete their activation'),
+        "description" => clienttranslate('${actplayer} must complete their activation'),
         "descriptionmyturn" => clienttranslate('${you} must complete your activation'),
         "type" => "activeplayer",
         "possibleactions" => array( "damageStyle", "damageBase", "done" ),
@@ -176,7 +177,7 @@ recycle            (automatic)
 
     12 => array(
         "name" => "afterActivation",
-        "description" => clienttranslate('${activeplayer} must complete their activation'),
+        "description" => clienttranslate('${actplayer} must complete their activation'),
         "descriptionmyturn" => clienttranslate('${you} must complete your activation'),
         "type" => "activeplayer",
         "possibleactions" => array( "postStyle", "postBase", "done" ),
@@ -185,7 +186,7 @@ recycle            (automatic)
 
     13 => array(
         "name" => "endBeat",
-        "description" => clienttranslate('${activeplayer} must complete end of beat effect(s)'),
+        "description" => clienttranslate('${actplayer} must complete end of beat effect(s)'),
         "descriptionmyturn" => clienttranslate('${you} must complete end of beat effect(s)'),
         "type" => "activeplayer",
         "possibleactions" => array( "endStyle", "endBase", "done" ),

@@ -26,6 +26,13 @@
 
 $game_options = array(
 
+    100 => array(
+        'name' => totranslate('GameOption'),
+        'values' => array(
+            1 => array( 'name' => totranslate('option 1') )
+        )
+    )
+
     /* Example of game variant:
 
     // note: game variant ID should start at 100 (ie: 100, 101, 102, ...). The maximum is 199.

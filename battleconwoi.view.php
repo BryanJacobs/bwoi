@@ -24,10 +24,10 @@
  *
  */
 
-  require_once(APP_BASE_PATH . "view/common/game.view.php");
+require_once(APP_BASE_PATH . "view/common/game.view.php");
 
-  class view_battleconwoi_battleconwoi extends game_view
-  {
+class view_battleconwoi_battleconwoi extends game_view
+{
     function getGameName() {
         return "battleconwoi";
     }
@@ -39,6 +39,7 @@
         $board_width = 7;
 
         /*********** Place your code below:  ************/
+        $this->page->begin_block('battleconwoi_battleconwoi', 'space');
 
         for ($i = 0; $i < $board_width; $i++) {
             $no = $i - (int)($board_width / 2);
@@ -83,7 +84,5 @@
 
 
         /*********** Do not change anything below this line  ************/
-  	}
-  }
-  
-
+    }
+}
