@@ -11,7 +11,7 @@ var jstpl_some_game_item='<div class="my_game_item" id="my_game_item_${id}"></di
 */
 </script>
 
-<div id="bwoiboard">
+<div id="bwoiboard" class="bwoiboard">
     <!-- BEGIN space -->
         <div id="space_{NO}" class="bwoispace" style="left: {X}px;">&nbsp;</div>
     <!-- END space -->
