@@ -1,1 +1,1 @@
-<?php $game_version_battleconwoi ="0";
+<?php $game_version_battleconwoi = "999999-9999";
