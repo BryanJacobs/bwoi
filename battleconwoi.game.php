@@ -34,6 +34,8 @@ class BattleConWoI extends Table
         self::initGameStateLabels(array(
             "beatCount" => 11,
         ));
+
+        $this->cardRegistry = buildCardRegistry();
     }
 
     protected function getGameName()
@@ -191,18 +193,21 @@ class BattleConWoI extends Table
 
     Example:
     */
-    function selectChar($character)
+
+    function selectChar($choice)
     {
         self::checkAction('selectChar');
-        $player_id = self::getActivePlayerID();
 
-        //TODO
-        //get user input for character choice
-        foreach ($players as $player_id => $playercharacter)
-        {
-            $playerCharacter = new characterArray($charKey());
-            //characterArray($charKey()).gameStart();
-        }
+        $player_id = self::getCurrentPlayerID();
+
+        $sql = "
+            UPDATE  player
+            SET     `character`=\"$choice\"
+            WHERE   `player_id`=$player_id
+        ";
+        self::DbQuery($sql);
+
+        $this->gamestate->setPlayerNonMultiactive($player_id, "selectChar");
     }
 
     function playPair($beatBase, $beatStyle)
@@ -248,17 +253,18 @@ class BattleConWoI extends Table
         }
     }
 
+
     /*
     function playCard( $card_id )
     {
         // Check that this is the player's turn and that it is a "possible action" at this game state (see states.inc.php)
-        self::checkAction( 'playCard' ); 
-        
+        self::checkAction( 'playCard' );
+
         $player_id = self::getActivePlayerId();
-        
+
         // Add your game logic to play a card there 
         ...
-        
+
         // Notify all players about the card played
         self::notifyAllPlayers( "cardPlayed", clienttranslate( '${player_name} played ${card_name}' ), array(
             'player_id' => $player_id,
@@ -266,9 +272,9 @@ class BattleConWoI extends Table
             'card_name' => $card_name,
             'card_id' => $card_id
         ) );
-          
+
     }
-    
+
     */
 
     

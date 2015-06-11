@@ -56,6 +56,8 @@ function (dojo, declare) {
             if (gamedata.gamestate.name == 'characterSelect') {
                 console.log("Enabling character selection...");
                 dojo.place(this.format_block('jstpl_character_select', {}), 'bwoiboard');
+
+                dojo.connect($('.bwoiCharacter'), 'onclick', this, 'characterClicked');
             } else {
                 console.log("Setting up board...");
             }
@@ -193,17 +195,35 @@ function (dojo, declare) {
                      });
         },
 
+        characterClicked: function(evt) {
+            console.log('characterClicked %o', evt);
+
+            var target = evt.target.innerHTML;
+
+            console.log('Click is on character %s', target);
+
+            this.ajaxcall( "/battleconwoi/battleconwoi/selectChar.html", {
+                                                                    lock: true,
+                                                                    character: target,
+                                                                 },
+                         this, function(result) {
+                            console.log("selectChar success %o", result);
+                         }, function(is_error) {
+                            console.log("selectChar result %o", is_error);
+             });
+        },
+
         ///////////////////////////////////////////////////
         //// Reaction to cometD notifications
 
         /*
             setupNotifications:
-            
+
             In this method, you associate each of your game notifications with your local method to handle it.
-            
+
             Note: game notification names correspond to "notifyAllPlayers" and "notifyPlayer" calls in
                   your battleconwoi.game.php file.
-        
+
         */
         setupNotifications: function()
         {

@@ -90,7 +90,7 @@ recycle            (automatic)
         "type" => "multipleactiveplayer",
         "args" => "argCharacterSelect",
         "possibleactions" => array( "selectChar" ),
-        "transitions" => array( "characterSelected" => 99 )
+        "transitions" => array( "selectChar" => 3 )
     ),
 
     3 => array(
