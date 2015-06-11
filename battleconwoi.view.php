@@ -43,7 +43,7 @@ class view_battleconwoi_battleconwoi extends game_view
 
         for ($i = 0; $i < $board_width; $i++) {
             $no = $i - (int)($board_width / 2);
-            $this->page->insert_block("space", array("X" => $i * 50, "NO" => $no));
+            $this->page->insert_block("space", array("X" => $i * 50 + 100, "NO" => $no));
         }
 
         /*
