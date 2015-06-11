@@ -53,6 +53,13 @@ function (dojo, declare) {
 
             this.setupNotifications();
 
+            if (gamedata.gamestate.name == 'characterSelect') {
+                console.log("Enabling character selection...");
+                dojo.place(this.format_block('jstpl_character_select', {}), 'bwoiboard');
+            } else {
+                console.log("Setting up board...");
+            }
+
             console.log("Ending game setup");
         },
 

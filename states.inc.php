@@ -87,7 +87,7 @@ recycle            (automatic)
         "name" => "characterSelect",
         "description" => clienttranslate('${actplayer} must make a character choice'),
         "descriptionmyturn" => clienttranslate('${you} must make a character choice'),
-        "type" => "activeplayer",
+        "type" => "multipleactiveplayer",
         "args" => "argCharacterSelect",
         "possibleactions" => array( "selectChar" ),
         "transitions" => array( "characterSelected" => 99 )

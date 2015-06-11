@@ -92,8 +92,7 @@ class BattleConWoI extends Table
         /*self::placePlayerAt(1, -2);
         self::placePlayerAt(2, 2);*/
 
-        // Activate first player (which is in general a good idea :) )
-        $this->activeNextPlayer();
+        $this->gamestate->setAllPlayersMultiactive();
 
         /************ End of the game initialization *****/
     }

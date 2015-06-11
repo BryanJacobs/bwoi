@@ -2,19 +2,18 @@
 
 <script type="text/javascript">
 
-// Javascript HTML templates
+var jstpl_space='<div id="space_${no}" class="bwoispace" style="left: ${X}px;">&nbsp;<div>';
 
-/*
-// Example:
-var jstpl_some_game_item='<div class="my_game_item" id="my_game_item_${id}"></div>';
+var jstpl_character_select='<div id="characterSelect" class="characterSelect"><h3 style="width: 100%; text-align: center;">{SELECT_CHARACTER}</h3>';
 
-*/
+// for loop around characters here
+jstpl_character_select += '<a class="bwoiCharacter" href="#">Cadenza</div>';
+
+jstpl_character_select += '</div>';
+
 </script>
 
 <div id="bwoiboard" class="bwoiboard">
-    <!-- BEGIN space -->
-        <div id="space_{NO}" class="bwoispace" style="left: {X}px;">&nbsp;</div>
-    <!-- END space -->
 </div>
 
 {OVERALL_GAME_FOOTER}
