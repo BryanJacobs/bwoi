@@ -144,7 +144,7 @@ class BattleConWoI extends Table
         $result = array();
 
         $sql = "SELECT player_id id, player_score score FROM player ";
-        $result['players'] = self::getCollectionFromDb( $sql );
+        $result['players'] = self::getCollectionFromDb($sql);
 
         $boardState = self::getCollectionFromDb("SELECT `position`,`object_type`,`object_description` FROM `board_objects`");
         $result['boardState'] = $boardState;
@@ -302,15 +302,8 @@ class BattleConWoI extends Table
             'variable2' => $value2,
             ...
         );
-    }    
-    */
-
-    function argCharacterSelect()
-    {
-        return array(
-            "CHARACTER DATA HERE"
-        );
     }
+    */
 
 //////////////////////////////////////////////////////////////////////////////
 //////////// Game state actions

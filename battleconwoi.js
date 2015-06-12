@@ -85,12 +85,11 @@ function (dojo, declare) {
         //
         onEnteringState: function(stateName, args)
         {
-            console.log( 'Entering state: '+stateName );
+            console.log('Entering state: ' + stateName);
 
-            switch( stateName )
+            switch (stateName)
             {
                 case 'characterSelect':
-                    console.log('CHARACTER SELECTION THINGY');
                     break;
             }
         },
@@ -98,9 +97,9 @@ function (dojo, declare) {
         // onLeavingState: this method is called each time we are leaving a game state.
         //                 You can use this method to perform some user interface changes at this moment.
         //
-        onLeavingState: function( stateName )
+        onLeavingState: function(stateName)
         {
-            console.log( 'Leaving state: '+stateName );
+            console.log('Leaving state: '+ stateName);
 
             switch (stateName)
             {
@@ -108,16 +107,13 @@ function (dojo, declare) {
                     dojo.style('characterSelect', 'display', 'none');
                     this.displayBoard();
                     break;
-
-                case 'dummmy':
-                    break;
             }
         },
 
         // onUpdateActionButtons: in this method you can manage "action buttons" that are displayed in the
         //                        action status bar (ie: the HTML links in the status bar).
         //
-        onUpdateActionButtons: function( stateName, args )
+        onUpdateActionButtons: function(stateName, args)
         {
             console.log( 'onUpdateActionButtons: '+stateName );
 
@@ -194,7 +190,7 @@ function (dojo, declare) {
 
             console.log('Click is on character %s', target);
 
-            this.ajaxcall( "/battleconwoi/battleconwoi/selectChar.html", {
+            this.ajaxcall("/battleconwoi/battleconwoi/selectChar.html", {
                                                                     lock: true,
                                                                     character: target,
                                                                  },
