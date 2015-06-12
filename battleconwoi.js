@@ -53,16 +53,28 @@ function (dojo, declare) {
 
             this.setupNotifications();
 
-            if (gamedata.gamestate.name == 'characterSelect') {
-                console.log("Enabling character selection...");
-                dojo.place(this.format_block('jstpl_character_select', {}), 'bwoiboard');
+            switch (gamedata.gamestate.name) {
+                case 'characterSelect':
+                    console.log("Enabling character selection...");
+                    dojo.place(this.format_block('jstpl_character_select', {}), 'bwoiboard');
 
-                dojo.connect($('.bwoiCharacter'), 'onclick', this, 'characterClicked');
-            } else {
-                console.log("Setting up board...");
+                    dojo.connect($('.bwoiCharacter'), 'onclick', this, 'characterClicked');
+                    break;
+
+                default:
+                    this.displayBoard();
+                    break;
             }
 
             console.log("Ending game setup");
+        },
+
+        displayBoard: function() {
+            console.log("Displaying board");
+            for (var i = 0; i < 7; ++i) {
+                var xpos = 60 * i + 200;
+                dojo.place(this.format_block('jstpl_space', {'no': i, 'X': xpos}), 'bwoiboard');
+            }
         },
 
         ///////////////////////////////////////////////////
@@ -77,23 +89,9 @@ function (dojo, declare) {
 
             switch( stateName )
             {
-
-            /* Example:
-
-            case 'myGameState':
-
-                // Show some HTML block at this game state
-                dojo.style( 'my_html_block_id', 'display', 'block' );
-
-                break;
-           */
-            case 'characterSelect':
-                console.log('CHARACTER SELECTION THINGY');
-                break;
-
-
-            case 'dummmy':
-                break;
+                case 'characterSelect':
+                    console.log('CHARACTER SELECTION THINGY');
+                    break;
             }
         },
 
@@ -104,21 +102,15 @@ function (dojo, declare) {
         {
             console.log( 'Leaving state: '+stateName );
 
-            switch( stateName )
+            switch (stateName)
             {
+                case 'characterSelect':
+                    dojo.style('characterSelect', 'display', 'none');
+                    this.displayBoard();
+                    break;
 
-            /* Example:
-
-            case 'myGameState':
-
-                // Hide the HTML block we are displaying only during this game state
-                dojo.style( 'my_html_block_id', 'display', 'none' );
-
-                break;
-           */
-
-            case 'dummmy':
-                break;
+                case 'dummmy':
+                    break;
             }
         },
 
