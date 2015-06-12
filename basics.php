@@ -243,10 +243,6 @@ function buildCardRegistry() {
     return $ret;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a7ae5d7481d90f4a7ab9dbb9a116ae413187c1ba
 /*
 //Cherri Seneca's Kit
 //My activation
