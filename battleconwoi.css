@@ -36,4 +36,5 @@
 .bwoiCharacter {
     padding: 10px 10px 10px 10px;
     outline: 1px dashed grey;
+    display: inline-block;
 }

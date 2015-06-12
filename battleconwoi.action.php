@@ -21,6 +21,7 @@
  *
  */
 
+require_once('basics.php');
 
 class action_battleconwoi extends APP_GameAction
 {
@@ -56,8 +57,14 @@ class action_battleconwoi extends APP_GameAction
     {
         self::setAjaxMode();
 
-        $characterSelection = self::getArg("character", AT_enum, true, NULL, array_keys($cardRegistry));
-        self::trace("Selected character: " . var_dump($characterSelection, true));
+        $possibleCharacters = array_keys($this->game->cardRegistry);
+        self::trace("Available characters: " . print_r($possibleCharacters, true));
+
+        $characterSelection = self::getArg("character", AT_enum, true, NULL, $possibleCharacters);
+
+        self::trace("Selected character: " . print_r($characterSelection, true));
+
+        $this->game->selectChar($characterSelection);
 
         self::ajaxResponse();
     }

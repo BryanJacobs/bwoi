@@ -53,14 +53,28 @@ function (dojo, declare) {
 
             this.setupNotifications();
 
-            if (gamedata.gamestate.name == 'characterSelect') {
-                console.log("Enabling character selection...");
-                dojo.place(this.format_block('jstpl_character_select', {}), 'bwoiboard');
-            } else {
-                console.log("Setting up board...");
+            switch (gamedata.gamestate.name) {
+                case 'characterSelect':
+                    console.log("Enabling character selection...");
+                    dojo.place(this.format_block('jstpl_character_select', {}), 'bwoiboard');
+
+                    dojo.connect($('.bwoiCharacter'), 'onclick', this, 'characterClicked');
+                    break;
+
+                default:
+                    this.displayBoard();
+                    break;
             }
 
             console.log("Ending game setup");
+        },
+
+        displayBoard: function() {
+            console.log("Displaying board");
+            for (var i = 0; i < 7; ++i) {
+                var xpos = 60 * i + 200;
+                dojo.place(this.format_block('jstpl_space', {'no': i, 'X': xpos}), 'bwoiboard');
+            }
         },
 
         ///////////////////////////////////////////////////
@@ -71,59 +85,35 @@ function (dojo, declare) {
         //
         onEnteringState: function(stateName, args)
         {
-            console.log( 'Entering state: '+stateName );
+            console.log('Entering state: ' + stateName);
 
-            switch( stateName )
+            switch (stateName)
             {
-
-            /* Example:
-
-            case 'myGameState':
-
-                // Show some HTML block at this game state
-                dojo.style( 'my_html_block_id', 'display', 'block' );
-
-                break;
-           */
-            case 'characterSelect':
-                console.log('CHARACTER SELECTION THINGY');
-                break;
-
-
-            case 'dummmy':
-                break;
+                case 'characterSelect':
+                    break;
             }
         },
 
         // onLeavingState: this method is called each time we are leaving a game state.
         //                 You can use this method to perform some user interface changes at this moment.
         //
-        onLeavingState: function( stateName )
+        onLeavingState: function(stateName)
         {
-            console.log( 'Leaving state: '+stateName );
+            console.log('Leaving state: '+ stateName);
 
-            switch( stateName )
+            switch (stateName)
             {
-
-            /* Example:
-
-            case 'myGameState':
-
-                // Hide the HTML block we are displaying only during this game state
-                dojo.style( 'my_html_block_id', 'display', 'none' );
-
-                break;
-           */
-
-            case 'dummmy':
-                break;
+                case 'characterSelect':
+                    dojo.style('characterSelect', 'display', 'none');
+                    this.displayBoard();
+                    break;
             }
         },
 
         // onUpdateActionButtons: in this method you can manage "action buttons" that are displayed in the
         //                        action status bar (ie: the HTML links in the status bar).
         //
-        onUpdateActionButtons: function( stateName, args )
+        onUpdateActionButtons: function(stateName, args)
         {
             console.log( 'onUpdateActionButtons: '+stateName );
 
@@ -193,17 +183,35 @@ function (dojo, declare) {
                      });
         },
 
+        characterClicked: function(evt) {
+            console.log('characterClicked %o', evt);
+
+            var target = evt.target.innerHTML;
+
+            console.log('Click is on character %s', target);
+
+            this.ajaxcall("/battleconwoi/battleconwoi/selectChar.html", {
+                                                                    lock: true,
+                                                                    character: target,
+                                                                 },
+                         this, function(result) {
+                            console.log("selectChar success %o", result);
+                         }, function(is_error) {
+                            console.log("selectChar result %o", is_error);
+             });
+        },
+
         ///////////////////////////////////////////////////
         //// Reaction to cometD notifications
 
         /*
             setupNotifications:
-            
+
             In this method, you associate each of your game notifications with your local method to handle it.
-            
+
             Note: game notification names correspond to "notifyAllPlayers" and "notifyPlayer" calls in
                   your battleconwoi.game.php file.
-        
+
         */
         setupNotifications: function()
         {
