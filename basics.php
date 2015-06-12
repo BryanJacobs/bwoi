@@ -41,7 +41,7 @@ class Character {
 // Generic Bases
 $dash = new BaseCard($name="Dash", $priority=9, $isBase=True, 
                                 $events=array(CardEvents::AFTERACTIVATING => getDasher(-3,3),
-                                              CardEvents::ONHIT => hitFail()));
+                                              CardEvents::ONHIT => getHitFail()));
 $grasp = new BaseCard($name="Grasp", $proxRange=1, $distRange=1, $power=2, $priority=5, $isBase=True,
                                  $events=array(CardEvents::ONHIT => getPuller(-1,1)));
 $drive = new BaseCard($name="Drive", $proxRange=1, $distRange=1, $power=3, $priority=4, $isBase=True,
@@ -100,15 +100,25 @@ function getDasher($distanceLow, $distanceHigh){
     $ret = function($eventDetails, $extraData) {
             // TODO: Iff this is for me, advance by some distance with each advance check:
         if ($active_player_location == $extradata) {
-            registerEvent(CardEvents::ONHIT, hitFail);
+            registerEvent(CardEvents::ONHIT, getHitFail);
         }
     };
     return $ret;
 }
 
-function hitFail(){
+function getHitFail(){
+        //TODO force dodge or negative hit confirmation on target
     return $hitConfirm = false;
 }
+
+function getForceShort ($missRange) {
+    $ret=function($eventDetails, $extraData) {
+        //TODO: when hit at $missRange or greater, return miss
+        return true;
+    };
+    return $ret;
+}
+
 function getAdvancer($distanceLow, $distanceHigh) {
     $ret = function($eventDetails, $extraData) {
         // TODO: Iff this is for me, advance by some distance
@@ -117,17 +127,83 @@ function getAdvancer($distanceLow, $distanceHigh) {
     return $ret;
 }
 
-function setNextBeatRelativePriority($priorityModifier) {
+
+function getPuller($distanceLow, $distanceHigh) {
     $ret = function($eventDetails, $extraData) {
-        // TODO: register a next-beat one-time priority boost or penalty
+        // TODO: Pull someone by a distance
         return true;
     };
     return $ret;
 }
 
-function getPuller($distanceLow, $distanceHigh) {
+function getDirectMove() {
     $ret = function($eventDetails, $extraData) {
-        // TODO: Pull someone by a distance
+        // TODO: prompt select unoccupied space shange ocation to be that space without entering any other spaces
+        return true;
+    };
+    return $ret;
+}
+
+function getMakeAdjacent() {
+    $ret = function($eventDetails, $extraData) {
+        // TODO: advance character until they are adjacant to the enemy
+        return true;
+    };
+    return $ret;
+}
+
+function getSetPair ($stat, $value, $isme) {
+    $ret=function($eventDetails, $extraData) {
+        //TODO: change value of given stat to the value indicated for the given character
+        return true;
+    };
+    return $ret;
+}
+
+function getAdjustPair ($stat, $value, $isme) {
+    $ret=function($eventDetails, $extraData) {
+        //TODO: change value of given stat by the value indicated for the given character
+        return true;
+    };
+    return $ret;
+}
+
+function getNextBeatPairAdjust($stat, $modifier, $isme) {
+    $ret = function($eventDetails, $extraData) {
+        // TODO: register a next-beat one-time boost or penalty for specified stat
+        return true;
+    };
+    return $ret;
+}
+
+function getIgnoreMove () {
+    $ret=function($eventDetails, $extraData) {
+        //TODO: prevent opponents move events from moving the character who called this function
+        return true;
+    };
+    return $ret;
+}
+
+function getStunImmune () {
+    $ret=function($eventDetails, $extraData) {
+        //TODO: either: prevent stun events from triggering OR change stun state to not stunned before 
+        // any events that checks for stun is activated
+        return true;
+    };
+    return $ret;
+}
+
+function getStunner ($stat, $value, $isme) {
+    $ret=function($eventDetails, $extraData) {
+        //TODO: Stun opponent
+        return true;
+    };
+    return $ret;
+}
+
+function getLifeGain($life) {
+    $ret=function($eventDetails, $extraData) {
+        //TODO: add to life points the value entered
         return true;
     };
     return $ret;
@@ -142,7 +218,7 @@ function buildCardRegistry() {
                               $events=array(CardEvents::BEFOREACTIVATING => getAdvancer(1, 1)));
 
     $battery = new BaseCard($name="Battery", $power=1, $priority=-1,
-                        $events=array(CardEvents::ENDOFBEAT => setNextBeatRelativePriority(4)));
+                        $events=array(CardEvents::ENDOFBEAT => getNextBeatPairAdjust($priority, 4, true)));
 
     $clockwork = new BaseCard($name="Clockwork", $power=3, $priority=-3, $soak=3);
     $grapnel = new BaseCard($name="Grapenel", $proxRange=2, $distRange=4,
@@ -167,13 +243,12 @@ function buildCardRegistry() {
     return $ret;
 }
 
-$cardRegistry = buildCardRegistry();
 
 /*
 //Cherri Seneca's Kit
 //My activation
 $dreamscape = new  BaseCard($name="Dreamscape", $power=-1, $priority=1,
-                    $events=array(CardEvents::BEFOREACTIVATING=>getSwitchSides));
+                    $events=array(CardEvents::BEFOREACTIVATING=>getDreamscapeSwitch));
 //Character specific function
 $crimson = new BaseCard($name="Crimson", $distRange=1, $power= -1,
                     $events=array(CardEvents::REVEAL=>getForceClash));
@@ -203,7 +278,7 @@ $jousting = new BaseCard($name="Jousting", $power=-2, $priority=1,
                                   CardEvents::ONHIT=>getJousting));
 //When I hit both on hits; need to store number of anteed crescendo tokens
 $bloodletting = new BaseCard($name="Bloodletting", $power=-2, $priority=3,
-                    $events=array(CardEvents::ONHIT=>getSetFoePair($soak, 0),
+                    $events=array(CardEvents::ONHIT=>getSetPair($soak, 0,false),
                                   CardEvents::ONHIT=>GetBloodletting));
 $illusory = new BaseCard($name="Illusory", $power=-1, $priority=1,
                     $events=array(CardEvents::REVEAL=>getIllusory));
@@ -239,7 +314,7 @@ $bloodlight = new BaseCard($name="Bloodlight", $proxRange=1, $distRange=3, $powe
 //Hikaru Sorayama's Kit
 //I can't regain a token I successfully anteed on a given beat
 $trance = new BaseCard($name="Trance", $distRange=1,
-                    $events=array(Event::REVEAL=>getCancelMyAnte,
+                    $events=array(Event::REVEAL=>getTranceCancelAnte,
                                   Event::ENDOFBEAT=>getGainHikaruToken));
 $geomantic = new BaseCard($name="Geomantic", $power=1,
                     $events=array(Event::STARTOFBEAT=>getGeomantic));
@@ -250,7 +325,7 @@ $advancing = new BaseCard($name="Advancing", $power=1, $priority=1,
                     $event=array(Event::STARTOFBEAT=>getAdvancing));
 //When I get hit; add damage to their attack
 $sweeping = new BaseCard($name="Sweeping", $power=-1, $priority=3,
-                    $event=array(Event::ONDAMAGE=>getAdjustFoePair($power, 2));
+                    $event=array(Event::ONDAMAGE=>getAdjustPair($power, 2, false));
 //When I hit
 $palmStrike = new BaseCard($name="Palm Strike", $proxRange=1, $distRange=1, $power=2, $priority=5, $isBase=True,
                     $event=array(Event::STARTOFBEAT=>getAdvancer(1,1),
@@ -324,7 +399,7 @@ $pruning = new BaseCard($name="Pruning", $distRange=1, $power=-1, $priority=-2,
 //My activation: both events
 $venomous = new BaseCard($name="Venomous", $power=1, $stun=2,
                     $events=array(Event::BEFOREACTIVATING=>getAdvancer(1,1),
-                                  Event::ONHIT=>getFoeNextBeatPairAdjust($priority, -2)));
+                                  Event::ONHIT=>getNextBeatPairAdjust($priority, -2, false)));
 //can ignore her own movements as well!
 $rooted = new BaseCard($name="Rooted", $proxRange=-1, $power=1, $priority=-2, $soak=2,
                     $events=array(Event::REVEAL=>getIgnoreMove,
@@ -359,23 +434,23 @@ $feinting = new BaseCard($name="Feinting", $proxRange=1, $distRange=1, $priority
 //when I hit
 $flash = new BaseCard($name="Flash", $proxRage=1, $distRange=1, $power=1, $priority=6, $isBase=True,
                     $events=array(Event::STARTOFBEAT=>getAdvancer(1,1),
-                                  Event::ONHIT=>getAdjustFoePair($stun,0)));
+                                  Event::ONHIT=>getAdjustPair($stun,0,false)));
 
 
 //Magdelina Larington's Kit
 //UA:check if level advance, then if no advance, gain token
 $spiritual = new BaseCard($name="Spiritual", $power=1, $priority=1,
-                    $events=array(Event::ENDOFBEAT=>getCancelMyUA));
+                    $events=array(Event::ENDOFBEAT=>getSpiritualCancelUA));
 //when I hit
 $sanctimonious = new BaseCard($name="Sanctimonious", $power=-1, $priority=-2,
                     $events=array(Event::ONHIT=>getSanctimoniousRange));
 //when I activate: both events
 $priestess = new BaseCard($name="Priestess", $power=-2, $priority=-1,
-                    $events=array(Event::ONHIT=>getAdjustFoePair($power, -2),
+                    $events=array(Event::ONHIT=>getAdjustPair($power, -2, false),
                                   Event::AFTERACTIVATING=>getLifeGain(1)));
 //when I am damaged
 $saftey = new BaseCard($name="Saftey", $power=-2, $priority=-1,
-                    $events=array(Event::ONDAMAGE=>getSafetyDamageAdjust,
+                    $events=array(Event::ONDAMAGE=>getSetPair($power, $x, false)
                                   Event::ENDOFBEAT=>getSafetyMove));
 //my activation: both events
 $excelsius = new BaseCard($name="Excelsius", $distRange=1, $power=-2, $priority=-1,
@@ -394,7 +469,7 @@ $merciless = new BaseCard($name="Merciless", $distRange=1, $power=-1,
 //my activtion: both events
 $critical = new BaseCard($name="Critical", $power=-1, $priority=1,
                     $events=array(Event::ONHIT=>getHeketchDamage,
-                                  Event::ONDAMAGE=>getAdjustFoePair($stun,0)));
+                                  Event::ONDAMAGE=>getAdjustPair($stun,0,false)));
 //my acivation: both events
 $rasping = new BaseCard($name="Rasping", $distRange=1, $power=-1, $priority=1,
                     $events=array(Event::ONHHIT=>getHeketchDamage,
@@ -415,10 +490,10 @@ $knives = new BaseCard($name="Knives", $proxRange=1, $distRange=2, $power=4, $pr
 //not move 0
 $gunner = new BaseCard($name="Gunner", $proxRange=2, $distRange=4,
                     $events=array((Event::BEFOREACTIVATING=>getGunnerRange,
-                                   Event::AFTERACTIVATING=>getAdvancer(-2,2)))
+                                   Event::AFTERACTIVATING=>getAdvancer(-2,2)))//not 0
 //not move 0
 $sniper = new BaseCard($name="Sniper", $proxRange=3, $distRange=5, $power=1, $priority=2,
-                    $events=array(Event::AFTERACTIVATING=>getAdvancer(-3,3)));
+                    $events=array(Event::AFTERACTIVATING=>getAdvancer(-3,3))); //not 0
 //my activation
 $pointBlank = new BaseCard($name="Point Blank", $distRange=1, $stun=2,
                     $events=array(Event::ONDAMAGE=>getPuller(-2,0)));
@@ -451,7 +526,7 @@ $shadow = new BaseCard($name="Shadow", $distRange=1, $power=1,
 //my activation
 $shattering = new BaseCard($name="Shattering", $proxRange=1, $distRange=2, $power=1, $priority=-1, $stun=2,
                     $events=array(Event::ONHIT=>getShatteringStun,
-                                  Event::ONDAMAGE=>getSetFoePair($stun, 0),
+                                  Event::ONDAMAGE=>getSetPair($stun, 0, false),
                                   Event::ENDOFBEAT=>getShatteringCancel));
 //my activation
 $staff = new BaseCard($name="Staff", $proxRange=1, $distRange=2, $power=3, $priority=4, $stun=4, $isBase=True,
@@ -464,11 +539,11 @@ $staff = new BaseCard($name="Staff", $proxRange=1, $distRange=2, $power=3, $prio
 //I need to name a base in my opponents hand
 //my activation
 $compelling = new BaseCard($name="Compelling",
-                    $events=array(Event::BEFOREACTIVATING=>getPuller(-1,1),
-                                  Event::AFTERACTIVATING=>getPuller(-1,1)));
+                    $events=array(Event::BEFOREACTIVATING=>getPuller(-1,1),//not 0
+                                  Event::AFTERACTIVATING=>getPuller(-1,1)));//not 0
 $fools = new BaseCard($name="Fool's", $power=-1, $priority=-2,
-                    $events=array(Event::STARTOFBEAT=>getAdjustFoePair($proxrange, -1),
-                                  Event::STARTOFBEAT=>getAdjustFoePair($distrange, -1));
+                    $events=array(Event::STARTOFBEAT=>getAdjustPair($proxrange, -1, false),
+                                  Event::STARTOFBEAT=>getAdjustPair($distrange, -1, false));
 //move exactly as opponent moves if able
 $mimics = new BaseCard($name="Mimic's", $power=1,
                     $events=array(Event::REVEAL=>getMimic));
@@ -555,3 +630,4 @@ $sturdy = new BaseCard($name="Sturdy",
 //my activation
 $paradigmShift = new BaseCard($name="Paradigm Shift", $proxRange=2, $distRange=3, $power=3, $priority=3, $isBase=True, $events=array(Event::AFTERACTIVATING=>getParadigm("$paradigmChoice")));
 */ 
+
