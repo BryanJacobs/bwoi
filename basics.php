@@ -38,18 +38,22 @@ class Character {
     }
 }
 
-// Generic Bases
-$dash = new BaseCard($name="Dash", $priority=9, $isBase=True, 
-                                $events=array(CardEvents::AFTERACTIVATING => getDasher(-3,3),
-                                              CardEvents::ONHIT => getHitFail()));
-$grasp = new BaseCard($name="Grasp", $proxRange=1, $distRange=1, $power=2, $priority=5, $isBase=True,
-                                 $events=array(CardEvents::ONHIT => getPuller(-1,1)));
-$drive = new BaseCard($name="Drive", $proxRange=1, $distRange=1, $power=3, $priority=4, $isBase=True,
-                                 $events=array(CardEvents::BEFOREACTIVATING => getAdvancer(1,2)));
-$strike = new BaseCard($name="Strike", $proxRange=1, $distRange=1, $power=4, $priority=3, $stun=5, $isBase=True);
-$shot = new BaseCard($name="Shot", $proxRange=1, $distRange=4, $power=3, $priority=2, $stun=2, $isBase=True);
-$burst = new BaseCard($name="Burst", $proxRange=2, $distRange=3, $power=3, $priority=1, $isBase=True,
-                                  $events=array(CardEvents::STARTOFBEAT => getAdvancer(-2,-1)));
+function getBasicCards() {
+    // Generic Bases
+    $dash = new BaseCard($name="Dash", $priority=9, $isBase=True,
+                                    $events=array(CardEvents::AFTERACTIVATING => getDasher(-3,3),
+                                                  CardEvents::ONHIT => getHitFail()));
+    $grasp = new BaseCard($name="Grasp", $proxRange=1, $distRange=1, $power=2, $priority=5, $isBase=True,
+                                     $events=array(CardEvents::ONHIT => getPuller(-1,1)));
+    $drive = new BaseCard($name="Drive", $proxRange=1, $distRange=1, $power=3, $priority=4, $isBase=True,
+                                     $events=array(CardEvents::BEFOREACTIVATING => getAdvancer(1,2)));
+    $strike = new BaseCard($name="Strike", $proxRange=1, $distRange=1, $power=4, $priority=3, $stun=5, $isBase=True);
+    $shot = new BaseCard($name="Shot", $proxRange=1, $distRange=4, $power=3, $priority=2, $stun=2, $isBase=True);
+    $burst = new BaseCard($name="Burst", $proxRange=2, $distRange=3, $power=3, $priority=1, $isBase=True,
+                                      $events=array(CardEvents::STARTOFBEAT => getAdvancer(-2,-1)));
+
+    return array($dash, $grasp, $drive, $strike, $shot, $burst);
+}
 
 class Cadenza extends Character {
     public function Cadenza() {

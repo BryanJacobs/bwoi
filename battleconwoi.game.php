@@ -100,7 +100,7 @@ class BattleConWoI extends Table
     }
 
     private function placePlayerAt($playerNumber, $location) {
-        $table = "board_objects";
+        $table = "board_object";
         $playerObjectType = "PLAYER";
         $playerObjectDescription = "NO${playerNumber}";
 
@@ -113,7 +113,7 @@ class BattleConWoI extends Table
 
     private function getPlayerLocation($playerNumber)
     {
-        $table = "board_objects";
+        $table = "board_object";
         $playerObjectType = "PLAYER";
         $playerObjectDescription = "NO${playerNumber}";
 
@@ -146,10 +146,22 @@ class BattleConWoI extends Table
         $sql = "SELECT player_id id, player_score score FROM player ";
         $result['players'] = self::getCollectionFromDb($sql);
 
-        $boardState = self::getCollectionFromDb("SELECT `position`,`object_type`,`object_description` FROM `board_objects`");
+        $boardState = self::getCollectionFromDb("SELECT `position`,`object_type`,`object_description` FROM `board_object`");
         $result['boardState'] = $boardState;
 
+        $result['characters'] = array_keys($this->cardRegistry);
+
+        $result['cardsInHand'] = self::getPlayerCardSet(self::getCurrentPlayerId());
+
         return $result;
+    }
+
+    /*
+        Return the cards "in hand" for the given player
+    */
+    protected function getPlayerCardSet($player_id)
+    {
+        return self::getCollectionFromDb("SELECT `card_id` id,`card_name` name,`card_type` type FROM `card` WHERE `player_id`=${player_id} AND `card_location`=\"HAND\"");
     }
 
     /*
@@ -164,9 +176,10 @@ class BattleConWoI extends Table
     */
     function getGameProgression()
     {
-        // TODO: compute and return the game progression
+        $num_beats = 20.0;
+        $percentage_per_beat = $num_beats / 100;
 
-        return 0;
+        return $percentage_per_beat * self::getGameStateValue("beatCount");
     }
 
 
@@ -205,6 +218,19 @@ class BattleConWoI extends Table
             SET     `character`=\"$choice\"
             WHERE   `player_id`=$player_id
         ";
+        self::DbQuery($sql);
+
+        // Fill the player's hand
+        $cards = array_merge($this->cardRegistry[$choice], getBasicCards());
+
+        $sql = "INSERT INTO card (`player_id`, `card_name`, `card_type`, `location`) VALUES ";
+        $card_sql = array();
+        foreach ($cards as $card) {
+            $card_sql[] = '(' + implode(',', array("" + $player_id, '"' + $card->name + '"',
+                                $card->isBase ? '"BASE"' : '"STYLE"',
+                                '"HAND"')) + ')';
+        }
+        $sql += implode(',', $card_sql);
         self::DbQuery($sql);
 
         $this->gamestate->setPlayerNonMultiactive($player_id, "selectChar");
@@ -309,23 +335,13 @@ class BattleConWoI extends Table
 //////////// Game state actions
 ////////////
 
-    /*
-        Here, you can create methods defined as "game state actions" (see "action" property in states.inc.php).
-        The action method of state X is called everytime the current game state is set to X.
-    */
-    
-    /*
-    
-    Example for game state "MyGameState":
-
-    function stMyGameState()
+    function checkForCharacterSpecificSetup()
     {
-        // Do some stuff ...
-        
-        // (very often) go to another gamestate
-        $this->gamestate->nextState( 'some_gamestate_transition' );
-    }    
-    */
+        // TODO: implement properly
+        $this->gamestate->nextState('noCharacterSpecificSetup');
+
+        // else $this->gamestate->nextState('characterSpecificSetupNecessary');
+    }
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -344,7 +360,7 @@ class BattleConWoI extends Table
     {
         $statename = $state['name'];
 
-        if ($state['type'] == "activeplayer") {
+        /*if ($state['type'] == "activeplayer") {
             switch ($statename) {
                 default:
                     $this->gamestate->nextState( "zombiePass" );
@@ -365,7 +381,7 @@ class BattleConWoI extends Table
 
             $this->gamestate->updateMultiactiveOrNextState( '' );
             return;
-        }
+        }*/
 
         throw new feException( "Zombie mode not supported at this game state: ".$statename );
     }

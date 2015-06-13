@@ -4,12 +4,13 @@
 
 var jstpl_space='<div id="space_${no}" class="bwoispace" style="left: ${X}px;">&nbsp;<div>';
 
-var jstpl_character_select='<div id="characterSelect" class="characterSelect"><h3 style="width: 100%; text-align: center;">{SELECT_CHARACTER}</h3>';
+var jstpl_character_select_start = '<div id="characterSelect" class="characterSelect"><h3 style="width: 100%; text-align: center;">{SELECT_CHARACTER}</h3>';
+var jstpl_character_select_block = '<a class="bwoiCharacter" href="#">${name}</a>';
+var jstpl_character_select_end = '</div>';
 
-// for loop around characters here
-jstpl_character_select += '<a class="bwoiCharacter" href="#">Cadenza</a>';
-
-jstpl_character_select += '</div>';
+var jstpl_card_chooser_start = '<div class="bwoiCardChooser">';
+var jstpl_card_chooser_block = '<div class="bwoiCard">${name}</div>';
+var jstpl_card_chooser_end = '</div>';
 
 </script>
 

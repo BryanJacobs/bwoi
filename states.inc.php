@@ -89,7 +89,32 @@ recycle            (automatic)
         "descriptionmyturn" => clienttranslate('${you} must make a character choice'),
         "type" => "multipleactiveplayer",
         "possibleactions" => array( "selectChar" ),
-        "transitions" => array( "selectChar" => 3 )
+        "transitions" => array( "selectChar" => 20 )
+    ),
+
+    20 => array(
+        "name" => "characterSpecificSetupCheck",
+        'type' => 'game',
+        'action' => 'checkForCharacterSpecificSetup',
+        'transitions' => array('characterSpecificSetupNecessary' => 21, "noCharacterSpecificSetup" => 22)
+    ),
+
+    21 => array(
+        "name" => "characterSpecificSetup",
+        "description" => clienttranslate('${activeplayer} must make choices about their character'),
+        "descriptionmyturn" => clienttranslate('${you} must make choices about your character'),
+        'type' => 'multipleactiveplayer',
+        'possibleactions' => array( 'characterSpecificChoice' ),
+        'transitions' => array('characterSpecificChoice' => 22)
+    ),
+
+    22 => array(
+        "name" => "initialBasePairDiscards",
+        "description" => clienttranslate('${activeplayer} must discard two base pairs'),
+        "descriptionmyturn" => clienttranslate('${you} must discard two base pairs'),
+        'type' => 'multipleactiveplayer',
+        'possibleactions' => array( 'discardBasePair' ),
+        'transitions' => array('discardBasePair' => 3)
     ),
 
     3 => array(
@@ -98,32 +123,38 @@ recycle            (automatic)
         "descriptionmyturn" => clienttranslate('${you} must select an attack pair'),
         "type" => "multipleactiveplayer",
         "possibleactions" => array( "playPair" ),
-        "transitions" => array( "playPair" => 4 )
+        "transitions" => array( "playPair" => 4 ),
+        "updateGameProgression" => true
     ),
 
     4 => array(
+        "name" => "checkForAnte",
+        "type" => "game",
+        "action" => "checkForAnte",
+        "transitions" => array('anteNecessary' => 41, 'noAnteNecessary' => 5)
+    )
+
+    41 => array(
         "name" => "ante",
         "description" => clienttranslate('${activeplayer} must select an ante or pass'),
         "descriptionmyturn" => clienttranslate('${you} must select an ante or pass'),
         "type" => "activeplayer",
-        "possibleactions" => array( "anteSelected", "pass" ),
-        "transitions" => array( "anteSelected"=> 5, "pass" => 5 )
+        "possibleactions" => array("anteSelected"),
+        "transitions" => array("anteSelected" => 5)
     ),
 
     5 => array(
         "name" => "revealEffects",
-        "description" => clienttranslate("Processing reveal effects"),
         "type" => "game",
-        "possibleactions" => array( "" ),
+        "action" => "processRevealEffects",
         "transitions" => array( "" => 6 )
     ),
 
     //automatic check for a clash between players' atack pairs
     6 => array(
         "name" => "clash",
-        "description" => clienttranslate("Check for clash"),
         "type" => "game",
-        "possibleactions" => array( "" ),
+        "action" => "checkForClash",
         "transitions" => array( "clash" => 7, "noClash" => 8 )
     ),
 

@@ -56,9 +56,23 @@ function (dojo, declare) {
             switch (gamedata.gamestate.name) {
                 case 'characterSelect':
                     console.log("Enabling character selection...");
-                    dojo.place(this.format_block('jstpl_character_select', {}), 'bwoiboard');
+
+                    var character_select_block = this.format_block('jstpl_character_select_start', {});
+                    for (character in gamedata.characters) {
+                        character_select_block += this.format_block('jstpl_character_select_block', {'name': character});
+                    }
+                    character_select_block += this.format_block('jstpl_character_select_end', {});
+
+                    dojo.place(character_select_block, 'bwoiboard');
 
                     dojo.connect($('.bwoiCharacter'), 'onclick', this, 'characterClicked');
+                    break;
+
+                case 'initialBasePairDiscards':
+                    this.displayHand(gamedata.cardsInHand);
+                    break;
+
+                case 'characterSpecificSetup':
                     break;
 
                 default:
@@ -75,6 +89,18 @@ function (dojo, declare) {
                 var xpos = 60 * i + 200;
                 dojo.place(this.format_block('jstpl_space', {'no': i, 'X': xpos}), 'bwoiboard');
             }
+        },
+
+        displayHand: function(cards) {
+            var hand_block = this.format_block('jstpl_card_chooser_start', {});
+            for (card in cards) {
+                hand_block += this.format_block('jstpl_card_chooser_card', {'name': card.name});
+            }
+            hand_block += this.format_block('jstpl_card_chooser_end', {});
+
+            dojo.place(hand_block, 'bwoiboard');
+
+            dojo.connect($('.bwoiCard'), 'onclick', this, 'cardClicked');
         },
 
         ///////////////////////////////////////////////////
@@ -105,6 +131,8 @@ function (dojo, declare) {
             {
                 case 'characterSelect':
                     dojo.style('characterSelect', 'display', 'none');
+                    break;
+                case 'initialBasePairDiscards':
                     this.displayBoard();
                     break;
             }
@@ -119,7 +147,7 @@ function (dojo, declare) {
 
             if( this.isCurrentPlayerActive() )
             {
-                switch( stateName )
+                switch (stateName)
                 {
 /*
                  Example:
@@ -183,8 +211,17 @@ function (dojo, declare) {
                      });
         },
 
+        cardClicked: function(evt) {
+            console.log('cardClicked %o', evt);
+            // TODO: handle this
+        },
+
         characterClicked: function(evt) {
             console.log('characterClicked %o', evt);
+            if (!this.checkAction( 'selectChar'))
+            {
+                return;
+            }
 
             var target = evt.target.innerHTML;
 
