@@ -132,7 +132,7 @@ recycle            (automatic)
         "type" => "game",
         "action" => "checkForAnte",
         "transitions" => array('anteNecessary' => 41, 'noAnteNecessary' => 5)
-    )
+    ),
 
     41 => array(
         "name" => "ante",

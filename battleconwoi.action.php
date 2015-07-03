@@ -69,5 +69,17 @@ class action_battleconwoi extends APP_GameAction
         self::ajaxResponse();
     }
 
+ /*   public function playPair()
+    {
+        self::setAjaxMode();
+
+        $player_id = self::getCurentPalyerID();
+        $possibleCards = array_keys($this->game->cardRegistry->$player_id[character]);
+
+        
+
+        
+    }
+*/
 
   }
