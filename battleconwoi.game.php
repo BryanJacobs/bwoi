@@ -223,14 +223,15 @@ class BattleConWoI extends Table
         // Fill the player's hand
         $cards = array_merge($this->cardRegistry[$choice], getBasicCards());
 
-        $sql = "INSERT INTO card (`player_id`, `card_name`, `card_type`, `location`) VALUES ";
+        $sql = "INSERT INTO card (`player_id`, `card_name`, `card_type`, `card_location`) VALUES ";
         $card_sql = array();
         foreach ($cards as $card) {
-            $card_sql[] = '(' + implode(',', array("" + $player_id, '"' + $card->name + '"',
+            $card_sql[] = '(' . implode(',', array('' . $player_id, '"' . $card->name . '"',
                                 $card->isBase ? '"BASE"' : '"STYLE"',
-                                '"HAND"')) + ')';
+                                '"HAND"')) . ')';
         }
-        $sql += implode(',', $card_sql);
+        $sql .= implode(',', $card_sql);
+
         self::DbQuery($sql);
 
         $this->gamestate->setPlayerNonMultiactive($player_id, "selectChar");

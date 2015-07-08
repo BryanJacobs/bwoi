@@ -85,7 +85,7 @@ recycle            (automatic)
 
     2 => array(
         "name" => "characterSelect",
-        "description" => clienttranslate('${activeplayer} must make a character choice'),
+        "description" => clienttranslate('Other players must make a character choice'),
         "descriptionmyturn" => clienttranslate('${you} must make a character choice'),
         "type" => "multipleactiveplayer",
         "possibleactions" => array( "selectChar" ),
@@ -101,7 +101,7 @@ recycle            (automatic)
 
     21 => array(
         "name" => "characterSpecificSetup",
-        "description" => clienttranslate('${activeplayer} must make choices about their character'),
+        "description" => clienttranslate('Other players must make choices about their character'),
         "descriptionmyturn" => clienttranslate('${you} must make choices about your character'),
         'type' => 'multipleactiveplayer',
         'possibleactions' => array( 'characterSpecificChoice' ),
@@ -110,7 +110,7 @@ recycle            (automatic)
 
     22 => array(
         "name" => "initialBasePairDiscards",
-        "description" => clienttranslate('${activeplayer} must discard two base pairs'),
+        "description" => clienttranslate('Other players must discard two base pairs'),
         "descriptionmyturn" => clienttranslate('${you} must discard two base pairs'),
         'type' => 'multipleactiveplayer',
         'possibleactions' => array( 'discardBasePair' ),

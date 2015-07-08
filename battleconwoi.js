@@ -58,14 +58,14 @@ function (dojo, declare) {
                     console.log("Enabling character selection...");
 
                     var character_select_block = this.format_block('jstpl_character_select_start', {});
-                    for (character in gamedata.characters) {
-                        character_select_block += this.format_block('jstpl_character_select_block', {'name': character});
+                    for (i=0; i<gamedata.characters.length; i++) {
+                        character_select_block += this.format_block('jstpl_character_select_block', {'name': gamedata.characters[i]});
                     }
                     character_select_block += this.format_block('jstpl_character_select_end', {});
 
                     dojo.place(character_select_block, 'bwoiboard');
 
-                    dojo.connect($('.bwoiCharacter'), 'onclick', this, 'characterClicked');
+                    dojo.query('.bwoiCharacter').connect('onclick', this, 'characterClicked');
                     break;
 
                 case 'initialBasePairDiscards':
